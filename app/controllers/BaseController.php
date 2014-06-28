@@ -7,6 +7,9 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
+	//public $public_folder_upload  = Config::get('app.url_upload', 'upload');
+
+	public $layout = 'template.main';	
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))
@@ -14,5 +17,8 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 	}
+
+
+
 
 }
