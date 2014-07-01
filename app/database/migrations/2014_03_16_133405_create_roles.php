@@ -54,13 +54,7 @@ class CreateRoles extends Migration {
 				)
 			);
 
-		Schema::table('users', function(Blueprint $table)
-		{
-		//FK
-			$table->index('role');
-			$table->foreign('role')->references('id')->on('roles');
-			
-		});
+		
 
 	}
 
@@ -74,10 +68,7 @@ class CreateRoles extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('users', function(Blueprint $table)
-		{
-			$table->dropForeign('users_role_foreign');
-		});
+		
 		
 		Schema::drop('roles');
 	}

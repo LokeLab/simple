@@ -55,6 +55,78 @@ class CreateUser extends Migration {
 			
 		});
 
+		 DB::table('users')->insert(
+			array(
+				'username' => 'admin@reportavpn.com',
+				'email' => 'admin@reportavpn.com',
+				'name' => 'Admin',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 1,
+				'active' => 1,		
+				'deleted' => 0		
+				));
+
+		 DB::table('users')->insert(
+			array(
+				'username' => 'developer@reportavpn.com',
+				'email' => 'developer@reportavpn.com',
+				'name' => 'developer',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 2,
+				'active' => 1,		
+				'deleted' => 0		
+				));
+
+
+		 DB::table('users')->insert(
+			array(
+				'username' => 'angel2@reportavpn.com',
+				'email' => 'angel2@reportavpn.com',
+				'name' => 'angel2',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 3,
+				'active' => 1,		
+				'deleted' => 0		
+				));
+
+		 DB::table('users')->insert(
+			array(
+				'username' => 'angelav@reportavpn.com',
+				'email' => 'angelav@reportavpn.com',
+				'name' => 'angelav',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 4,
+				'active' => 1,		
+				'deleted' => 0		
+				));
+
+		 DB::table('users')->insert(
+			array(
+				'username' => 'angelpn@reportavpn.com',
+				'email' => 'angelpn@reportavpn.com',
+				'name' => 'angelpn',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 5,
+				'active' => 1,		
+				'deleted' => 0		
+				));
+
+		 DB::table('users')->insert(
+			array(
+				'username' => 'tech@reportavpn.com',
+				'email' => 'tech@reportavpn.com',
+				'name' => 'tech',
+				'surname' => 'User',
+				'password' => Hash::make('!password!'),
+				'role' => 6,
+				'active' => 1,		
+				'deleted' => 0		
+				));
 
 	}
 

@@ -20,13 +20,7 @@ class CreateStateProvince extends Migration {
 		});
 
 
-		Schema::table('city', function(Blueprint $table)
-		{
-		//FK
-			$table->index('province_id');
-			$table->foreign('province_id')->references('id')->on('province');
-			
-		});
+
 	}
 
 	/**
@@ -36,10 +30,7 @@ class CreateStateProvince extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('city', function(Blueprint $table)
-		{
-			$table->dropForeign('city_province_foreign');
-		});
+
 		Schema::drop('province');
 	}
 
