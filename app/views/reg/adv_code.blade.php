@@ -3,7 +3,7 @@
 
 	
 	<div class="content">
-		<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+		<div  class="col-lg-12">Report AV PN</div>
 	{{ Form::open(array('url' => 'reg_adv_process', 'method' => 'post', 'class' => 'login-form')) }}
 	<h3 class="form-title">{{ Lang::get('users.step_1_reg_adv') }}</h3>
 
@@ -53,10 +53,7 @@
 		
 	<div class="clearfix"></div>
 			
-	<div class="login-options">
-
-			<h4><a href="http://quikode.com/" target="_blank">{{Lang::get('users.discover_quikode') }}</a></h4>
-	</div>
+	
 
 
 

@@ -9,7 +9,7 @@
 		<div class="form-body">
 			
 			<div class="content registration">
-				<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+				<div  class="col-lg-12">Report AV PN</div>
 				<h1>{{Lang::get('users.regAdvStep2');}}</h1>
 				{{ Form::open(array('url' => 'reg_adv_profile', 'method' => 'post', 'class' => 'login-form')) }}
 				

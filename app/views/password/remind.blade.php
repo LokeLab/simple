@@ -8,7 +8,7 @@
 		
 			
 			<div class="content">
-				<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+				<div  class="col-lg-12">Report AV PN</div>
 				<h3 class="form-title">{{Lang::get('users.password_recovery') }}</h3>
 				<p>{{Lang::get('users.password_recovery_subtitle')}} </p>
 

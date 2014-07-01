@@ -7,7 +7,7 @@
 		
 		<div class="content registration">
 			
-			<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+			<div  class="col-lg-12">Report AV PN</div>
 
 			<div class="row">
 				<div class="col-lg-12">

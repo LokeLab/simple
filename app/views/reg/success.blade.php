@@ -7,7 +7,7 @@
 	<div class="form-body">
 		
 		<div class="content ">
-			<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+			<div  class="col-lg-12">Report AV PN</div>
 <div class="note note-success">
 	<h4 class="block">{{Lang::get('users.gratzReg');}}</h4>
 	<p>

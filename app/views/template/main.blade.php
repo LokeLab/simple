@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Quikode | Welcome</title>
+    <title>Report AV PN | Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ url('/bs/css/bootstrap.min.css') }}" media="screen">
@@ -30,7 +30,7 @@
         <link href="{{ url('/css/themes/custom.css') }}" rel="stylesheet" type="text/css">
         
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="{{ url('/images/favicon_quikode.png') }}">
+<link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
 <style type="text/css">
  body {
  padding-top: 70px;

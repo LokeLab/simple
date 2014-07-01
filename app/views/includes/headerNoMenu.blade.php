@@ -1,7 +1,7 @@
 <div class="header-inner">
     <!-- BEGIN LOGO -->  
     <a class="navbar-brand" href="index.html">
-   <img src="{{ url('/images/Quikode_logo_white.png') }}"   class="img-responsive" alt="logo" width="70%"> 
+      Report AV PN
     </a>
     <!-- END LOGO -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER --> 

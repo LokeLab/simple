@@ -8,7 +8,7 @@
 	<div class="form-body">
 		
 			<div class="content">
-				<div  class="col-lg-12"><img src="{{ url('/images/logo_mrquikode.png') }}" class='img-responsive' alt="logo" ></div>
+				<div  class="col-lg-12">Report AV PN</div>
 			{{ Form::open(array('url' => 'reg_promoter_process', 'method' => 'POST', 'class' => 'login-form')) }}
 
 
@@ -57,11 +57,7 @@
 				
 			<div class="clearfix"></div>
 					
-			<div class="login-options">
-
-					<h4><a href="http://quikode.com/" target="_blank">{{Lang::get('users.discover_quikode') }}</a></h4>
-			</div>
-		
+			
 	</div>
 </div>
 

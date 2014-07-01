@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Quikode | Welcome</title>
+    <title>Report AV PN | Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 
@@ -42,7 +42,7 @@
      <link rel="stylesheet" href="{{ url('/assets/plugins/data-tables/DT_bootstrap.css') }}" />
         
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="{{ url('/images/favicon_quikode.png') }}">
+<link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
 
 
 
