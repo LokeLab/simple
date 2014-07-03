@@ -59,27 +59,7 @@
 <div class="row">
 <div class="col-md-12 col-sm-12">
 
- <div class="col-md-6 col-sm-6"> 
- 		<div class="col-lg-12"><h4>Avanzamento compilazioni</h4></div>
-	 </div>
- <div class="col-md-6 col-sm-6">
-
-							{{ Form::open(array('url' => 'home', 'method' => 'POST')) }}
-							<div class="col-lg-8"><div class="col-lg-3">
-							{{ Form::label('c',  Lang::get('offerts.community_id'), array('class'=>'control-label')) }}
-							</div><div class="col-lg-9">
-							{{ Form::select('c', $community_list, Input::get('c'), array('class' => 'form-control control-inline')) }}
-							</div></div><div class="col-lg-2" style="padding:2px!important; margin:0px!important">
-							<button class="btn green" type="submit" style="width:80px;"><i class="fa fa-check-circle"></i>&nbsp;{{Lang::get('generic.filter');}} </button>
-							</div>
-							@if (Input::has('c'))
-							<div class="col-lg-2 " style="padding:2px!important; margin:0px!important"><a href="/home" class="btn default" style="width:80px;">{{Lang::get('generic.all')}}</a></div> 
-							@endif 
-							{{ Form::close()}}
-</div>
-
-
-								
+							
 								<div class="col-lg-12" style="padding:2px!important; margin:0px!important"><div id="chart1" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div></div>
 							
 </div>

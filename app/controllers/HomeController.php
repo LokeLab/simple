@@ -116,121 +116,7 @@ class HomeController extends BaseController {
 	{
 		if(Role::isAdministrator(Auth::user()->id)){
 
-			$data = array();
-			$this->layout = View::make('home.admin', $data);
-		}else{
-			return Redirect::action('HomeController@logout');
-		}
-	}
-	public function home_promoter()
-	{
-		if(Role::isPromoter(Auth::user()->id)){
-			$data['campaigns_list'] = DB::table('offers_active')->where('promo', Session::get('userid'))->orderby('updated_at','desc')->take(5)->get();
-			
-
-
-			if (Input::has('c'))
-		{
-
-			$stats = DB::table('stats_community_click')->get();
-
-
-			  $label = "{label:'click'}";
-			  $s1 = "";
-			   $ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
-
-			  foreach ($stats as $elem) {
-			    
-				$s1 = '[['.$elem->cnt.' , \''. str_replace("'", "\'", $elem->description).'\' ]],'.$s1 ;
-			   // $s1 = $s1 .' '.$elem->cnt.',';
-			    
-			   // $ticks = $ticks . "'".str_replace("'", "\'", $elem->description)."',";
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-
-
-			  
-			$stats = DB::table('stats_communities_by_day')->where('community_id', Input::get('c'))
-			->orderby('anno','asc')->orderby('mese','asc')->orderby('giorno','asc')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl1 = "";
-			   $lticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
-
-				    $sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->cnt.' ';
-				    if ($label)
-				    {
-				    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-				    	//$label = false;
-				    } else
-				    {
-
-				    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "''";
-				    	$label = true;
-				    }
-				    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-				    
-				  }
-
-
-				  $stats = DB::table('stats_offers_by_day')->where('id', Input::get('c'))
-			->orderby('anno','asc')->orderby('mese','asc')->orderby('giorno','asc')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl2 = "";
-			   $l2ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
-
-				    $sl2 = ((strlen($sl2) > 1 )?$sl2.',':$sl2) .'  '.$elem->cnt.' ';
-				    if ($label)
-				    {
-				    	$l2ticks = ((strlen($l2ticks) > 1 )?$l2ticks.',':$l2ticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-				    	//$label = false;
-				    } else
-				    {
-
-				    	$l2ticks = ((strlen($l2ticks) > 1 )?$l2ticks.',':$l2ticks)  . "''";
-				    	$label = true;
-				    }
-				    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-				    
-				  }
-
-			  $data['community_name'] =  Community::getLabel(Input::get('c'));
-
-			  $data['s1'] =  $s1;
-			  $data['ticks'] =  $ticks;
-			  $data['sl1'] =  $sl1;
-			  $data['lticks'] =  $lticks;
-			  $data['sl2'] =  $sl2;
-			  $data['l2ticks'] =  $l2ticks;
-
-		}
-
-		else
-		{
-
-						
-
-			$stats = DB::table('stats_community_click')->get();
+			$stats = array(); // DB::table('stats_community_click')->get();
 
 
 			  $label = "{label:'click'}";
@@ -250,7 +136,7 @@ class HomeController extends BaseController {
 
 			  }
 			  
-			$stats = DB::table('stats_all_campaigns_promoter_day')->where('promoter_id', Session::get('userid') )->get();
+			$stats = array(); // DB::table('stats_all_communities_day')->get();
 
 
 			  $label = "{label:'click'}";
@@ -281,7 +167,7 @@ class HomeController extends BaseController {
 			  }
 
 
-			  $stats = DB::table('stats_all_offers_day')->get();
+			  $stats =array(); // DB::table('stats_all_offers_day')->get();
 
 
 			  $label = "{label:'click'}";
@@ -318,108 +204,14 @@ class HomeController extends BaseController {
 			  $data['sl2'] =  $sl2;
 			  $data['l2ticks'] =  $l2ticks;
 
-		}
-
-
-			$data['community_list'] = array(''=>Lang::get('generic.pleaseselect')) + Community::getAllList();
-
-			$this->layout = View::make('home.promoter',$data);
-
+			$data['campaigns_list'] = array( ); // lastestvisit
+			
+			$this->layout = View::make('home.admin', $data);
 		}else{
 			return Redirect::action('HomeController@logout');
 		}
 	}
-	public function home_advertiser()
-	{
-		if(Role::isAdvertiser(Auth::user()->id)){
-
-
-			$stats = DB::table('stats_offer_click')->where('user_created', Session::get('userid'))
-			->orderby('cnt', 'desc')
-			->get();
-
-
-			  $label = "{label:'click'}";
-			  $s1 = "";
-			   $ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-			  $number = 0;
-			  $offers = '';
-			  if (count($stats) == 1 )
-			  {
-
-			  	$nooffer = 1;
-			  	$offers = Offer::where('user_created' , Session::get('userid'))->pluck('description');
-
-
-			  } else 	$nooffer = 2;
-
-			  foreach ($stats as $elem) {
-			    
-			    $number = $elem->cnt;
-			    //$offers = $elem->description;
-
-			    $s1 = '[['.$elem->cnt.' , \''. $elem->description.'\' ]],'.$s1 ;
-			    
-			    //$ticks = $ticks . "'".str_replace("'", "\'", $elem->description)."',";
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-			  
-			$stats = DB::table('stats_campaigns_by_month')
-			->where('user_created', Session::get('userid'))
-			->orderby('mese', 'asc')->orderby('giorno', 'asc')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl1 = "";
-			   $lticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
-
-			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
-			    
-			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->cnt.' ';
-			    if ($label)
-			    {
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-			    	$label = false;
-			    } else
-			    {
-
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "''";
-			    	$label = true;
-			    }
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-			  $data['s1'] =  $s1;
-			  $data['ticks'] =  $ticks;
-			  $data['sl1'] =  $sl1;
-			  $data['lticks'] =  $lticks;
-			  $data['sl2'] =  $sl1;
-			  $data['l2ticks'] =  $lticks;
-			  $data['number'] =  $number;
-			  $data['nooffer'] =  $nooffer;
-			  $data['offers'] =  $offers;
-
-
-
-
-
-
-			$data['campaigns_list'] = Campaign::where('user_created', Session::get('userid'))->take(5)->get();
-			$this->layout = View::make('home.advertiser', $data);
-		}else{
-			return Redirect::action('HomeController@logout');
-		}
-	}
+	
 	public function home_tecnico()
 	{
 		if(Role::isTecnico(Auth::user()->id)){

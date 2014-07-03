@@ -45,12 +45,7 @@
 							<td>{{ $c['email'] }}</td>
 							<td>{{ $c['name'] }}</td>
 							<td>{{ $c['surname'] }}</td>
-							<td>{{  Decoder::decodeRole($c['role']) }} <?php 
-									if($c['role']==2)
-									{ ?>
-										<br/><a href="{{ url('customers?p='.$c['id']) }}" class="btn default"><i class="fa fa-users"></i>  
-											({{Customer::getNumberbyPromoterActive($c['id'])}}  / {{Customer::getNumberbyPromoter($c['id'])}}  )</a>
-									<?php } ?></td>
+							<td>{{  Decoder::decodeRole($c['role']) }} </td>
 							<td>{{ $c['company'] }}</td>
 							<td><?php if($c['active'])
 								{ ?>
