@@ -16,9 +16,17 @@ include 'routes_BM.php';
 
 
 Route::get('/', 'HomeController@redirectToHome');
-Route::post('home', 'HomeController@redirectToHome');
 
 
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::post('home', 'HomeController@redirectToHome');
+	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
+	Route::get('home_promoter', array('uses' => 'HomeController@home_promoter'));
+	Route::get('home_advertiser', array('uses' => 'HomeController@home_advertiser'));
+	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
+
+});
 
 
 // Login logout 
