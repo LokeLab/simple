@@ -1,16 +1,7 @@
 @extends('template.internal')
 @section('content')
 
-<div class="row">
-	<div class="col-lg-12">
 
-	<h2>
-		
-			{{Lang::get('enduser.allOffers');}} 
-	</h2>
-		
-	</div>
-</div>
 <div class="row">
 	<div class="col-lg-12">
 		<!--BEGIN TABLE -->
@@ -18,7 +9,7 @@
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-list-alt"></i>{{Lang::get('enduser.offertlist');}}
+					<i class="fa fa-list-alt"></i>Visite a sistema
 				</div>
 				
 
@@ -27,19 +18,20 @@
 
 			<div class="table-toolbar">
 					<div class="btn-group">
-						<a href="csv/enduser" class="btn green" style = "margin-right:4px;">
-							{{Lang::get('generic.exportcsv');}} <i class="fa fa-file-o"></i>
-						</a> 
+						
 						<a href="#" class="btn green" style = "margin-right:4px;">
 							{{Lang::get('generic.exportxls');}} <i class="fa fa-file-o"></i>
 						</a>
 						<a href="?all=1" class="btn blue" style = "margin-right:4px;">
 							{{Lang::get('enduser.viewall');}} <i class="fa fa-filter"></i>
 						</a>
-						<a href="?filter=2" class="btn blue" style = "margin-right:4px;">
-							{{Lang::get('enduser.reg');}} <i class="fa fa-filter"></i>
-						</a><a href="?filter=1" class="btn blue" style = "margin-right:4px;">
-							{{Lang::get('enduser.sub');}} <i class="fa fa-filter"></i>
+						<a href="?filter=1" class="btn blue" style = "margin-right:4px;">
+							Advocacy <i class="fa fa-filter"></i>
+						</a><a href="?filter=2" class="btn blue" style = "margin-right:4px;">
+							Consumer <i class="fa fa-filter"></i>
+						</a>
+						<a href="?filter=3" class="btn blue" style = "margin-right:4px;">
+							Autogestito <i class="fa fa-filter"></i>
 						</a>
 					</div>
 				</div>
@@ -50,22 +42,22 @@
 					<thead>
 						<tr>
 							<th>
-								 {{Lang::get('enduser.date');}}
+								Data visita
 							</th>
 							<th>
-								 {{Lang::get('enduser.name');}}
+								 Compilata da
 							</th>
 							<th>
-								 {{Lang::get('enduser.email');}}
+								 Tipo visita 
 							</th>
 							<th>
-								 {{Lang::get('enduser.attribute');}}
+								 Locale
 							</th>
 							<th>
-								 {{Lang::get('enduser.offert');}}
+								 Città
 							</th>					
 							<th>
-								 
+								 Inserita il 
 							</th>	
 							
 						</tr>
@@ -73,31 +65,27 @@
 					<tbody>
 
 
-						@foreach($endusers_list as $c)
+						@foreach($roles_list as $c)
 						<tr class="odd gradeX">
 							<td>
-								{{ Decoder::decodeDateTime($c->created_at) }}  
+								{{ Decoder::decodeDate($c->visit_at) }}  
 							</td>
 							<td>
 								{{ $c->surname }}  {{ $c->name }} 
 							</td>
 						
 							<td>
-								{{ $c->email }}  
+								{{ Visit::getTypeLabel($c->typevisit) }}  
 							</td>	
 							<td>
-								{{Lang::get('enduser.phone')}}: {{ $c->phone }}  <br/>
-								{{Lang::get('enduser.other')}}: {{ $c->other }}  
+								  {{ $c->locale }}  
+
 							</td>					
 							<td>
-								{{Offer::getLabel($c->offer_id)}}
-								{{Offer::getRegistration($c->typereg)}}
-								@if (Role::isAdmin(Auth::user()->id))
-									<br/> {{$c->adv}}
-								@endif
+								 {{ $c->city }} 
 							</td>
 							<td>
-								{{ Decoder::decodeReg($c->typereg)  }}  
+								{{ Decoder::decodeDateTime($c->created_at) }}  
 							</td>	
 							
 							

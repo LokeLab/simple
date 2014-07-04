@@ -12,7 +12,7 @@
 				</div>
 				<div class="cont-col2">
 					<div class="desc">
-						 {{ $c['description']}} <a href="campaigns/{{ $c['id']}}" class="green"><i class="fa fa-eye"></i></a>
+						 {{ $c['created_at']}} <a href="campaigns/{{ $c['id']}}" class="green"><i class="fa fa-eye"></i></a>
 					</div>
 				</div>
 			</div>

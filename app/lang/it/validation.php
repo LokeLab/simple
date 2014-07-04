@@ -55,11 +55,11 @@ return array(
 	"not_in"           => ":attribute selezionato non è valido.",
 	"numeric"          => ":attribute deve essere un numero.",
 	"regex"            => ":attribute ha un formato non valido.",
-	"required"         => ":attribute è obbligatorio.",
-	"required_if"      => ":attribute è obbligatorio quando :other è :value.",
-	"required_with"    => ":attribute è obbligatorio quando :values è valorizzato.",
-	"required_without" => ":attribute è obbligatorio quandi :values non è valorizzato.",
-	"same"             => ":attribute e :other devono combaciare.",
+	"required"         => "E' necessario compilare :attribute.",
+	"required_if"      => "E' necessario compilare :attribute  quando :other è :value.",
+	"required_with"    => "E' necessario compilare :attribute quando :values è valorizzato.",
+	"required_without" => "E' necessario compilare :attribute  quando :values non è valorizzato.",
+	"same"             => "E' necessario compilare :attribute e :other devono coincidere.",
 	"size"             => array(
 		"numeric" => ":attribute deve essere :size.",
 		"file"    => ":attribute deve essere :size kilobytes.",
@@ -103,8 +103,8 @@ return array(
 
 	'attributes' => array(
 
-		'username' => 'Nome Utente',
-	    'password' => 'Password',
+		'username' => 'la mail di accesso',
+	    'password' => 'la password',
 	    'login' => 'Login',
 	    'role' => 'Ruolo',
 	    'access_code' => 'Codice d\'accesso',

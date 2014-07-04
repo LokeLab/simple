@@ -23,7 +23,6 @@ Route::group(array('before'=>'auth'), function()
 	Route::post('home', 'HomeController@redirectToHome');
 	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
 	Route::get('home_promoter', array('uses' => 'HomeController@home_promoter'));
-	Route::get('home_advertiser', array('uses' => 'HomeController@home_advertiser'));
 	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
 
 });
@@ -124,7 +123,30 @@ Route::group(array('before'=>'auth'), function()
 
 });
 
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('visit', array( 'uses' => 'VisitController@tablelist'));
 
+	Route::get('visit/add', array( 'uses' =>  'VisitController@add'));
+
+	Route::get('visit/{id}', array( 'uses' => 'VisitController@view'));
+
+	Route::get('visit/{id}/edit', array( 'uses' => 'VisitController@edit'));
+
+	Route::put('visit/{id}', array('as' => 'visit.update','uses' => 'VisitController@update'));
+
+	Route::post('visit/step1', array('as' => 'visit.add',  'uses' => 'VisitController@storestep1'));
+	Route::post('visit/step2', array('as' => 'visit.add',  'uses' => 'VisitController@storestep2'));
+	Route::post('visit/step3', array('as' => 'visit.add',  'uses' => 'VisitController@storestep3'));
+
+	Route::post('visit', array('as' => 'visit.add',  'uses' => 'VisitController@store'));
+	
+	Route::delete('visit/{id}', array('uses' => 'VisitController@destroy'));
+
+	Route::get('visit1/add/{id}', array( 'uses' =>  'VisitController@addstep1'));
+	Route::get('visit2/add/{id}', array( 'uses' =>  'VisitController@addstep2'));
+	Route::get('visit3/add/{id}', array( 'uses' =>  'VisitController@addstep3'));
+});
 /*
 |--------------------------------------------------------------------------
 | HelpDesk Routes

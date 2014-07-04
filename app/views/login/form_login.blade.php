@@ -1,11 +1,19 @@
 @extends('template.login')
 
 @section('content')
+<style>
+.form-body{
+
+	margin-top:50px;
+}
+
+</style>
 <div class="portlet-body form">
 	<!-- BEGIN FORM-->
+
 	<div class="form-body">
 
-			<div class="content">
+			<div class="content text-center">
 				{{ Form::open(array('url' => 'login_process', 'method' => 'post', 'class' => 'login-form')) }}
 			
 				<div class="col-lg-12 ">
@@ -24,15 +32,15 @@
 					        </div>
 					        <?php endif; ?>
 				</div>
-				<div class="alert alert-danger display-hide">
-					<button class="close" data-close="alert"></button>
+				<div class="alert alert-danger display-hide text-center">
+					 
 					<span>
 						 Inserire le credenziali di accesso 
 					</span>
 				</div>
 				
-				<div class="row">
-					<div class="col-lg-6">
+				<div class="row text-left">
+					<div class="col-lg-12">
 						<div class="form-group">
 							{{ Form::label('username',  Lang::get('users.email') , array('class' => 'control-label '))  }}
 							<div class="input-icon">
@@ -41,7 +49,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">	
+					<div class="col-lg-12">	
 						<div class="form-group">
 							{{ Form::label('password', Lang::get('users.password') , array('class' => 'control-label ' )) }}
 							

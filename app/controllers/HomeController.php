@@ -86,14 +86,14 @@ class HomeController extends BaseController {
 		                return Redirect::to('home_admin');
 		                break;
 		             case 2:
-		             	Session::put('role_promoter', $user['role']);
+		             case 3:
+		             case 4:
+		             case 5:
+		             	 
 		                return Redirect::to('home_promoter');
 		                break;
-		             case 3:
-		             	Session::put('role_advertiser', $user['role']);
-		                return Redirect::to('home_advertiser');
-		                break;
-		             case 4:
+		             
+		             case 6:
 		             	Session::put('role_tecnico', $user['role']);
 		                return Redirect::to('home_tecnico');
 		                break;
@@ -115,6 +115,107 @@ class HomeController extends BaseController {
 	public function home_admin()
 	{
 		if(Role::isAdministrator(Auth::user()->id)){
+
+			$stats = array(); // DB::table('stats_community_click')->get();
+
+
+			  $label = "{label:'click'}";
+			  $s1 = "";
+			   $ticks = "";
+			  $label = "{label:'".Lang::get('campaigns.view')."'},";
+
+
+			  
+			  foreach ($stats as $elem) {
+			    
+
+			    $s1 = '[['.$elem->cnt.' , \''. str_replace("'", "\'", $elem->description).'\' ]],'.$s1 ;
+			    
+			    //$ticks = $ticks . "'".str_replace("'", "\'", $elem->description)."',";
+			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
+
+			  }
+			  
+			$stats = array(); // DB::table('stats_all_communities_day')->get();
+
+
+			  $label = "{label:'click'}";
+			  $sl1 = "";
+			  $lticks = "";
+			  $label = "{label:'".Lang::get('campaigns.view')."'},";
+			  
+
+			  $label = true;
+			  foreach ($stats as $elem) {
+			    
+
+			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
+			    
+			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->cnt.' ';
+			    if ($label)
+			    {
+			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
+			    	$label = false;
+			    } else
+			    {
+
+			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "''";
+			    	$label = true;
+			    }
+			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
+
+			  }
+
+
+			  $stats =array(); // DB::table('stats_all_offers_day')->get();
+
+
+			  $label = "{label:'click'}";
+			  $sl2 = "";
+			  $l2ticks = "";
+			  $label = "{label:'".Lang::get('campaigns.view')."'},";
+			  
+
+			  $label = true;
+			  foreach ($stats as $elem) {
+			    
+
+			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
+			    
+			  	$sl2 = ((strlen($sl2) > 1 )?$sl2.',':$sl2) .'  '.$elem->cnt.' ';
+			    if ($label)
+			    {
+			    	$l2ticks = ((strlen($lticks) > 1 )?$l2ticks.',':$l2ticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
+			    	$label = false;
+			    } else
+			    {
+
+			    	$l2ticks = ((strlen($l2ticks) > 1 )?$l2ticks.',':$l2ticks)  . "''";
+			    	$label = true;
+			    }
+			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
+
+			  }
+
+			  $data['s1'] =  $s1;
+			  $data['ticks'] =  $ticks;
+			  $data['sl1'] =  $sl1;
+			  $data['lticks'] =  $lticks;
+			  $data['sl2'] =  $sl2;
+			  $data['l2ticks'] =  $l2ticks;
+
+			$data['campaigns_list'] = array( ); // lastestvisit
+			
+			$this->layout = View::make('home.admin', $data);
+		}else{
+			return Redirect::action('HomeController@logout');
+		}
+	}
+	
+
+	public function home_promoter()
+	{
+		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
 
 			$stats = array(); // DB::table('stats_community_click')->get();
 

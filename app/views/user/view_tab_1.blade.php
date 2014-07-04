@@ -174,5 +174,26 @@
 				
 			</div>
 		</div>
+
+
+		<div class="row">
+	<div class="col-lg-3">
+{{ Form::label('user_manager', 'Manager' ) }}
+{{ Form::label('user_manager', $user_detail['user_manager'], array('class'=>'form-control')) }}
+</div>
+
+
+
+	<div class="col-lg-3">
+{{ Form::label('agente', 'Agente' ) }}
+{{ Form::label('agente', $user_detail['agente'], array('class'=>'form-control')) }}
+</div>
+
+	<div class="col-lg-3">
+{{ Form::label('developer', 'Developer' ) }}
+{{ Form::label('developer', $user_detail['developer'], array('class'=>'form-control')) }}
+</div>
+</div> 
+
 	</div>
 </div>				

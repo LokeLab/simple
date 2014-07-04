@@ -104,6 +104,9 @@ class UsersController extends \BaseController {
 			$user->state = $userdata['state'];
 			$user->country = $userdata['country'];
 			$user->language = Input::get('language');
+			$user->user_manager = Input::get('user_manager');
+			$user->developer = Input::get('developer');
+			$user->agente = Input::get('agente');
 
 			if (Session::get('userid') == $id)
 				Session::put('Language', Input::get('language') );
@@ -195,6 +198,10 @@ class UsersController extends \BaseController {
 				$user->cap = $userdata['cap'];
 				$user->state = $userdata['state'];
 				$user->country = $userdata['country'];
+				$user->user_manager = Input::get('user_manager');
+				$user->developer = Input::get('developer');
+				$user->agente = Input::get('agente');
+
 
 				$user->user_created = 1;
 				$user->user_updated = 0;

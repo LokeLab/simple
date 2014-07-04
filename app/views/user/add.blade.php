@@ -88,6 +88,29 @@
 
 <div class="row">
 	<div class="col-lg-3">
+{{ Form::label('user_manager', 'Manager' ) }}
+{{ Form::label('user_manager', '', array('class'=>'form-control')) }}
+</div>
+</div> 
+
+<div class="row">
+	<div class="col-lg-3">
+{{ Form::label('agente', 'Agente' ) }}
+{{ Form::label('agente', '', array('class'=>'form-control')) }}
+</div>
+</div> 
+
+<div class="row">
+	<div class="col-lg-3">
+{{ Form::label('developer', 'Developer' ) }}
+{{ Form::label('developer', '', array('class'=>'form-control')) }}
+</div>
+</div> 
+
+
+
+<div class="row">
+	<div class="col-lg-3">
 		<div class="form-group">
 		{{ Form::label('note',  Lang::get('users.note')) }}
 		{{ Form::textarea('note', '', array('class'=>'form-control', 'placeholder'=>Lang::get('users.note'))) }}

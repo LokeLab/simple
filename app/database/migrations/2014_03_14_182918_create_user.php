@@ -26,6 +26,9 @@ class CreateUser extends Migration {
 			$table->string('surname',255);
 			$table->string('phone',255);
 			$table->string('email',1000);
+			$table->string('user_manager',255);
+			$table->string('agente',255);
+			$table->string('developer',255);
 			
 
 			//date 
@@ -43,6 +46,7 @@ class CreateUser extends Migration {
 
 			//login info
 			$table->boolean('external_login');
+			$table->string('remember_token',255);
 			$table->string('ext_login_code',255);
 			$table->integer('type_external_login');
 			$table->integer('try_wrong_login');
