@@ -1,22 +1,12 @@
 
-<ul class="feeds">
-@foreach($campaigns_list as $c)
 
-	<li>
-		<div class="col1">
-			<div class="cont">
-				<div class="cont-col1">
-					<div class="label label-sm label-info">
-						<i class="fa fa-bullseye"></i>
-					</div>
-				</div>
-				<div class="cont-col2">
-					<div class="desc">
-						 {{ $c['created_at']}} <a href="campaigns/{{ $c['id']}}" class="green"><i class="fa fa-eye"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
+@foreach($campaigns_list as $c)
+<div class="row">
+<div class="col-lg-2">
+						 {{ Decoder::decodeDate($c['visit_at'])}} </div><div class="col-lg-4"> {{  $c['local'] }} </div>
+						  <div class="col-lg-6"> ({{  User::getLabel($c['user_created']) }}) <a href="visit/{{ $c['id']}}" class="green"><i class="fa fa-eye"></i></a>
+</div>
+</div>				
+	
 @endforeach
-</ul>
+

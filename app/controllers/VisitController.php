@@ -32,8 +32,11 @@ class VisitController extends \BaseController {
 	 */
 	 public function view($id)
 	 {
-	  $data['role_detail'] = Visit::find(Input::get('id'));
+	  //$data['role_detail'] = Visit::find(Input::get('id'));
+	  $data['v'] = Visit::find($id);
+
 	  
+
 	  $this->layout = View::make('visit.view', $data);
 	 }
 
@@ -159,9 +162,7 @@ class VisitController extends \BaseController {
 	 */
 	public function store()
 	{
-		$userdata = array(
-	 		'visit_at' => Input::get('visit_at')
-				);
+		$userdata = Input::all();
 
  		$role = new Visit;
 
@@ -179,7 +180,7 @@ class VisitController extends \BaseController {
 			$role->local_definition = Input::get('local_definition');
 			$role->code = Input::get('code');
 			$role->furniture = Input::get('furniture');
-			$role->code_team_sell_out = Input::get('code_team_sell_out');
+			//$role->code_team_sell_out = Input::get('code_team_sell_out');
 			$role->name = Input::get('name');
 			$role->surname = Input::get('surname');
 			$role->role_description = Input::get('role_description');
@@ -220,9 +221,7 @@ class VisitController extends \BaseController {
 	public function storestep1()
 	 {
 
-	 	$userdata = array(
-	 		'id' => Input::get('id')
-				);
+	 	$userdata = Input::all();;
 
  		
  		$role = new Visit;
@@ -274,14 +273,12 @@ class VisitController extends \BaseController {
 	 public function storestep2()
 	 {
 
-	 	$userdata = array(
-	 		'id' => Input::get('id')
-				);
+	 	$userdata = Input::all();
 
  		
  		$role = new Visit;
 
-	 	if( $role->validastep1($userdata) == false)
+	 	if( $role->validastep2($userdata) == false)
 		{
 			return Redirect::back()->withInput()->withErrors($role->errors());
 		}
@@ -317,15 +314,13 @@ class VisitController extends \BaseController {
 	 public function storestep3()
 	 {
 
-	 	$userdata = array(
-	 		'id' => Input::get('id')
-				);
+	 	$userdata = Input::all();
 
 
  		
  		$role = new Visit;
 
-	 	if( $role->validastep1($userdata) == false)
+	 	if( $role->validastep3($userdata) == false)
 		{
 			return Redirect::back()->withInput()->withErrors($role->errors());
 		}

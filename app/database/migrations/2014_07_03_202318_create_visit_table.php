@@ -100,7 +100,26 @@ class CreateVisitTable extends Migration {
 			$table->integer('cons_17');
 			$table->integer('cons_18');
 			$table->integer('cons_19');
-			$table->integer('cons_20');
+			$table->integer('mcons_1');
+			$table->integer('mcons_2');
+			$table->integer('mcons_3');
+			$table->integer('mcons_4');
+			$table->integer('mcons_5');
+			$table->integer('mcons_6');
+			$table->integer('mcons_7');
+			$table->integer('mcons_8');
+			$table->integer('mcons_9');
+			$table->integer('mcons_10');
+			$table->integer('mcons_11');
+			$table->integer('mcons_12');
+			$table->integer('mcons_13');
+			$table->integer('mcons_14');
+			$table->integer('mcons_15');
+			$table->integer('mcons_16');
+			$table->integer('mcons_17');
+			$table->integer('mcons_18');
+			$table->integer('mcons_19');
+		
 		
 			$table->integer('qsmr2');
 			$table->integer('qscc2');

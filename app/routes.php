@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@redirectToHome');
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::post('home', 'HomeController@redirectToHome');
+	Route::get('home', 'HomeController@redirectToHome');
 	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
 	Route::get('home_promoter', array('uses' => 'HomeController@home_promoter'));
 	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));

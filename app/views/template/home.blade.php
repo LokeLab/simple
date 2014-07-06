@@ -123,6 +123,8 @@
 <script type="text/javascript" src="{{ url('assets/plugins/jqplot/jqplot.barRenderer.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('assets/plugins/jqplot/jqplot.categoryAxisRenderer.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('assets/plugins/jqplot/jqplot.pointLabels.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/plugins/jqplot/jqplot.pieRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/plugins/jqplot/jqplot.donutRenderer.min.js') }}"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
 
@@ -148,8 +150,56 @@
 
 
 
+jQuery(document).ready(function(){
+  var data = [<?php
+    if(strlen($sp1)> 1)  
+        echo $sp1;
+    else
+        echo "['nessuna visita',1]";
 
+ ?> ];
+  var plot1 = $.jqplot('chartp1', [data], 
+    { 
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+      }, 
+      legend: { show:true, location: 'e' }
+    }
+  );
+});
+
+
+jQuery(document).ready(function(){
+  var data = [<?php
+    if(strlen($sp2)> 1)  
+        echo $sp2;
+    else
+        echo "['nessuna visita',1]";
+
+ ?> ];
+  var plot1 = $.jqplot('chartp2', [data], 
+    { 
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+      }, 
+      legend: { show:true, location: 'e' }
+    }
+  );
+});
 </script>
+
 
 
 
@@ -288,50 +338,7 @@
  
   </script>
 
-<script>
 
-$(document).ready(function(){
-    // For horizontal bar charts, x an y values must will be "flipped"
-    // from their vertical bar counterpart.
-    var plot2 = $.jqplot('chart2', [{{$s1}}], {
-        seriesDefaults: {
-            renderer:$.jqplot.BarRenderer,
-            // Show point labels to the right ('e'ast) of each bar.
-            // edgeTolerance of -15 allows labels flow outside the grid
-            // up to 15 pixels.  If they flow out more than that, they 
-            // will be hidden.
-            pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
-            // Rotate the bar shadow as if bar is lit from top right.
-            shadowAngle: 135,
-            // Here's where we tell the chart it is oriented horizontally.
-            rendererOptions: {
-                barDirection: 'horizontal',
-                barWidth: null,
-                    barPadding: -15,
-                    barMargin: 5,
-            }
-        },
-        grid: {
-                drawGridLines: true,        // wether to draw lines across the grid or not.
-                    gridLineColor: '#cccccc',   // CSS color spec of the grid lines.
-                    background: '#fff',      // CSS color spec for background color of grid.
-                    borderColor: '#999999',     // CSS color spec for border around grid.
-                    borderWidth: 2.0,           // pixel width of border around grid.
-                    shadow: true,               // draw a shadow for grid.
-                    shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
-                    shadowOffset: 1.5,          // offset from the line of the shadow.
-                    shadowWidth: 3,             // width of the stroke for the shadow.
-                    shadowDepth: 3
-            }, 
-        axes: {
-            yaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer
-            }
-        }
-    });
-});
-
-  </script>
 <!-- END JAVASCRIPTS -->
   
    </body>

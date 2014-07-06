@@ -56,7 +56,7 @@ class HomeController extends BaseController {
 	    }
 	    else 
 	    {
-			echo ('test');
+			
 			if( Auth::attempt($userdata) ){
 	 			
 	 			$user = User::where('username', '=', $userdata['username'])->first();
@@ -116,27 +116,37 @@ class HomeController extends BaseController {
 	{
 		if(Role::isAdministrator(Auth::user()->id)){
 
-			$stats = array(); // DB::table('stats_community_click')->get();
+			$stats = DB::table('graph_a_1')->orderBy('numero', 'desc')->take(5)->get();
+ 			$s1 = '';
+			if($stats)
+			{
+	 			foreach ($stats as $elem) {
+				    
+
+				    $s1 = '[ \''. str_replace("'", "\'", $elem->city).'\' , '.$elem->numero.' ],'.$s1 ;
+				}
+			} else 	$s1 = "['nessuna visita',1]";
+
+			$sp1=$s1;
+
+			$stats = DB::table('graph_a_2')->orderBy('numero', 'desc')->take(5)->get();
+ 			$s1 = '';
+			if($stats)
+			{
+	 			foreach ($stats as $elem) {
+				    
+
+				    $s1 = '[ \''. str_replace("'", "\'", $elem->visit).'\' , '.$elem->numero.' ],'.$s1 ;
+				}
+			} else 	$s1 = "['nessuna visita',1]";
+
+			$sp2=$s1;
 
 
-			  $label = "{label:'click'}";
-			  $s1 = "";
-			   $ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
+			
 			  
-			  foreach ($stats as $elem) {
-			    
+			$stats = DB::table('graph_a_3')->get(); // DB::table('stats_all_communities_day')->get();
 
-			    $s1 = '[['.$elem->cnt.' , \''. str_replace("'", "\'", $elem->description).'\' ]],'.$s1 ;
-			    
-			    //$ticks = $ticks . "'".str_replace("'", "\'", $elem->description)."',";
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-			  
-			$stats = array(); // DB::table('stats_all_communities_day')->get();
 
 
 			  $label = "{label:'click'}";
@@ -151,7 +161,7 @@ class HomeController extends BaseController {
 
 			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
 			    
-			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->cnt.' ';
+			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->numero.' ';
 			    if ($label)
 			    {
 			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
@@ -167,44 +177,15 @@ class HomeController extends BaseController {
 			  }
 
 
-			  $stats =array(); // DB::table('stats_all_offers_day')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl2 = "";
-			  $l2ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
 			  
 
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
+			  $data['sp1'] =  $sp1;
+			  $data['sp2'] =  $sp2;
 
-			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
-			    
-			  	$sl2 = ((strlen($sl2) > 1 )?$sl2.',':$sl2) .'  '.$elem->cnt.' ';
-			    if ($label)
-			    {
-			    	$l2ticks = ((strlen($lticks) > 1 )?$l2ticks.',':$l2ticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-			    	$label = false;
-			    } else
-			    {
-
-			    	$l2ticks = ((strlen($l2ticks) > 1 )?$l2ticks.',':$l2ticks)  . "''";
-			    	$label = true;
-			    }
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-			  $data['s1'] =  $s1;
-			  $data['ticks'] =  $ticks;
 			  $data['sl1'] =  $sl1;
 			  $data['lticks'] =  $lticks;
-			  $data['sl2'] =  $sl2;
-			  $data['l2ticks'] =  $l2ticks;
 
-			$data['campaigns_list'] = array( ); // lastestvisit
+			$data['campaigns_list'] = Visit::orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
 			
 			$this->layout = View::make('home.admin', $data);
 		}else{
@@ -217,27 +198,36 @@ class HomeController extends BaseController {
 	{
 		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
 
-			$stats = array(); // DB::table('stats_community_click')->get();
+			$stats = DB::table('graph_p_1')->where('user_created', Auth::user()->id)->orderBy('numero', 'desc')->take(5)->get();
+ 			$s1 = '';
+			if($stats)
+			{
+	 			foreach ($stats as $elem) {
+				    
+
+				    $s1 = '[ \''. str_replace("'", "\'", $elem->city).'\' , '.$elem->numero.' ],'.$s1 ;
+				}
+			} else 	$s1 = "['nessuna visita',1]";
+
+			$sp1=$s1;
+
+			$stats = DB::table('graph_p_2')->where('user_created', Auth::user()->id)->orderBy('numero', 'desc')->take(5)->get();
+ 			$s1 = '';
+			if($stats)
+			{
+	 			foreach ($stats as $elem) {
+				    
+
+				    $s1 = '[ \''. str_replace("'", "\'", $elem->visit).'\' , '.$elem->numero.' ],'.$s1 ;
+				}
+			} else 	$s1 = "['nessuna visita',1]";
+
+			$sp2=$s1;
 
 
-			  $label = "{label:'click'}";
-			  $s1 = "";
-			   $ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-
-
+			
 			  
-			  foreach ($stats as $elem) {
-			    
-
-			    $s1 = '[['.$elem->cnt.' , \''. str_replace("'", "\'", $elem->description).'\' ]],'.$s1 ;
-			    
-			    //$ticks = $ticks . "'".str_replace("'", "\'", $elem->description)."',";
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-			  
-			$stats = array(); // DB::table('stats_all_communities_day')->get();
+			$stats = DB::table('graph_p_3')->where('user_created', Auth::user()->id)->get(); // DB::table('stats_all_communities_day')->get();
 
 
 			  $label = "{label:'click'}";
@@ -252,7 +242,7 @@ class HomeController extends BaseController {
 
 			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
 			    
-			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->cnt.' ';
+			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->numero.' ';
 			    if ($label)
 			    {
 			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
@@ -268,46 +258,18 @@ class HomeController extends BaseController {
 			  }
 
 
-			  $stats =array(); // DB::table('stats_all_offers_day')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl2 = "";
-			  $l2ticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
 			  
 
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
+			  $data['sp1'] =  $sp1;
+			  $data['sp2'] =  $sp2;
 
-			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
-			    
-			  	$sl2 = ((strlen($sl2) > 1 )?$sl2.',':$sl2) .'  '.$elem->cnt.' ';
-			    if ($label)
-			    {
-			    	$l2ticks = ((strlen($lticks) > 1 )?$l2ticks.',':$l2ticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-			    	$label = false;
-			    } else
-			    {
-
-			    	$l2ticks = ((strlen($l2ticks) > 1 )?$l2ticks.',':$l2ticks)  . "''";
-			    	$label = true;
-			    }
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-			  $data['s1'] =  $s1;
-			  $data['ticks'] =  $ticks;
 			  $data['sl1'] =  $sl1;
 			  $data['lticks'] =  $lticks;
-			  $data['sl2'] =  $sl2;
-			  $data['l2ticks'] =  $l2ticks;
 
-			$data['campaigns_list'] = array( ); // lastestvisit
+
+			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('user_created', Auth::user()->id)->orderBy('visit_at', 'desc')->take(8)->get();; // lastestvisit
 			
-			$this->layout = View::make('home.admin', $data);
+			$this->layout = View::make('home.promoter', $data);
 		}else{
 			return Redirect::action('HomeController@logout');
 		}

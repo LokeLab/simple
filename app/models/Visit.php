@@ -36,16 +36,75 @@ class Visit extends Eloquent  {
 	 * @var array
 	 */
 	public $rules = array(
-        'visit_at' => 'required'
+        'visit_at' => 'required',
+        'city' => 'required',
+        'address' => 'required',
+        'local' => 'required',
+        'local_definition' => 'required',
+        'furniture' => 'required',
+        'aperitif_auto' => 'required',
+        'advocacy' => 'required',
+        'typevisit' => 'required',
+        's_consumer' => 'required',
+        'l_advocacy' => 'required',
+        'first_visit' => 'required',
+        'pot' => 'required',
+        're' => 'required',
+        'qsmr' => 'required',
+        'qscc' => 'required',
     );
 	public $rulesstep1 = array(
-        'id' => 'required'
+        'id' => 'required',
+        'case_1' => 'required',
+        'case_2' => 'required',
+        'case_3' => 'required',
+        'case_4' => 'required',
+        'case_5' => 'required',
+        'case_6' => 'required',
+        'case_7' => 'required',
+        'case_8' => 'required',
+        'case_9' => 'required',
+        'case_10' => 'required',
+        'case_11' => 'required',
+        'case_12' => 'required',
+        'case_13' => 'required',
+        'case_14' => 'required',
+        'case_16' => 'required',
+        'case_17' => 'required',
+        'case_18' => 'required',
+
     );
 	public $rulesstep2 = array(
-        'id' => 'required'
+        'id' => 'required',	
+        'case_1' => 'required',
+        'case_2' => 'required',
+        'case_3' => 'required',
+        'case_6' => 'required',
+        'case_13' => 'required',
+        'case_14' => 'required',
+        'nbarman' => 'required',
     );
     public $rulesstep3 = array(
-        'id' => 'required'
+        'id' => 'required',
+        'mcons_1' => 'required_without:cons_1',
+        'mcons_2' => 'required_without:cons_2',
+        'mcons_3' => 'required_without:cons_3',
+        'mcons_4' => 'required_without:cons_4',
+        'mcons_5' => 'required_without:cons_5',
+        'mcons_6' => 'required_without:cons_6',
+        'mcons_7' => 'required_without:cons_7',
+        'mcons_8' => 'required_without:cons_8',
+        'mcons_9' => 'required_without:cons_9',
+        'mcons_10' => 'required_without:cons_10',
+        'mcons_11' => 'required_without:cons_11',
+        'mcons_12' => 'required_without:cons_12',
+        'mcons_13' => 'required_without:cons_13',
+        'mcons_14' => 'required_without:cons_14',
+        'mcons_15' => 'required_without:cons_15',
+        'mcons_16' => 'required_without:cons_16',
+        'mcons_17' => 'required_without:cons_17',
+        'mcons_18' => 'required_without:cons_18',
+        'mcons_19' => 'required_without:cons_19',
     );
 	/**
 	 * The fuction that validates the model
@@ -253,6 +312,33 @@ class Visit extends Eloquent  {
 			return '/visit';
 		else
 			return '/visit'.$target.'/add/'.$id;
+
+
+
+	}
+
+	public static function getIncludeVisit($role, $type)
+	{
+
+
+
+		$target = '';
+		if ($role == 1 && $type== 1) $target = '1';
+		if ($role == 2 && $type== 1) $target = '1';
+		if ($role == 3 && $type== 1) $target = '2';
+		if ($role == 4 && $type== 1) $target = '2';
+
+		if ($role == 3 && $type== 2) $target = '3';
+		if ($role == 4 && $type== 2) $target = '3';
+
+		if ($role == 1 && $type== 3) $target = '3';
+		if ($role == 2 && $type== 3) $target = '3';
+		if ($role == 4 && $type== 3) $target = '3';
+
+		if ($target == '') 
+			return 'visit.view1';
+		else
+			return 'visit.view'.$target;
 
 
 

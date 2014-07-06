@@ -49,10 +49,17 @@
 	</div>
 	<div class="col-md-6 col-sm-6" style="padding:2px!important; margin:0px!important">
 
-	<div class="col-lg-12"><h4> Operatori più attivi </h4></div>
-	<div class="col-lg-12" style="padding:2px!important; margin:0px!important"><div id="chart2" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div></div>
+	<div class="col-lg-6"><h4> Città più visitate </h4></div><div class="col-lg-6"><h4> Tipologia di visita </h4></div>
+	<div class="col-lg-6" style="padding:2px!important; margin:0px!important">
 
+		<div id="chartp1" style="width: 100%; height: 300px; position: relative;" class="jqplot-target"></div> 
+	</div>
+	
+	<div class="col-lg-6" style="padding:2px!important; margin:0px!important">
 
+		<div id="chartp2" style="width: 100%; height: 300px; position: relative;" class="jqplot-target"></div> 
+	</div>
+	
 
 	</div>
 </div>
@@ -60,7 +67,7 @@
 <div class="col-md-12 col-sm-12">
 
 							
-								<div class="col-lg-12" style="padding:2px!important; margin:0px!important"><div id="chart1" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div></div>
+		<div class="col-lg-12" style="padding:2px!important; margin:0px!important"><div id="chart1" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div></div>
 							
 </div>
 </div>

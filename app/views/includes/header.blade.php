@@ -17,7 +17,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
   <div class="header-inner">
     <!-- BEGIN LOGO -->
     <a class="navbar-brand" href="/home">
-      Report AV PN
+      <img src="/images/logo_martini.png" height="70">
     </a>
     <!-- END LOGO -->
     <!-- BEGIN HORIZANTAL MENU -->

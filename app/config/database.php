@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'reportavpn',
+			'database'  => 'reportavpn_prod',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

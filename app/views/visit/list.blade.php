@@ -59,7 +59,9 @@
 							<th>
 								 Inserita il 
 							</th>	
-							
+							<th>
+								 
+							</th>	
 						</tr>
 					</thead>
 					<tbody>
@@ -87,6 +89,9 @@
 							<td>
 								{{ Decoder::decodeDateTime($c->created_at) }}  
 							</td>	
+							<td>
+								<a href="/visit/{{ $c->id }} " class="btn blue">Visualizza</a>
+							</td>
 							
 							
 							

@@ -61,8 +61,18 @@
 					
 				</div>
 		@else
-		<h4>{{Lang::get('adv.mostactive')}} </h4>
-		<div id="chart2" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div>	
+		
+
+
+<div class="col-lg-12"><h4> Città più visitate </h4></div>
+	<div class="col-lg-12" style="padding:2px!important; margin:0px!important">
+
+		<div id="chartp1" style="height:400px;width:300px; "></div> 
+	</div>
+	<div class="col-lg-12" style="padding:2px!important; margin:0px!important"><div id="chart2" style="width: 100%; height: 350px; position: relative;" class="jqplot-target"></div></div>
+
+
+		
 		@endif
 	</div>
 </div>
