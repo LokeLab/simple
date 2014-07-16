@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 		<h3 class="page-title">
-		{{Lang::get('roles.modifyrole');}}
+		{{Lang::get('navigation.offerts');}} <!--<small>{{Lang::get('home.home');}}</small>-->
 		</h3>
 		<ul class="page-breadcrumb breadcrumb">
 			<li>
@@ -11,12 +11,12 @@
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<i class="fa fa-sitemap"></i>
-				<a href="{{ url('visit') }}">{{Lang::get('navigation.roles');}}</a>
+				<i class="fa fa-group"></i>
+				<a href="{{ url('/offers?c='.Input::get('c')) }}">{{Lang::get('navigation.offerts');}}</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				{{Lang::get('roles.modifyrole');}}
+				{{Lang::get('navigation.list');}}
 			</li>
 		</ul>
 		<!-- END PAGE TITLE & BREADCRUMB-->

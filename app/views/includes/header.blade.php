@@ -61,11 +61,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
               @endforeach
             </ul><div class="slimScrollBar" style="background-color: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 1px; background-position: initial initial; background-repeat: initial initial;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px; background-position: initial initial; background-repeat: initial initial;"></div></div>
           </li>
-          <li class="external">
-            <a href="#">
-                {{Lang::get('notification.all')}} <i class="m-icon-swapright"></i>
-            </a>
-          </li>
+          
         </ul>
       </li>
       
@@ -85,12 +81,6 @@ $list_event = User::getAllEvents(Session::get('userid'));
               <i class="fa fa-user"></i> {{ Lang::get('users.myprofile') }}
             </a>
           </li>
-          <li>
-            <a href="/helpdesk">
-              <i class="fa fa-bug"></i> {{ Lang::get('users.helpdesk') }}
-            </a>
-          </li>
-          
           <li>
             <a href="/logout">
               <i class="fa fa-key"></i> Log Out

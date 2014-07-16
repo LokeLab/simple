@@ -7,8 +7,7 @@
 					</style>
 
 
-{{ Form::open(array('url' => 'visit/step1', 'method' => 'POST')) }}
-{{Form::hidden('id', $id)}}
+
 
 <div class="row">
 	@if($errors->has())
@@ -44,13 +43,13 @@
 							{{ Decoder::decodeYN($v->case_3) }}
 						</div><div class="col-lg-6 alt">E' presente il brand block nel back bar?</div><div class="col-lg-6 alt">	
 										
-							{{ Decoder::decodeYN($v->case_6) }}
+							{{ Decoder::decodeYN($v->case_5) }}
 						</div><div class="col-lg-6">Sono presenti i cavalierini?</div><div class="col-lg-6">	
 										
-							{{ Decoder::decodeYN($v->case_13) }}
+							{{ Decoder::decodeYN($v->case_12) }}
 						</div><div class="col-lg-6 alt">Sono presenti i menu'?</div><div class="col-lg-6 alt">	
 										
-							{{ Decoder::decodeYN($v->case_14) }}
+							{{ Decoder::decodeYN($v->case_13) }}
 						</div>
 						<div class="col-lg-6">N° barman coinvolti nell'advocacy</div> <div class="col-lg-6"> {{$v->nbarman}}</div>
 						
@@ -79,5 +78,3 @@
 
 
 
-
-{{ Form::close() }}

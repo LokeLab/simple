@@ -157,5 +157,15 @@ Route::group(array('before'=>'auth'), function()
 {
 	Route::get('helpdesk', array('uses' => 'HomeController@helpdesk'));
     Route::post('helpdesk', array('as' => 'helpdesk.send',  'uses' => 'HomeController@send'));
+	Route::get('reporting', array('uses' => 'ReportController@home'));
+});
+
+
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('/export/weekall/{anno}/{settimana}/', array('uses' => 'ExporterController@getWeekAll'));
+	Route::get('/export/weekRoleall/{anno}/{settimana}/{role}', array('uses' => 'ExporterController@getWeekRoleAll'));
+	Route::get('/export/week/{anno}/{settimana}/{id}', array('uses' => 'ExporterController@getWeek'));
+	Route::get('/export/monthall/{anno}/{settimana}/', array('uses' => 'ExporterController@getMonthAll'));
 	
 });

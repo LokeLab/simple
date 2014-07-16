@@ -17,7 +17,7 @@
 		<div class="form-group">
 			{{ Form::submit(Lang::get('generic.save'),  array('class' =>'btn btn-success btn-large')) }}
 			&nbsp;
-			<a href="{{ url('roles') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
+			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>
 	</div>
 </div>
@@ -71,7 +71,7 @@
 					</div>
 					<div class="col-lg-6">
 						{{ Form::label('code_team_sell_out', 'Classificazione TEAM SELL OUT'  , array('class' => 'control-label ')) }}
-						{{ Form::select('code_team_sell_out', array('ND'=>'ND','A'=>'A','B'=>'B','C'=>'C','D'=>'D'),'ND', array('class'=>'form-control placeholder-no-fix'   )) }}
+						{{ Form::select('code_team_sell_out', array('A'=>'A','B'=>'B','C'=>'C'),'A', array('class'=>'form-control placeholder-no-fix'   )) }}
 					</div>
 				
 				
@@ -92,11 +92,14 @@
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				{{ Form::label('name', 'Nome' ) }} 
-				{{ Form::text('name', Auth::user()->name, array('class'=>'form-control readonly	')) }}
+				{{ Form::label('name', Auth::user()->name, array('class'=>'form-control readonly	')) }}
+				{{ Form::hidden('name', Auth::user()->name)}}
 				{{ Form::label('surname', 'Cognome') }}
-				{{ Form::text('surname', Auth::user()->surname, array('class'=>'form-control readonly')) }}
+				{{ Form::label('surname', Auth::user()->surname, array('class'=>'form-control readonly')) }}
+				{{ Form::hidden('surname', Auth::user()->surname)}}
 				{{ Form::label('role_description', 'Ruolo' ) }} {{ Form::hidden('role', Auth::user()->role) }}
-				{{ Form::text('role_description', Role::getLabel(Auth::user()->role), array('class'=>'form-control readonly')) }}
+				{{ Form::label('role_description', Role::getLabel(Auth::user()->role), array('class'=>'form-control readonly')) }}
+				{{ Form::hidden('role_description', Auth::user()->role_description)}}
 				{{ Form::label('user_manager', 'Manager' ) }}
 				{{ Form::text('user_manager', Auth::user()->manager, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_agente', 'Agente' ) }}
@@ -121,20 +124,11 @@
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
 					<div class="col-lg-12">
-
-						{{ Form::label('visit_at', 'Data visita'  , array('class' => 'control-label ')) }}
-						{{ Form::text('visit_at', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Data')   ) }}
-					</div>
-					
-					
-
-
-					<div class="col-lg-12">
 						<h4>Informazioni generali</h4>
 					</div>
 
 					<div class="col-lg-12">
-						<div class="col-lg-6">	
+						<div class="col-lg-4">	
 							Aperitivo autogestito
 						</div>
 						<div class="col-lg-3">	
@@ -147,13 +141,13 @@
 							</label>
 			
 						</div>
-						<div class="col-lg-3">	
-							{{ Form::text('aperitif_auto_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+						<div class="col-lg-5">	
+							{{ Form::select('aperitif_auto_fq', $selectFQ,'' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
 						</div>
 					</div>
 
 					<div class="col-lg-12 active">
-						<div class="col-lg-6">	
+						<div class="col-lg-4">	
 							Advocacy
 						</div>
 						<div class="col-lg-3">	
@@ -166,13 +160,13 @@
 							</label>
 			
 						</div>
-						<div class="col-lg-3">	
-							{{ Form::text('advocacy_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+						<div class="col-lg-5">	
+							{{ Form::select('advocacy_fq', $selectFQ,'' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
 						</div>
 					</div>
 
 					<div class="col-lg-12">
-						<div class="col-lg-6">	
+						<div class="col-lg-4">	
 							Serata consumer
 						</div>
 						<div class="col-lg-3">	
@@ -185,29 +179,12 @@
 							</label>
 			
 						</div>
-						<div class="col-lg-3">	
-							{{ Form::text('s_consumer_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+						<div class="col-lg-5">	
+							{{ Form::select('s_consumer_fq', $selectFQ, '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
 						</div>
 					</div>
 
-					<div class="col-lg-12 active">
-						<div class="col-lg-6">	
-							Light advocacy
-						</div>
-						<div class="col-lg-3">	
-										
-							<label class="radio-inline">
-								{{ Form::radio('l_advocacy', 1, 0) }} {{Lang::get('decode.Yes')}}
-							</label>
-							<label class="radio-inline">
-								{{ Form::radio('l_advocacy', 0, 0) }} {{Lang::get('decode.No')}}
-							</label>
-			
-						</div>
-						<div class="col-lg-3">	
-							{{ Form::text('l_advocacy_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
-						</div>
-					</div>
+					
 				
 				</div>
 			</div>
@@ -227,6 +204,11 @@
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
+				<div class="col-lg-12">
+
+						{{ Form::label('visit_at', 'Data visita'  , array('class' => 'control-label ')) }}
+						{{ Form::text('visit_at', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Data')   ) }}
+				</div>
 				<div class="col-lg-12">	
 						{{ Form::label('typevisit', 'Tipo visita'  , array('class' => 'control-label ')) }}
 						{{ Form::select('typevisit', Visit::getTypeList() ,'',  array('class'=>'form-control placeholder-no-fix'  )) }}
@@ -273,7 +255,7 @@
 
 					 
 						<div class="col-lg-12">
-							<div class="col-lg-5">Serve Martini Royal </div><div class="col-lg-7"><label class="radio-inline">
+							<div class="col-lg-5">Serve Martini Royale </div><div class="col-lg-7"><label class="radio-inline">
 									{{ Form::radio('qsmr', 1, 0) }} {{Lang::get('decode.Yes')}}
 								</label>
 								<label class="radio-inline">
@@ -303,9 +285,9 @@
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
-			{{ Form::submit('Salva',  array('class' =>'btn btn-success btn-large')) }}
+			{{ Form::submit('Prosegui',  array('class' =>'btn btn-success btn-large')) }}
 			&nbsp;
-			<a href="{{ url('roles') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
+			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>
 	</div>
 </div>

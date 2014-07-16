@@ -19,9 +19,7 @@
 			<div class="table-toolbar">
 					<div class="btn-group">
 						
-						<a href="#" class="btn green" style = "margin-right:4px;">
-							{{Lang::get('generic.exportxls');}} <i class="fa fa-file-o"></i>
-						</a>
+						
 						<a href="?all=1" class="btn blue" style = "margin-right:4px;">
 							{{Lang::get('enduser.viewall');}} <i class="fa fa-filter"></i>
 						</a>
@@ -80,7 +78,7 @@
 								{{ Visit::getTypeLabel($c->typevisit) }}  
 							</td>	
 							<td>
-								  {{ $c->locale }}  
+								  {{ $c->local }}  
 
 							</td>					
 							<td>
@@ -99,6 +97,7 @@
 						@endforeach
 					</tbody>
 				</table>
+				<?php echo $roles_list->links(); ?>
 			</div>
 
 		</div>

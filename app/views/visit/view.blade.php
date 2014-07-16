@@ -17,14 +17,7 @@
 		</div>
 	</div>
 </div>
-<!--<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('id', Lang::get('ttemplates.id')) }}: 
-		{{ Form::text('id', '', array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div>-->
+
 <div class="row">
 	@if($errors->has())
 					<div class="alert alert-danger">
@@ -47,27 +40,27 @@
 				<div class="row">
 					<div class="col-lg-12">
 						{{ Form::label('city', 'Città'  , array('class' => 'control-label ')) }}
-						{{ Form::text('city', '' ,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Città')   ) }}
+						{{ Form::label('city', $v->city ,   array('class'=>'form-control ')   ) }}
 						
 						{{ Form::label('address', 'Indirizzo'  , array('class' => 'control-label ')) }}
-						{{ Form::text('address',  '' ,  array('class'=>'form-control placeholder-no-fix' , 'placeholder' => 'Indirizzo')  ) }}
+						{{ Form::label('address', $v->address ,  array('class'=>'form-control ')  ) }}
 						
 						{{ Form::label('local', 'Locale'  , array('class' => 'control-label ')) }}
-						{{ Form::text('local', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Locale' ) ) }}
+						{{ Form::label('local', $v->local,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Locale' ) ) }}
 			
 						{{ Form::label('local_definition', 'Ragione sociale'  , array('class' => 'control-label ')) }}
-						{{ Form::text('local_definition', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Ragione sociale' ) ) }}
+						{{ Form::label('local_definition', $v->local_definition,   array('class'=>'form-control ' ) ) }}
 
 						{{ Form::label('code', 'Codice spedizione'  , array('class' => 'control-label ')) }}
-						{{ Form::text('code', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Codice Spedizione')  ) }}
+						{{ Form::label('code', $v->code,   array('class'=>'form-control ')  ) }}
 					</div>
 					<div class="col-lg-6">
 						{{ Form::label('furniture', 'Codice spedizione'  , array('class' => 'control-label ')) }}
-						{{ Form::select('furniture', array('DIRETTO'=>'DIRETTO','INDIRETTO'=>'INDIRETTO'),'DIRETTO',  array('class'=>'form-control placeholder-no-fix'  )) }}
+						{{ Form::label('furniture', $v->furniture ,  array('class'=>'form-control placeholder-no-fix'  )) }}
 					</div>
 					<div class="col-lg-6">
 						{{ Form::label('code_team_sell_out', 'Classificazione TEAM SELL OUT'  , array('class' => 'control-label ')) }}
-						{{ Form::select('code_team_sell_out', array('ND'=>'ND','A'=>'A','B'=>'B','C'=>'C','D'=>'D'),'ND', array('class'=>'form-control placeholder-no-fix'   )) }}
+						{{ Form::label('code_team_sell_out', $v->code_team_sell_out, array('class'=>'form-control '   )) }}
 					</div>
 				
 				
@@ -88,17 +81,17 @@
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				{{ Form::label('name', 'Nome' ) }} 
-				{{ Form::text('name', Auth::user()->name, array('class'=>'form-control readonly	')) }}
+				{{ Form::label('name', $v->name, array('class'=>'form-control readonly	')) }}
 				{{ Form::label('surname', 'Cognome') }}
-				{{ Form::text('surname', Auth::user()->surname, array('class'=>'form-control readonly')) }}
+				{{ Form::label('surname', $v->surname, array('class'=>'form-control readonly')) }}
 				{{ Form::label('role_description', 'Ruolo' ) }} {{ Form::hidden('role', Auth::user()->role) }}
-				{{ Form::text('role_description', Role::getLabel(Auth::user()->role), array('class'=>'form-control readonly')) }}
+				{{ Form::label('role_description', $v->role, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_manager', 'Manager' ) }}
-				{{ Form::text('user_manager', Auth::user()->manager, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_manager', $v->manager, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_agente', 'Agente' ) }}
-				{{ Form::text('user_agente', Auth::user()->agente, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_agente', $v->agente, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_developer', 'Developer' ) }}
-				{{ Form::text('user_developer', Auth::user()->developer, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_developer', $v->developer, array('class'=>'form-control readonly')) }}
 
 
 			</div>
@@ -116,11 +109,6 @@
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
-					<div class="col-lg-12">
-
-						{{ Form::label('visit_at', 'Data visita'  , array('class' => 'control-label ')) }}
-						{{ Form::text('visit_at', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Data')   ) }}
-					</div>
 					
 					
 
@@ -139,7 +127,7 @@
 			
 						</div>
 						<div class="col-lg-3">	
-							{{ Form::text('aperitif_auto_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+							{{$v->aperitif_auto_fq }} 
 						</div>
 					</div>
 
@@ -153,7 +141,7 @@
 			
 						</div>
 						<div class="col-lg-3">	
-							{{ Form::text('advocacy_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+							{{$v->advocacy_fq }} 
 						</div>
 					</div>
 
@@ -167,7 +155,7 @@
 			
 						</div>
 						<div class="col-lg-3">	
-							{{ Form::text('s_consumer_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+							{{$v->s_consumer_fq }} 
 						</div>
 					</div>
 
@@ -181,7 +169,7 @@
 			
 						</div>
 						<div class="col-lg-3">	
-							{{ Form::text('l_advocacy_fq', '' ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+							{{$v->l_advocacy_fq }} 
 						</div>
 					</div>
 				
@@ -203,6 +191,12 @@
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
+				<div class="col-lg-12">
+
+						{{ Form::label('visit_at', 'Data visita'  , array('class' => 'control-label ')) }}
+						{{ Form::label('visit_at', Decoder::decodeDate($v->visit_at) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Data')   ) }}
+					</div>
+					
 				<div class="col-lg-12">	
 						{{ Form::label('typevisit', 'Tipo visita'  , array('class' => 'control-label ')) }}
 						{{ Form::label('typevisit', Visit::getTypeLabel($v->typevisit) ,  array('class'=>'form-control placeholder-no-fix'  )) }}
@@ -235,7 +229,7 @@
 
 					 
 						<div class="col-lg-12">
-							<div class="col-lg-5">Serve Martini Royal </div><div class="col-lg-7">{{ Decoder::decodeYN($v->qsmr) }}
+							<div class="col-lg-5">Serve Martini Royale </div><div class="col-lg-7">{{ Decoder::decodeYN($v->qsmr) }}
 							</div>
 						</div>
 

@@ -46,7 +46,6 @@ class Visit extends Eloquent  {
         'advocacy' => 'required',
         'typevisit' => 'required',
         's_consumer' => 'required',
-        'l_advocacy' => 'required',
         'first_visit' => 'required',
         'pot' => 'required',
         're' => 'required',
@@ -79,13 +78,40 @@ class Visit extends Eloquent  {
         'case_1' => 'required',
         'case_2' => 'required',
         'case_3' => 'required',
-        'case_6' => 'required',
+        'case_5' => 'required',
+        'case_12' => 'required',
         'case_13' => 'required',
-        'case_14' => 'required',
-        'nbarman' => 'required',
+        'nbarman' => 'numeric',
     );
     public $rulesstep3 = array(
         'id' => 'required',
+        'case_1' => 'required',
+        'case_2' => 'required',
+        'case_3' => 'required',
+        'case_5' => 'required',
+        'case_12' => 'required',
+        'case_13' => 'required',
+        'nbarman' => 'numeric',
+        'cons_1' => 'numeric',
+        'cons_2' => 'numeric',
+        'cons_3' => 'numeric',
+        'cons_4' => 'numeric',
+        'cons_5' => 'numeric',
+        'cons_6' => 'numeric',
+        'cons_7' => 'numeric',
+        'cons_8' => 'numeric',
+        'cons_9' => 'numeric',
+        'cons_10' => 'numeric',
+        'cons_11' => 'numeric',
+        'cons_12' => 'numeric',
+        'cons_13' => 'numeric',
+        'cons_14' => 'numeric',
+        'cons_15' => 'numeric',
+        'cons_16' => 'numeric',
+        'cons_17' => 'numeric',
+        'cons_18' => 'numeric',
+        'cons_19' => 'numeric',
+        'cons_20' => 'numeric',
         'mcons_1' => 'required_without:cons_1',
         'mcons_2' => 'required_without:cons_2',
         'mcons_3' => 'required_without:cons_3',
@@ -105,6 +131,7 @@ class Visit extends Eloquent  {
         'mcons_17' => 'required_without:cons_17',
         'mcons_18' => 'required_without:cons_18',
         'mcons_19' => 'required_without:cons_19',
+        'mcons_20' => 'required_without:cons_20',
     );
 	/**
 	 * The fuction that validates the model
@@ -184,7 +211,7 @@ class Visit extends Eloquent  {
 	 */
 	public static function getAll()
 	{
-		return Role::all();
+		return Visit::all();
 	}
 
 	/**
@@ -194,7 +221,7 @@ class Visit extends Eloquent  {
 	 */
 	public static function getAllUpdated()
 	{
-		return Role::whereUpdate(1)->get();
+		return Visit::whereUpdate(1)->get();
 	}
 
 	/**
@@ -204,7 +231,7 @@ class Visit extends Eloquent  {
 	 */
 	public static function getAllNotUpdated()
 	{
-		return Role::whereUpdate(0)->get();
+		return Visit::whereUpdate(0)->get();
 	}
 
 	/**
@@ -214,7 +241,7 @@ class Visit extends Eloquent  {
 	 */
 	public static function getById($id)
 	{
-		return Role::whereId($id)->first();
+		return Visit::whereId($id)->first();
 	}
 
 	/**
@@ -224,7 +251,7 @@ class Visit extends Eloquent  {
 	 */
 	public static function getLabel($id)
 	{
-		return Role::find($id)->description;
+		return Visit::find($id)->description;
 	}
 
 	/**
@@ -296,17 +323,22 @@ class Visit extends Eloquent  {
 
 
 		$target = '';
-		if ($role == 1 && $type== 1) $target = '1';
+		//developer
 		if ($role == 2 && $type== 1) $target = '1';
-		if ($role == 3 && $type== 1) $target = '2';
-		if ($role == 4 && $type== 1) $target = '2';
-
-		if ($role == 3 && $type== 2) $target = '3';
-		if ($role == 4 && $type== 2) $target = '3';
-
-		if ($role == 1 && $type== 3) $target = '3';
 		if ($role == 2 && $type== 3) $target = '3';
-		if ($role == 4 && $type== 3) $target = '3';
+		//angel 20
+		if ($role == 3 && $type== 1) $target = '1';
+		if ($role == 3 && $type== 3) $target = '3';
+		//angel av 
+		if ($role == 4 && $type== 2) $target = '3';
+		if ($role == 4 && $type== 1) $target = '2';
+		
+		// angel PN 
+		if ($role == 5 && $type== 1) $target = '2';
+		if ($role == 5 && $type== 2) $target = '3';
+		if ($role == 5 && $type== 3) $target = '3';
+
+		
 
 		if ($target == '') 
 			return '/visit';
@@ -323,17 +355,17 @@ class Visit extends Eloquent  {
 
 
 		$target = '';
-		if ($role == 1 && $type== 1) $target = '1';
 		if ($role == 2 && $type== 1) $target = '1';
-		if ($role == 3 && $type== 1) $target = '2';
+		if ($role == 3 && $type== 1) $target = '1';
 		if ($role == 4 && $type== 1) $target = '2';
+		if ($role == 5 && $type== 1) $target = '2';
 
-		if ($role == 3 && $type== 2) $target = '3';
 		if ($role == 4 && $type== 2) $target = '3';
+		if ($role == 5 && $type== 2) $target = '3';
 
-		if ($role == 1 && $type== 3) $target = '3';
 		if ($role == 2 && $type== 3) $target = '3';
-		if ($role == 4 && $type== 3) $target = '3';
+		if ($role == 3 && $type== 3) $target = '3';
+		if ($role == 5 && $type== 3) $target = '3';
 
 		if ($target == '') 
 			return 'visit.view1';

@@ -66,7 +66,7 @@ class HomeController extends BaseController {
 	 			
 				$user->save();
 
-				$message = Lang::get('notification.last_login', array( 'data' => date('m/d/Y H:i:s')));
+				$message = Lang::get('notification.last_login', array( 'data' => date('d/m/Y H:i:s')));
 				$type = 'info';
 				User::setEvents($user->id, $message, $type);
 
@@ -185,7 +185,7 @@ class HomeController extends BaseController {
 			  $data['sl1'] =  $sl1;
 			  $data['lticks'] =  $lticks;
 
-			$data['campaigns_list'] = Visit::orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
+			$data['campaigns_list'] = Visit::where('active', '1')->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
 			
 			$this->layout = View::make('home.admin', $data);
 		}else{
@@ -267,7 +267,7 @@ class HomeController extends BaseController {
 			  $data['lticks'] =  $lticks;
 
 
-			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('user_created', Auth::user()->id)->orderBy('visit_at', 'desc')->take(8)->get();; // lastestvisit
+			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('visit_at', 'desc')->take(8)->get();; // lastestvisit
 			
 			$this->layout = View::make('home.promoter', $data);
 		}else{

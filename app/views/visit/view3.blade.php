@@ -7,8 +7,8 @@
 					</style>
 
 
-{{ Form::open(array('url' => 'visit/step3', 'method' => 'POST')) }}
-{{Form::hidden('id', $id)}}
+
+
 
 <div class="row">
 	@if($errors->has())
@@ -31,6 +31,36 @@
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
 					<div class="col-lg-12">
+						<div class="col-lg-6">E' presente la vetrofania?</div><div class="col-lg-6">	
+										
+							{{ Decoder::decodeYN($v->case_1) }}
+			
+						
+						</div><div class="col-lg-6 alt">E' presente la lavagna (da esterno o da bancone)?</div><div class="col-lg-6 alt">	
+										
+							{{ Decoder::decodeYN($v->case_2) }}
+						</div><div class="col-lg-6">E' presente l'espositore?</div><div class="col-lg-6">	
+										
+							{{ Decoder::decodeYN($v->case_3) }}
+						</div><div class="col-lg-6 alt">E' presente il brand block nel back bar?</div><div class="col-lg-6 alt">	
+										
+							{{ Decoder::decodeYN($v->case_5) }}
+						</div><div class="col-lg-6">Sono presenti i cavalierini?</div><div class="col-lg-6">	
+										
+							{{ Decoder::decodeYN($v->case_12) }}
+						</div><div class="col-lg-6 alt">Sono presenti i menu'?</div><div class="col-lg-6 alt">	
+										
+							{{ Decoder::decodeYN($v->case_13) }}
+						</div>
+						<div class="col-lg-6">N° barman coinvolti nell'advocacy</div> <div class="col-lg-6"> {{$v->nbarman}}</div>
+						
+
+
+						<div class="col-lg-12">Descrivi la meccanica dell'autogestito</div>
+						<div class="col-lg-12">{{$v->description_ma}}
+						</div><div class="col-lg-12">In coppia con..
+						</div><div class="col-lg-12">{{$v->description_ma2}}</div>
+						
 						<div class="col-lg-6">N° persone presenti nel locale</div> <div class="col-lg-6"> {{$v->cons_1}} {{$v->mcons_1}} </div>
 						<div class="col-lg-6 alt">N° totale consumazioni Martini</div> <div class="col-lg-6 alt"> {{$v->cons_2}} {{$v->mcons_2}} </div>
 						<div class="col-lg-6">N° consumazioni Martini Royale bianco</div> <div class="col-lg-6"> {{$v->cons_3}} {{$v->mcons_3}} </div>
@@ -74,4 +104,3 @@
 
 
 
-{{ Form::close() }}
