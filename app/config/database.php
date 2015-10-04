@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'reportavpn_prod',
+			'database'  => 'caravannext',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

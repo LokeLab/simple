@@ -76,12 +76,13 @@ class HomeController extends BaseController {
 				Session::put('nameComplete', $user['name'] . ' ' . $user['surname']);
 
 				//set language
-				Session::put('Language',  $user['language']);
+				Session::put('Language', 'it');
 				//echo $user['language'];
 				//echo '****';
 
 	 			switch ($user['role']){
 	 				 case 1:
+	 				 case 10:
 	 				 	Session::put('role_admin', $user['role']);
 		                return Redirect::to('home_admin');
 		                break;
@@ -97,6 +98,7 @@ class HomeController extends BaseController {
 		             	Session::put('role_tecnico', $user['role']);
 		                return Redirect::to('home_tecnico');
 		                break;
+
 		            default   :
 	                	return Redirect::to('login');
 	                	break;
@@ -114,79 +116,15 @@ class HomeController extends BaseController {
 
 	public function home_admin()
 	{
-		if(Role::isAdministrator(Auth::user()->id)){
-
-			$stats = DB::table('graph_a_1')->orderBy('numero', 'desc')->take(5)->get();
- 			$s1 = '';
-			if($stats)
-			{
-	 			foreach ($stats as $elem) {
-				    
-
-				    $s1 = '[ \''. str_replace("'", "\'", $elem->city).'\' , '.$elem->numero.' ],'.$s1 ;
-				}
-			} else 	$s1 = "['nessuna visita',1]";
-
-			$sp1=$s1;
-
-			$stats = DB::table('graph_a_2')->orderBy('numero', 'desc')->take(5)->get();
- 			$s1 = '';
-			if($stats)
-			{
-	 			foreach ($stats as $elem) {
-				    
-
-				    $s1 = '[ \''. str_replace("'", "\'", $elem->visit).'\' , '.$elem->numero.' ],'.$s1 ;
-				}
-			} else 	$s1 = "['nessuna visita',1]";
-
-			$sp2=$s1;
-
+		if(Role::isAdministrator(Auth::user()->id) || Auth::user()->role ==10  )
+		{
 
 			
-			  
-			$stats = DB::table('graph_a_3')->get(); // DB::table('stats_all_communities_day')->get();
 
-
-
-			  $label = "{label:'click'}";
-			  $sl1 = "";
-			  $lticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-			  
-
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
-
-			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
-			    
-			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->numero.' ';
-			    if ($label)
-			    {
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-			    	$label = false;
-			    } else
-			    {
-
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "''";
-			    	$label = true;
-			    }
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-
-			  
-
-			  $data['sp1'] =  $sp1;
-			  $data['sp2'] =  $sp2;
-
-			  $data['sl1'] =  $sl1;
-			  $data['lticks'] =  $lticks;
-
-			$data['campaigns_list'] = Visit::where('active', '1')->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
-			
+			$data['partners_list'] = Visit::where('active', '1')->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list'] = Partner::listWithBudget();
+			$data['news_list'] = News::last2();
+			$data['visit_list'] = Visit::last(5);
 			$this->layout = View::make('home.admin', $data);
 		}else{
 			return Redirect::action('HomeController@logout');
@@ -198,74 +136,11 @@ class HomeController extends BaseController {
 	{
 		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
 
-			$stats = DB::table('graph_p_1')->where('user_created', Auth::user()->id)->orderBy('numero', 'desc')->take(5)->get();
- 			$s1 = '';
-			if($stats)
-			{
-	 			foreach ($stats as $elem) {
-				    
-
-				    $s1 = '[ \''. str_replace("'", "\'", $elem->city).'\' , '.$elem->numero.' ],'.$s1 ;
-				}
-			} else 	$s1 = "['nessuna visita',1]";
-
-			$sp1=$s1;
-
-			$stats = DB::table('graph_p_2')->where('user_created', Auth::user()->id)->orderBy('numero', 'desc')->take(5)->get();
- 			$s1 = '';
-			if($stats)
-			{
-	 			foreach ($stats as $elem) {
-				    
-
-				    $s1 = '[ \''. str_replace("'", "\'", $elem->visit).'\' , '.$elem->numero.' ],'.$s1 ;
-				}
-			} else 	$s1 = "['nessuna visita',1]";
-
-			$sp2=$s1;
-
-
 			
-			  
-			$stats = DB::table('graph_p_3')->where('user_created', Auth::user()->id)->get(); // DB::table('stats_all_communities_day')->get();
-
-
-			  $label = "{label:'click'}";
-			  $sl1 = "";
-			  $lticks = "";
-			  $label = "{label:'".Lang::get('campaigns.view')."'},";
-			  
-
-			  $label = true;
-			  foreach ($stats as $elem) {
-			    
-
-			    //$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'[ \''.$elem->data_stat.'\',  '.$elem->cnt.']  ';
-			    
-			  	$sl1 = ((strlen($sl1) > 1 )?$sl1.',':$sl1) .'  '.$elem->numero.' ';
-			    if ($label)
-			    {
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "'".str_replace("'", "\'", $elem->data_stat)."'";
-			    	$label = false;
-			    } else
-			    {
-
-			    	$lticks = ((strlen($lticks) > 1 )?$lticks.',':$lticks)  . "''";
-			    	$label = true;
-			    }
-			    //$label = $label . "{label:'".str_replace("'", "\'", $elem->description)."'}, ";
-
-			  }
-
-
-			  
-
-			  $data['sp1'] =  $sp1;
-			  $data['sp2'] =  $sp2;
-
-			  $data['sl1'] =  $sl1;
-			  $data['lticks'] =  $lticks;
-
+			$data['partners_list'] = Visit::where('active', '1')->wherePartner(Auth::user()->partner)->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list'] = Partner::listWithBudget();
+			$data['news_list'] = News::last2();
+			$data['visit_list'] = Visit::lastPartner(Auth::user()->partner, 5);
 
 			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('visit_at', 'desc')->take(8)->get();; // lastestvisit
 			

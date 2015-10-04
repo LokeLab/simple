@@ -17,7 +17,7 @@
 				{{ Form::open(array('url' => 'login_process', 'method' => 'post', 'class' => 'login-form')) }}
 			
 				<div class="col-lg-12 ">
-					<h4 class="form-title">Accesso a sistema</h4>
+					<h4 class="form-title">Log in</h4>
 
 					       <?php if($errors->has()): ?>
 					        <div class="alert alert-danger">
@@ -35,7 +35,7 @@
 				<div class="alert alert-danger display-hide text-center">
 					 
 					<span>
-						 Inserire le credenziali di accesso 
+						 Insert username and password
 					</span>
 				</div>
 				

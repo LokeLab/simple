@@ -14,6 +14,12 @@ class Decoder {
 		return Role::getLabel($role_id);
 	}
 
+	public static function decodePartnerShort($role_id)
+	{
+		
+		return Partner::getLabelShort($role_id);
+	}
+
 /**
 	 * Get decode license.
 	 *

@@ -32,7 +32,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public $rules = array(
         'email' => 'required|email',
         'name' => 'required',
-        'initial_code'  => 'required'
+      
     );
 
     /**
@@ -62,12 +62,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
  		'email'  => 'required|email' ,
  		'name'  => 'required' ,
  		'surname'  => 'required',
- 		'phone'  => 'required|numeric',
- 		'address'  => 'required',
- 		'city'  => 'required',
- 		'cap'  => 'required',
- 		'state'  => 'required',
- 		'country'  => 'required',
+ 		
  		);
 
 	/**
@@ -76,16 +71,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
  	private $regrulesProfileAdv = array( 
- 		'email'  => 'required|email' ,
- 		'company' => 'required',
- 		'phone'  => 'required|numeric',
- 		'address'  => 'required',
- 		'city'  => 'required',
- 		'cap'  => 'required',
- 		'state'  => 'required',
- 		'phone'  => 'required|numeric',
- 		'country'  => 'required',
- 		'language' => 'required',
+ 		'email'  => 'required|email' , 		
  		'password' => 'required|confirmed'
  		
  		);
@@ -98,12 +84,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	private $rulesEditProfile = array( 
  		'name'  => 'required' ,
  		'surname'  => 'required',
- 		'phone'  => 'required|numeric',
- 		'address'  => 'required',
- 		'city'  => 'required',
- 		'cap'  => 'required',
- 		'state'  => 'required',
- 		'country'  => 'required',
  		'password' => 'confirmed'
  		);
 
@@ -117,7 +97,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
  		'password'  => 'required' ,
  		'name'  => 'required' ,
  		'surname'  => 'required',
- 		'company' => 'required'
+ 		
  		);
 
  	/**
@@ -167,7 +147,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
  		'email'  => 'required|email' ,
  		'name'  => 'required' ,
  		'surname'  => 'required',
- 		'company' => 'required',
+ 		
  		'password' => 'confirmed'
  		);
 
@@ -517,6 +497,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		//$users = User::whereRole($role_id)->get();
 		
 		return User::whereRole($role_id)->count();
+
+		
+	}
+
+	public static function getNumberofUsersInPartner($role_id)
+	{
+		//$users = User::whereRole($role_id)->get();
+		
+		return User::wherePartner($role_id)->count();
 
 		
 	}

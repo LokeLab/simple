@@ -8,7 +8,7 @@
 		
 			
 			<div class="content">
-				<div  class="col-lg-12">Report AV PN</div>
+				<div  class="col-lg-12">{{Config::get('app.site')}} </div>
 				<h3 class="form-title">{{Lang::get('users.password_recovery') }}</h3>
 				<p>{{Lang::get('users.password_recovery_subtitle')}} </p>
 

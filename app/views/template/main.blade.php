@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='it'>
   <head>
-    <title>Report AV PN | Welcome</title>
+    <title>{{Config::get('app.site')}}  | Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ url('/bs/css/bootstrap.min.css') }}" media="screen">

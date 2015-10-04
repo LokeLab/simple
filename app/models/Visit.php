@@ -13,11 +13,7 @@ class Visit extends Eloquent  {
 	 */
 	protected $table = 'visit';
 
-	/**
-	 * Sets the timestamp method on the model
-	 */
-	public $timestamps = false;
-
+	
 	/**
 	 * Sets the softDelete method on the model
 	 */
@@ -40,7 +36,6 @@ class Visit extends Eloquent  {
         'city' => 'required',
         'address' => 'required',
         'local' => 'required',
-        'local_definition' => 'required',
         'furniture' => 'required',
         'aperitif_auto' => 'required',
         'advocacy' => 'required',
@@ -52,7 +47,7 @@ class Visit extends Eloquent  {
         'qsmr' => 'required',
         'qscc' => 'required',
     );
-	public $rulesstep1 = array(
+    public $rulesstep1 = array(
         'id' => 'required',
         'case_1' => 'required',
         'case_2' => 'required',
@@ -71,6 +66,65 @@ class Visit extends Eloquent  {
         'case_16' => 'required',
         'case_17' => 'required',
         'case_18' => 'required',
+        'cons_12' => 'numeric',
+        'cons_13' => 'numeric',
+        'cons_14' => 'numeric',
+        'cons_15' => 'numeric',
+        'cons_16' => 'numeric',
+        'cons_17' => 'numeric',
+        'cons_18' => 'numeric',
+        'cons_19' => 'numeric',
+        'cons_20' => 'numeric',
+        'mcons_12' => 'required_without:cons_12',
+        'mcons_13' => 'required_without:cons_13',
+        'mcons_14' => 'required_without:cons_14',
+        'mcons_15' => 'required_without:cons_15',
+        'mcons_16' => 'required_without:cons_16',
+        'mcons_17' => 'required_without:cons_17',
+        'mcons_18' => 'required_without:cons_18',
+        'mcons_19' => 'required_without:cons_19',
+        'mcons_20' => 'required_without:cons_20',
+       
+
+    );
+	public $rulesstep1a = array(
+        'id' => 'required',
+        'case_1' => 'required',
+        'case_2' => 'required',
+        'case_3' => 'required',
+        'case_4' => 'required',
+        'case_5' => 'required',
+        'case_6' => 'required',
+        'case_7' => 'required',
+        'case_8' => 'required',
+        'case_9' => 'required',
+        'case_10' => 'required',
+        'case_11' => 'required',
+        'case_12' => 'required',
+        'case_13' => 'required',
+        'case_14' => 'required',
+        'case_16' => 'required',
+        'case_17' => 'required',
+        'case_18' => 'required',
+        'cons_12' => 'numeric',
+        'cons_13' => 'numeric',
+        'cons_14' => 'numeric',
+        'cons_15' => 'numeric',
+        'cons_16' => 'numeric',
+        'cons_17' => 'numeric',
+        'cons_18' => 'numeric',
+        'cons_19' => 'numeric',
+        'cons_20' => 'numeric',
+        'mcons_12' => 'required_without:cons_12',
+        'mcons_13' => 'required_without:cons_13',
+        'mcons_14' => 'required_without:cons_14',
+        'mcons_15' => 'required_without:cons_15',
+        'mcons_16' => 'required_without:cons_16',
+        'mcons_17' => 'required_without:cons_17',
+        'mcons_18' => 'required_without:cons_18',
+        'mcons_19' => 'required_without:cons_19',
+        'mcons_20' => 'required_without:cons_20',
+        'nbarman' => 'numeric',
 
     );
 	public $rulesstep2 = array(
@@ -78,20 +132,95 @@ class Visit extends Eloquent  {
         'case_1' => 'required',
         'case_2' => 'required',
         'case_3' => 'required',
+        'case_4' => 'required',
         'case_5' => 'required',
+        'case_6' => 'required',
+        'case_7' => 'required',
+        'case_8' => 'required',
+        'case_9' => 'required',
+        'case_10' => 'required',
+        'case_11' => 'required',
         'case_12' => 'required',
         'case_13' => 'required',
-        'nbarman' => 'numeric',
+        'case_14' => 'required',
+        'case_16' => 'required',
+        'case_17' => 'required',
+        'case_18' => 'required',
+        'cons_1' => 'numeric',
+        'cons_2' => 'numeric',
+        'cons_3' => 'numeric',
+        'cons_4' => 'numeric',
+        'cons_5' => 'numeric',
+        'cons_6' => 'numeric',
+        'cons_7' => 'numeric',
+        'cons_8' => 'numeric',
+        'cons_9' => 'numeric',
+        'cons_10' => 'numeric',
+        'cons_11' => 'numeric',
+        'cons_12' => 'numeric',
+        'cons_13' => 'numeric',
+        'cons_14' => 'numeric',
+        'cons_15' => 'numeric',
+        'cons_16' => 'numeric',
+        'cons_17' => 'numeric',
+        'cons_18' => 'numeric',
+        'cons_19' => 'numeric',
+        'cons_20' => 'numeric',
+        'mcons_1' => 'required_without:cons_1',
+        'mcons_2' => 'required_without:cons_2',
+        'mcons_3' => 'required_without:cons_3',
+        'mcons_4' => 'required_without:cons_4',
+        'mcons_5' => 'required_without:cons_5',
+        'mcons_6' => 'required_without:cons_6',
+        'mcons_7' => 'required_without:cons_7',
+        'mcons_8' => 'required_without:cons_8',
+        'mcons_9' => 'required_without:cons_9',
+        'mcons_10' => 'required_without:cons_10',
+        'mcons_11' => 'required_without:cons_11',
+        'mcons_12' => 'required_without:cons_12',
+        'mcons_13' => 'required_without:cons_13',
+        'mcons_14' => 'required_without:cons_14',
+        'mcons_15' => 'required_without:cons_15',
+        'mcons_16' => 'required_without:cons_16',
+        'mcons_17' => 'required_without:cons_17',
+        'mcons_18' => 'required_without:cons_18',
+        'mcons_19' => 'required_without:cons_19',
+        'mcons_20' => 'required_without:cons_20',
+
+    );
+
+public $rulesstep2a = array(
+        'id' => 'required',	
+        
+        'cons_1' => 'numeric',
+        'cons_2' => 'numeric',
+        'cons_3' => 'numeric',
+        'cons_4' => 'numeric',
+        'cons_5' => 'numeric',
+        'cons_6' => 'numeric',
+        'cons_7' => 'numeric',
+        'cons_8' => 'numeric',
+        'cons_9' => 'numeric',
+        'cons_10' => 'numeric',
+        'cons_11' => 'numeric',
+        
+        'mcons_1' => 'required_without:cons_1',
+        'mcons_2' => 'required_without:cons_2',
+        'mcons_3' => 'required_without:cons_3',
+        'mcons_4' => 'required_without:cons_4',
+        'mcons_5' => 'required_without:cons_5',
+        'mcons_6' => 'required_without:cons_6',
+        'mcons_7' => 'required_without:cons_7',
+        'mcons_8' => 'required_without:cons_8',
+        'mcons_9' => 'required_without:cons_9',
+        'mcons_10' => 'required_without:cons_10',
+        'mcons_11' => 'required_without:cons_11',
+        
+
     );
     public $rulesstep3 = array(
         'id' => 'required',
-        'case_1' => 'required',
-        'case_2' => 'required',
-        'case_3' => 'required',
-        'case_5' => 'required',
-        'case_12' => 'required',
-        'case_13' => 'required',
-        'nbarman' => 'numeric',
+        
         'cons_1' => 'numeric',
         'cons_2' => 'numeric',
         'cons_3' => 'numeric',
@@ -133,6 +262,34 @@ class Visit extends Eloquent  {
         'mcons_19' => 'required_without:cons_19',
         'mcons_20' => 'required_without:cons_20',
     );
+
+ public $rulesstep3a = array(
+        'id' => 'required',
+        
+        'cons_1' => 'numeric',
+        'cons_2' => 'numeric',
+        'cons_3' => 'numeric',
+        'cons_4' => 'numeric',
+        'cons_5' => 'numeric',
+        'cons_6' => 'numeric',
+        'cons_7' => 'numeric',
+        'cons_8' => 'numeric',
+        'cons_9' => 'numeric',
+        'cons_10' => 'numeric',
+        'cons_11' => 'numeric',
+        
+        'mcons_1' => 'required_without:cons_1',
+        'mcons_2' => 'required_without:cons_2',
+        'mcons_3' => 'required_without:cons_3',
+        'mcons_4' => 'required_without:cons_4',
+        'mcons_5' => 'required_without:cons_5',
+        'mcons_6' => 'required_without:cons_6',
+        'mcons_7' => 'required_without:cons_7',
+        'mcons_8' => 'required_without:cons_8',
+        'mcons_9' => 'required_without:cons_9',
+        'mcons_10' => 'required_without:cons_10',
+        
+    );
 	/**
 	 * The fuction that validates the model
 	 *
@@ -154,7 +311,10 @@ class Visit extends Eloquent  {
  	}
 	public function validastep1($data)
  	{
- 		$v = Validator::make($data, $this->rulesstep1);
+ 		if(Auth::user()->role == 3 )
+ 			$v = Validator::make($data, $this->rulesstep1a);
+ 		else
+ 			$v = Validator::make($data, $this->rulesstep1);
 
  		if($v->fails())
  		{
@@ -168,7 +328,10 @@ class Visit extends Eloquent  {
  	}
  	public function validastep2($data)
  	{
- 		$v = Validator::make($data, $this->rulesstep2);
+ 		if(Auth::user()->role == 5 )
+ 			$v = Validator::make($data, $this->rulesstep2);
+ 		else
+ 			$v = Validator::make($data, $this->rulesstep2a);
 
  		if($v->fails())
  		{
@@ -182,7 +345,10 @@ class Visit extends Eloquent  {
  	}
  	public function validastep3($data)
  	{
- 		$v = Validator::make($data, $this->rulesstep3);
+ 		if(Auth::user()->role == 2 )
+ 			$v = Validator::make($data, $this->rulesstep3);
+ 		else
+ 			$v = Validator::make($data, $this->rulesstep3a);
 
  		if($v->fails())
  		{
@@ -213,6 +379,16 @@ class Visit extends Eloquent  {
 	{
 		return Visit::all();
 	}
+
+    public static function last($id)
+    {
+        return DB::table('view_visit')->orderby('id', 'desc')->take($id)->get();
+    }
+
+     public static function lastPartner($id,$number)
+    {
+        return DB::table('view_visit')->wherePartner($id)->orderby('id', 'desc')->take($number)->get();
+    }
 
 	/**
 	 * Returns all the items not deleted and activated
@@ -330,12 +506,12 @@ class Visit extends Eloquent  {
 		if ($role == 3 && $type== 1) $target = '1';
 		if ($role == 3 && $type== 3) $target = '3';
 		//angel av 
-		if ($role == 4 && $type== 2) $target = '3';
-		if ($role == 4 && $type== 1) $target = '2';
+		if ($role == 4 && $type== 2) $target = '2';
+		if ($role == 4 && $type== 1) $target = '1';
 		
 		// angel PN 
-		if ($role == 5 && $type== 1) $target = '2';
-		if ($role == 5 && $type== 2) $target = '3';
+		if ($role == 5 && $type== 1) $target = '1';
+		if ($role == 5 && $type== 2) $target = '2';
 		if ($role == 5 && $type== 3) $target = '3';
 
 		
@@ -357,11 +533,11 @@ class Visit extends Eloquent  {
 		$target = '';
 		if ($role == 2 && $type== 1) $target = '1';
 		if ($role == 3 && $type== 1) $target = '1';
-		if ($role == 4 && $type== 1) $target = '2';
-		if ($role == 5 && $type== 1) $target = '2';
+		if ($role == 4 && $type== 1) $target = '1';
+		if ($role == 5 && $type== 1) $target = '1';
 
-		if ($role == 4 && $type== 2) $target = '3';
-		if ($role == 5 && $type== 2) $target = '3';
+		if ($role == 4 && $type== 2) $target = '2';
+		if ($role == 5 && $type== 2) $target = '2';
 
 		if ($role == 2 && $type== 3) $target = '3';
 		if ($role == 3 && $type== 3) $target = '3';
@@ -376,7 +552,111 @@ class Visit extends Eloquent  {
 
 	}
 
+    public static function getEditIncludeVisit($role, $type)
+    {
+
+
+
+        $target = '';
+        if ($role == 2 && $type== 1) $target = '1';
+        if ($role == 3 && $type== 1) $target = '1';
+        if ($role == 4 && $type== 1) $target = '1';
+        if ($role == 5 && $type== 1) $target = '1';
+
+        if ($role == 4 && $type== 2) $target = '2';
+        if ($role == 5 && $type== 2) $target = '2';
+
+        if ($role == 2 && $type== 3) $target = '3';
+        if ($role == 3 && $type== 3) $target = '3';
+        if ($role == 5 && $type== 3) $target = '3';
+
+        if ($target == '') 
+            return 'visit.edit1';
+        else
+            return 'visit.edit'.$target;
+
+
+
+    }
+
+
+	public static function getFilter($filter, $code,$local,$name)
+
+	{
+		$raw = ' 1=1 ';
+
+		if ($filter == 1 || $filter == 2 || $filter == 3)
+		{
+			$raw = $raw . ' and  partner = '.$filter;
+		} 
+
+		if (is_numeric( $code))
+		{
+			$raw = $raw . ' and  id = '.$code;
+		} 
+
+		if ( $local)
+		{
+			$raw = $raw . ' and  row like \'%'.str_replace('\'', '\\\'', $local) .'%\'';
+		} 
+
+		if ( $name)
+		{
+			$raw = $raw . ' and  (name like \'%'.str_replace('\'', '\\\'', $name) .'%\' or surname like \'%'.str_replace('\'', '\\\'', $name) .'%\') ';
+		} 
+
+
+		return $raw;
+	}
+
+
+    public static function getFilterSospese($filter, $code,$local,$name)
+
+    {
+        $raw = ' 1=1 ';
+
+        if ($filter == 1 || $filter == 2 || $filter == 3)
+        {
+            $raw = $raw . ' and  typevisit = '.$filter;
+        } 
+
+        if (is_numeric( $code))
+        {
+            $raw = $raw . ' and  id = '.$code;
+        } 
+
+        if ( $local)
+        {
+            $raw = $raw . ' and  local like \'%'.str_replace('\'', '\\\'', $local) .'%\'';
+        } 
+
+        if ( $name)
+        {
+            $raw = $raw . ' and  (name like \'%'.str_replace('\'', '\\\'', $name) .'%\' or surname like \'%'.str_replace('\'', '\\\'', $name) .'%\') ';
+        } 
+
+
+        return $raw;
+    }
+
 	
+
+
+    public static function getCity()
+
+    {
+        $raw = VisitCity::orderBy('city')->lists('city', 'city');
+
+        return $raw;
+    }
+
+    public static function getLocaliByCity($city)
+
+    {
+        $raw = VisitLocali::whereCity($city)->orderBy('locale')->lists('locale', 'locale');
+
+        return $raw;
+    }
 
 
 

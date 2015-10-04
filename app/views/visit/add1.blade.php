@@ -1,11 +1,15 @@
 @extends('template.internal')
 
 @section('content')
+
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
 						min-height:40px;}
 					.alt { background-color: rgb(226, 211, 211);
 						min-height:40px;}
+					.col-lg-6 {min-height:40px;}
+					.col-lg-2 {min-height:40px;}
+					.col-lg-4 {min-height:40px;}
 					</style>
 <div class="row">
 	<div class="col-lg-10">
@@ -175,7 +179,8 @@
 							<label class="radio-inline">
 								{{ Form::radio('case_16', 0, 0) }} {{Lang::get('decode.No')}}
 							</label>
-						</div><div class="col-lg-6 alt">E' stato proposto il Martini Royale contest? (ad almeno un barman)</div><div class="col-lg-6 alt">	
+						</div>
+						<div class="col-lg-6 alt">E' stato proposto il Martini Royale contest? (ad almeno un barman)</div><div class="col-lg-6 alt">	
 										
 							<label class="radio-inline">
 								{{ Form::radio('case_17', 1, 0) }} {{Lang::get('decode.Yes')}}
@@ -191,10 +196,26 @@
 							<label class="radio-inline">
 								{{ Form::radio('case_18', 0, 0) }} {{Lang::get('decode.No')}}
 							</label>
-						</div><div class="col-lg-12">Descrivi la meccanica dell'autogestito</div>
-						<div class="col-lg-12">{{Form::textarea('description_ma','',  array('class'=>'form-control'))}}
-						</div><div class="col-lg-12">In coppia con..
-						</div><div class="col-lg-12">{{Form::textarea('description_ma','',  array('class'=>'form-control'))}}</div>
+						</div>
+
+						@if (Auth::user()->role==3)
+							<div class="col-lg-6">N° barman coinvolti nell'advocacy</div> <div class="col-lg-6"> {{Form::text('nbarman','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div>
+						@endif
+						<div class="row">
+						<div class="col-lg-6">Quanti Martini Royale a settimana?</div> <div class="col-lg-2"> {{Form::text('cons_12','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_12','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6 alt">Quanti negroni a settimana?</div> <div class="col-lg-2 alt"> {{Form::text('cons_13','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_13','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6">Quanti sbagliato a settimana?</div> <div class="col-lg-2"> {{Form::text('cons_14','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_14','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6 alt">Quanti americano a settimana?</div> <div class="col-lg-2 alt"> {{Form::text('cons_15','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_15','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6">Quanti Spritz Aperol settimana?</div> <div class="col-lg-2"> {{Form::text('cons_16','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_16','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6 alt">Quanti altri cocktail a settimana?</div> <div class="col-lg-2 alt"> {{Form::text('cons_17','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_17','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6">Quante consumazioni vino o prosecco a settimana?</div> <div class="col-lg-2"> {{Form::text('cons_18','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_18','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>
+						<div class="col-lg-6 alt">Quante consumazioni birra a settimana?</div> <div class="col-lg-2 alt"> {{Form::text('cons_19','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_19','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>	
+
+						<div class="col-lg-6 ">Totale consumazioni alcoliche a settimana?</div> <div class="col-lg-2 "> {{Form::text('cons_20','', array('class'=>'form-control', 'placeholder'=>'numero'))}}</div><div class="col-lg-4"> {{Form::text('mcons_20','', array('class'=>'form-control', 'placeholder'=>'motivo se non disponibile'))}}</div>	
+						</div>
+
+
+
 						<div class="col-lg-12">Note/commenti</div>
 						<div class="col-lg-12">{{Form::textarea('note_visit','',  array('class'=>'form-control'))}}
 						</div>

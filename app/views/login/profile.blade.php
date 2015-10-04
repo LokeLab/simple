@@ -42,15 +42,8 @@
 		</div>
 	</div>
 </div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('access_code',  Lang::get('users.access_code'), array('class'=>'control-label')) }}
-		{{ Form::text('access_code',  $user_detail['access_code'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
-<hr/>
+
+
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
@@ -67,14 +60,7 @@
 		</div>
 	</div>
 </div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('company',  Lang::get('users.company'), array('class'=>'control-label')) }}
-		{{ Form::text('company',  $user_detail['company'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
+
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
@@ -100,65 +86,19 @@
 	</div>
 </div> 
 <hr/>
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('address',  Lang::get('users.address'), array('class'=>'control-label')) }}
-		{{ Form::text('address',  $user_detail['address'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('city',  Lang::get('users.city'), array('class'=>'control-label')) }}
-		{{ Form::text('city',  $user_detail['city'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('cap',  Lang::get('users.cap'), array('class'=>'control-label')) }}
-		{{ Form::text('cap',  $user_detail['cap'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('state',  Lang::get('users.state'), array('class'=>'control-label')) }}
-		{{ Form::text('state',  $user_detail['state'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
-<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('country',  Lang::get('users.country'), array('class'=>'control-label')) }}
-		{{ Form::text('country',  $user_detail['country'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div> 
+<
 <hr/>
 <div class="row">
-	<div class="col-lg-3">
+	<div class="col-lg-4">
 		<div class="form-group">
 		{{ Form::label('lastlogin_at',  Lang::get('users.lastlogin_at'), array('class'=>'control-label')) }}
 		{{ Form::text('lastlogin_at',  $user_detail['lastlogin_at'], array('class'=>'form-control')) }}
 		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('try_wrong_login',  Lang::get('users.try_wrong_login'), array('class'=>'control-label')) }}
-		{{ Form::text('try_wrong_login',  $user_detail['try_wrong_login'], array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-lg-3">
+	<div class="col-lg-4">
 		<div class="form-group">
 		{{ Form::label('active',  Lang::get('users.active'), array('class'=>'control-label')) }}
 		{{ Form::text('active',  $user_detail['active'], array('class'=>'form-control')) }}
@@ -167,7 +107,7 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-3">
+	<div class="col-lg-4">
 		<div class="form-group">
 			{{ Form::submit(Lang::get('generic.update'),  array('class' =>'btn btn-success btn-large')) }}
 			

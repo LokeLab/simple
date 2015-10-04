@@ -33,9 +33,7 @@
 			<div class="portlet-title">
 				<div class="caption ">
 					<ul class="list-inline">
-						<li> 
-							<i class="fa fa-file"></i> {{Lang::get('users.access_code')}}: {{$user_detail->access_code }}
-						</li>
+						
 						<li> 
 							<i class="fa fa-sitemap"></i> {{Lang::get('users.role')}}: {{ Decoder::decodeRole(Session::get('userrole')) }}
 						</li>
@@ -69,64 +67,12 @@
 							{{ Form::label('surname',  $user_detail['surname'], array('class'=>'form-control')) }}
 							</div>
 						</div>
-						<div class="col-lg-4">
-							@if( $user_detail['logo'])
-								<img src="/upload/logo/{{$user_detail['logo']}}" width="180">
-							@else
-								{{Lang::get('generic.nologo')}}
-							@endif
-						</div>
+						
 					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="form-group">
-							{{ Form::label('company',  Lang::get('users.company'), array('class'=>'control-label')) }}
-							{{ Form::label('company',  $user_detail['company'], array('class'=>'form-control')) }}
-							</div>
-						</div>	
-						<div class="col-lg-6">
-							<div class="form-group">
-							{{ Form::label('phone',  Lang::get('users.phone'), array('class'=>'control-label')) }}
-							{{ Form::label('phone',  $user_detail['phone'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-					</div> 
+					
 
 
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="form-group">
-							{{ Form::label('address',  Lang::get('users.address'), array('class'=>'control-label')) }}
-							{{ Form::label('address',  $user_detail['address'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-					</div> 
-					<div class="row">
-						<div class="col-lg-3">
-							<div class="form-group">
-							{{ Form::label('city',  Lang::get('users.city'), array('class'=>'control-label')) }}
-							{{ Form::label('city',  $user_detail['city'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="form-group">
-							{{ Form::label('cap',  Lang::get('users.cap'), array('class'=>'control-label')) }}
-							{{ Form::label('cap',  $user_detail['cap'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="form-group">
-							{{ Form::label('state',  Lang::get('users.state'), array('class'=>'control-label')) }}
-							{{ Form::label('state',  $user_detail['state'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="form-group">
-							{{ Form::label('country',  Lang::get('users.country'), array('class'=>'control-label')) }}
-							{{ Form::label('country',  $user_detail['country'], array('class'=>'form-control')) }}
-							</div>
-						</div>
-					</div> 
+					
 					
 					<div class="row">
 						<div class="col-lg-12">

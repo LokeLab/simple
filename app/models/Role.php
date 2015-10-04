@@ -136,7 +136,7 @@ class Role extends Eloquent  {
 	 */
 	public static function isAdministrable($role_id)
 	{
-		   	return $role_id != 4 ? TRUE : FALSE;
+		   	return $role_id != 6 ? TRUE : FALSE;
 	}
 
 	/**

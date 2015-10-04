@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='it'>
   <head>
-    <title>Report AV PN | Welcome </title>
+    <title>{{Config::get('app.site')}}  | Welcome </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
  
@@ -34,11 +34,21 @@
         
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}">
+
+<style>
+  html { 
+  background: url(/images/fondo.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
 </head>
 
 
-  </head>
 <body class="login">
+
 
   @yield('content')
 

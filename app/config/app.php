@@ -52,7 +52,7 @@ return array(
 	|
 	*/
 
-	'locale' => 'it',
+	'locale' => 'en',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'fallback_locale' => 'it',
+	'fallback_locale' => 'en',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -192,5 +192,10 @@ return array(
 		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel'
 
 	),
+
+
+
+	'site' => 'Financial Reporting || CARAVAN NEXT',
+	'header' => 'CARAVAN NEXT',
 
 );

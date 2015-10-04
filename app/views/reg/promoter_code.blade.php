@@ -8,7 +8,7 @@
 	<div class="form-body">
 		
 			<div class="content">
-				<div  class="col-lg-12">Report AV PN</div>
+				<div  class="col-lg-12">{{Config::get('app.site')}} </div>
 			{{ Form::open(array('url' => 'reg_promoter_process', 'method' => 'POST', 'class' => 'login-form')) }}
 
 

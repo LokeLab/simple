@@ -87,11 +87,11 @@
 				{{ Form::label('role_description', 'Ruolo' ) }} {{ Form::hidden('role', Auth::user()->role) }}
 				{{ Form::label('role_description', $v->role, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_manager', 'Manager' ) }}
-				{{ Form::label('user_manager', $v->manager, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_manager', $v->user_manager, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_agente', 'Agente' ) }}
-				{{ Form::label('user_agente', $v->agente, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_agente', $v->user_agente, array('class'=>'form-control readonly')) }}
 				{{ Form::label('user_developer', 'Developer' ) }}
-				{{ Form::label('user_developer', $v->developer, array('class'=>'form-control readonly')) }}
+				{{ Form::label('user_developer', $v->user_developer, array('class'=>'form-control readonly')) }}
 
 
 			</div>
@@ -103,7 +103,7 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Visita 
+					<i class="fa fa-bullseye"></i>Tipo di attività che si fa nel locale 
 				</div>
 				
 			</div>
@@ -159,19 +159,7 @@
 						</div>
 					</div>
 
-					<div class="col-lg-12 active">
-						<div class="col-lg-6">	
-							Light advocacy
-						</div>
-						<div class="col-lg-3">	
-										
-							{{ Decoder::decodeYN($v->l_advocacy) }} 
-			
-						</div>
-						<div class="col-lg-3">	
-							{{$v->l_advocacy_fq }} 
-						</div>
-					</div>
+					
 				
 				</div>
 			</div>
@@ -186,7 +174,7 @@
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-thumb-tack"></i>Tipo visita
+					<i class="fa fa-thumb-tack"></i>Tipo visita  rilevata
 				</div>
 				
 			</div>
@@ -248,6 +236,32 @@
 
 @include(Visit::getIncludeVisit($v->role,$v->typevisit))
 
+
+<div class="col-lg-12">
+	<div class="portlet box red">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-bullseye"></i>Immagini
+				</div>
+				
+			</div>
+			<div class="portlet-body" style="padding-top:0px!important ">
+				<div class="row">
+
+	@if( $v->img1)
+								<img src="/upload/img/{{$v->img1}}" width="400">
+							
+							@endif
+
+	@if( $v->img2)
+								<img src="/upload/img/{{$v->img2}}" width="400">
+							
+							@endif
+			    </div>
+			</div>
+	</div>
+
+</div>
 
 {{ Form::close() }}
 @stop

@@ -9,7 +9,7 @@ class UsersController extends \BaseController {
 	 */
 	public function tablelist()
 	{
-		$data['users_list'] = User::where('role', '<>', '3')->get();
+		$data['users_list'] = User::all();
 		$data['DT'] = 'userTable';
 		$this->layout = View::make('user.list', $data);
 	}
@@ -21,7 +21,7 @@ class UsersController extends \BaseController {
 	 */
 	public function add()
 	{
-		$roleList = DB::table('roles')->orderBy('id')->where('id', '<>',3)->lists('description', 'id');
+		$roleList = DB::table('roles')->orderBy('id')->lists('description', 'id');
 		$this->layout = View::make('user.add')->with('roleList', $roleList);
 	}
 
@@ -42,7 +42,8 @@ class UsersController extends \BaseController {
 	 public function edit($id)
 	 {
 	  $data['user_detail'] = User::find($id);
-	  $data['roleList'] = DB::table('roles')->orderBy('id')->where('id', '<>',3)->lists('description', 'id');
+	  $data['roleList'] = DB::table('roles')->orderBy('id')->lists('description', 'id');
+	  $data['partnerList'] = DB::table('partner')->orderBy('id')->lists('description', 'id');
      
 
 	  $this->layout = View::make('user.edit', $data);
@@ -64,14 +65,8 @@ class UsersController extends \BaseController {
 				'username' => Input::get('email'),
 				'name' => Input::get('name'),
 				'surname' => Input::get('surname'),
-				'company' => Input::get('company'),
+				'partner' => Input::get('partner'),
 				'phone' => Input::get('phone'),
-				'note' => Input::get('note'),
-				'address' => Input::get('address'),
-				'city' => Input::get('city'),
-				'cap' => Input::get('cap'),
-				'state' => Input::get('state'),
-				'country' => Input::get('country'),
 				'password' =>   Input::get('password'),
 				'password_confirmation' =>   Input::get('confirm')
 				);
@@ -93,25 +88,15 @@ class UsersController extends \BaseController {
 		 	//personal infos
 			$user->name = $userdata['name'];
 			$user->surname = $userdata['surname'];
-			$user->company = $userdata['company'];
-			$user->phone = $userdata['phone'];
+			
+			
 			$user->email = $userdata['email'];
-			$user->note = $userdata['note'];
-			//address
-			$user->address = $userdata['address'];
-			$user->city = $userdata['city'];
-			$user->cap = $userdata['cap'];
-			$user->state = $userdata['state'];
-			$user->country = $userdata['country'];
-			$user->language = Input::get('language');
-			$user->user_manager = Input::get('user_manager');
-			$user->developer = Input::get('developer');
-			$user->agente = Input::get('agente');
+			$user->partner = $userdata['partner'];
+			$user->phone = $userdata['phone'];
+			
+			
 
-			if (Session::get('userid') == $id)
-				Session::put('Language', Input::get('language') );
-
-			//Session::put('Language', Input::get('language'));
+			
 			$user->user_updated = 1;
 			$user->save();
 
@@ -170,7 +155,8 @@ class UsersController extends \BaseController {
 				'city' => Input::get('city'),
 				'cap' => Input::get('cap'),
 				'state' => Input::get('state'),
-				'country' => Input::get('country')
+				'country' => Input::get('country'),
+				'access_code' => Input::get('access_code')
 				);
 
 
@@ -188,16 +174,12 @@ class UsersController extends \BaseController {
 			 	//personal infos
 				$user->name = $userdata['name'];
 				$user->surname = $userdata['surname'];
-				$user->company = $userdata['company'];
-				$user->phone = $userdata['phone'];
+				
 				$user->email = $userdata['email'];
 				$user->note = $userdata['note'];
+				$user->access_code = $userdata['access_code'];
 				//address
-				$user->address = $userdata['address'];
-				$user->city = $userdata['city'];
-				$user->cap = $userdata['cap'];
-				$user->state = $userdata['state'];
-				$user->country = $userdata['country'];
+				
 				$user->user_manager = Input::get('user_manager');
 				$user->developer = Input::get('developer');
 				$user->agente = Input::get('agente');
@@ -254,21 +236,12 @@ class UsersController extends \BaseController {
 
 			$userrole = Session::get('userrole');
 
-			if ($userrole == 3)
-			{
-
-				$data['user_detail'] = DB::table('customers') ->where('user_id', $id) ->first();
-				$data['docs_list'] = DB::table('customer_doc') ->where('customer_id', $id) ->get();
-				$this->layout = View::make('login.profile_view_adv', $data);
-
-				
-			} else
-			{
+		
 				$data['user_detail'] = User::find($id);
 
 				$this->layout = View::make('login.profile_view', $data);
 
-			}
+			
 
 
 			

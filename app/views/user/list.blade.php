@@ -31,9 +31,10 @@
 						<tr>
 							<th>{{Lang::get('users.email')}}</th>
 							<th>{{Lang::get('users.name')}}</th>
-							<th>{{Lang::get('users.surname')}}</th>
+							
 							<th>{{Lang::get('users.role')}}</th>
-							<th>{{Lang::get('users.company')}}</th>
+							<th>Partner</th>
+							
 							<th>{{Lang::get('users.active');}}</th>
 							<th >&nbsp;</th>
 							
@@ -43,10 +44,9 @@
 						@foreach($users_list as $c)
 						<tr class="odd gradeX">
 							<td>{{ $c['email'] }}</td>
-							<td>{{ $c['name'] }}</td>
-							<td>{{ $c['surname'] }}</td>
+							<td>{{ $c['name'] }} {{ $c['surname'] }}</td>
 							<td>{{  Decoder::decodeRole($c['role']) }} </td>
-							<td>{{ $c['company'] }}</td>
+							<td>{{  Decoder::decodePartnerShort($c['partner']) }} </td>
 							<td><?php if($c['active'])
 								{ ?>
 								<span class="btn btn-xs green">{{Lang::get('decode.Yes')}}</span>

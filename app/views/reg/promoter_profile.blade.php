@@ -7,7 +7,7 @@
 		
 		<div class="content registration">
 			
-			<div  class="col-lg-12">Report AV PN</div>
+			<div  class="col-lg-12">{{Config::get('app.site')}} </div>
 
 			<div class="row">
 				<div class="col-lg-12">

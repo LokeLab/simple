@@ -3,7 +3,7 @@
 
 	
 	<div class="content">
-		<div  class="col-lg-12">Report AV PN</div>
+		<div  class="col-lg-12">{{Config::get('app.site')}} </div>
 	{{ Form::open(array('url' => 'reg_adv_process', 'method' => 'post', 'class' => 'login-form')) }}
 	<h3 class="form-title">{{ Lang::get('users.step_1_reg_adv') }}</h3>
 

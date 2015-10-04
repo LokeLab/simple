@@ -32,6 +32,14 @@ light grey: #fafafa;
 Reset and overrides  
 ***/
 
+html { 
+  background: url(/images/fondo.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 /* general body settings */
 body { 
   color: #000; 

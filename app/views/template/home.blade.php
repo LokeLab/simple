@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='it'>
   <head>
-    <title>Report AV PN | Welcome</title>
+    <title>{{Config::get('app.site')}}  | Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 
@@ -13,7 +13,7 @@
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->          
      <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-     <link href="{{ url('/assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
      <link href="{{ url('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
      <link href="{{ url('/assets/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css"/>
      <!-- END GLOBAL MANDATORY STYLES -->
@@ -150,193 +150,13 @@
 
 
 
-jQuery(document).ready(function(){
-  var data = [<?php
-    if(strlen($sp1)> 1)  
-        echo $sp1;
-    else
-        echo "['nessuna visita',1]";
 
- ?> ];
-  var plot1 = $.jqplot('chartp1', [data], 
-    { 
-      seriesDefaults: {
-        // Make this a pie chart.
-        renderer: jQuery.jqplot.PieRenderer, 
-        rendererOptions: {
-          // Put data labels on the pie slices.
-          // By default, labels show the percentage of the slice.
-          showDataLabels: true
-        }
-      }, 
-      legend: { show:true, location: 'e' }
-    }
-  );
-});
-
-
-jQuery(document).ready(function(){
-  var data = [<?php
-    if(strlen($sp2)> 1)  
-        echo $sp2;
-    else
-        echo "['nessuna visita',1]";
-
- ?> ];
-  var plot1 = $.jqplot('chartp2', [data], 
-    { 
-      seriesDefaults: {
-        // Make this a pie chart.
-        renderer: jQuery.jqplot.PieRenderer, 
-        rendererOptions: {
-          // Put data labels on the pie slices.
-          // By default, labels show the percentage of the slice.
-          showDataLabels: true
-        }
-      }, 
-      legend: { show:true, location: 'e' }
-    }
-  );
-});
 </script>
 
 
 
 
 
-<script>
-
- $(document).ready(function(){
-    var s1 = [<?php
-    if(strlen($sl1)> 1)  
-        echo $sl1;
-    else
-        echo "0";
-
- ?>];
-    
-    //var s2 = [460, -210, 690, 820];
-    //var s3 = [-260, -440, 320, 200];
-    // Can specify a custom tick Array.
-    // Ticks should match up one for each y value (category) in the series.
-    var ticks = [<?php
-    if(strlen($sl1)> 1)  
-        echo $lticks;
-    else
-        echo "'".date('d').'.'.date('m')."'";
-
- ?>];
-     
-    var plot1 = $.jqplot('chart1', [s1], {
-        grid: {
-                drawGridLines: true,        // wether to draw lines across the grid or not.
-                    gridLineColor: '#cccccc',   // CSS color spec of the grid lines.
-                    background: '#fff',      // CSS color spec for background color of grid.
-                    borderColor: '#999999',     // CSS color spec for border around grid.
-                    borderWidth: 2.0,           // pixel width of border around grid.
-                    shadow: true,               // draw a shadow for grid.
-                    shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
-                    shadowOffset: 1.5,          // offset from the line of the shadow.
-                    shadowWidth: 3,             // width of the stroke for the shadow.
-                    shadowDepth: 3
-            }, 
-        // Turns on animatino for all series in this plot.
-        animate: true,
-        // Will animate plot on calls to plot1.replot({resetAxes:true})
-        animateReplot: true,
-        cursor: {
-            show: true,
-            zoom: true,
-            looseZoom: true,
-            showTooltip: false
-        },
-        // The "seriesDefaults" option is an options object that will
-        // be applied to all series in the chart.
-        seriesDefaults:{
-            renderer:$.jqplot.LineRenderer,
-            rendererOptions: {fillToZero: true
-            }
-        },
-        // Custom labels for the series are specified with the "label"
-        // option on the series option.  Here a series option object
-        // is specified for each series.
-        series:[
-            {
-                pointLabels: {
-                    show: true
-                },
-                renderer: $.jqplot.LineRenderer,
-                showHighlight: false,
-                yaxis: 'yaxis',
-                rendererOptions: {
-                    // Speed up the animation a little bit.
-                    // This is a number of milliseconds.  
-                    // Default for bar series is 3000.  
-                    animation: {
-                        speed: 2500
-                    },
-                    barWidth: null,
-                    barPadding: -15,
-                    barMargin: 0,
-                    highlightMouseOver: false
-                }
-            }, {
-                rendererOptions: {
-                    // speed up the animation a little bit.
-                    // This is a number of milliseconds.
-                    // Default for a line series is 2500.
-                    animation: {
-                        speed: 2000
-                    }
-                }
-            }
-        ],
-
-        axes: {
-            // These options will set up the x axis like a category axis.
-            
-            yaxis: {
-                tickOptions: {
-                    formatString: "%'d"
-                },
-                rendererOptions: {
-                    forceTickAt0: true
-                }
-            }
-          },
-        // Show the legend and put it outside the grid, but inside the
-        // plot container, shrinking the grid to accomodate the legend.
-        // A value of "outside" would not shrink the grid and allow
-        // the legend to overflow the container.
-        legend: {
-            show: false,
-            placement: 'insideGrid'
-        },
-        //grid:[background: '#fff'],
-        axes: {
-            // Use a category axis on the x axis and use our custom ticks.
-            xaxis: {
-                tickOptions: {
-                    showGridline: false
-                },
-                renderer: $.jqplot.CategoryAxisRenderer,
-                
-                ticks: ticks,
-                
-            },
-            // Pad the y axis just a little so bars can get close to, but
-            // not touch, the grid boundaries.  1.2 is the default padding.
-            yaxis: {
-                pad: 1.00,
-                tickOptions: {formatString: '%d'}
-            }
-        }
-    });
-});
-
-
- 
-  </script>
 
 
 <!-- END JAVASCRIPTS -->

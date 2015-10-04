@@ -4,6 +4,9 @@
 						min-height:40px;}
 					.alt { background-color: rgb(226, 211, 211);
 						min-height:40px;}
+					.col-lg-6 {min-height:40px;}
+					.col-lg-2 {min-height:40px;}
+					.col-lg-4 {min-height:40px;}
 					</style>
 
 
@@ -82,10 +85,25 @@
 						</div><div class="col-lg-6">E' stato proposto il Martini workshop? (ad almeno un barman)</div><div class="col-lg-6">	
 										
 							{{ Decoder::decodeYN($v->case_18) }}
-						</div><div class="col-lg-12">Descrivi la meccanica dell'autogestito</div>
-						<div class="col-lg-12">{{$v->description_ma}}
-						</div><div class="col-lg-12">In coppia con..
-						</div><div class="col-lg-12">{{$v->description_ma2}}</div>
+						</div>
+
+
+
+
+						@if ($v->role  == 3)
+							<div class="col-lg-6">N° barman coinvolti nell'advocacy</div> <div class="col-lg-6"> {{$v->nbarman}}</div>
+						@endif
+
+
+						<div class="col-lg-6">Quanti Martini Royale a settimana?</div> <div class="col-lg-6"> {{$v->cons_12}} {{$v->mcons_12}} </div>
+						<div class="col-lg-6 alt">Quanti negroni a settimana?</div> <div class="col-lg-6 alt"> {{$v->cons_13}} {{$v->mcons_13}} </div>
+						<div class="col-lg-6">Quanti sbagliato a settimana?</div> <div class="col-lg-6"> {{$v->cons_14}} {{$v->mcons_14}} </div>
+						<div class="col-lg-6 alt">Quanti americano a settimana?</div> <div class="col-lg-6 alt"> {{$v->cons_15}} {{$v->mcons_15}} </div>
+						<div class="col-lg-6">Quanti Spritz Aperol settimana?</div> <div class="col-lg-6"> {{$v->cons_16}} {{$v->mcons_16}} </div>
+						<div class="col-lg-6 alt">Quanti altri cocktail a settimana?</div> <div class="col-lg-6 alt"> {{$v->cons_17}} {{$v->mcons_17}} </div>
+						<div class="col-lg-6">Quante consumazioni vino o prosecco a settimana?</div> <div class="col-lg-6"> {{$v->cons_18}} {{$v->mcons_18}} </div>
+						<div class="col-lg-6 alt">Quante consumazioni birra a settimana?</div> <div class="col-lg-6 alt"> {{$v->cons_19}} {{$v->mcons_19}} </div>
+
 						<div class="col-lg-12">Note/commenti</div>
 						<div class="col-lg-12">{{$v->note_visit}}
 						</div>

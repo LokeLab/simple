@@ -9,30 +9,52 @@
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-list-alt"></i>Visite a sistema
+					<i class="fa fa-list-alt"></i>Inserted cost
 				</div>
 				
 
 			</div>
 			<div class="portlet-body">
 
-			<div class="table-toolbar">
-					<div class="btn-group">
+			
+					<div class="row"><div class="col-lg-12"> 
+						
+						<div class="col-lg-2">
+							<a href="?all=1" class="btn blue" style = "margin-right:4px;">
+								{{Lang::get('enduser.viewall');}} <i class="fa fa-filter"></i>
+							</a>
+						</div>
+						{{ Form::open(array('url' => '/visit', 'method' => 'GET')) }}
+							
+							@if (Auth::user()->role ==1)
+							<div class="col-lg-3">
+
+							{{ Form::select('filter', $arr_parner
+ 							, Input::get('filter'), array('class' => 'form-control control-inline')) }}
+
+							</div>
+							@endif
+							<div class="col-lg-1">
+								{{ Form::text('code',  Input::get('code'), array('class' => 'form-control control-inline', 'placeholder'=>'Id')) }}
+							</div>
+							<div class="col-lg-2">
+								{{ Form::text('local',  Input::get('local'), array('class' => 'form-control control-inline', 'placeholder'=>'Row')) }}
+							</div>
+							<div class="col-lg-2">
+								{{ Form::text('name',  Input::get('name'), array('class' => 'form-control control-inline', 'placeholder'=>'')) }}
+							</div>
+							
+							
+							<div class="col-lg-2"><button class="btn " type="submit" style="width:80px;"><i class="fa fa-check-filter"></i> Filtra</button></div>
+							
+							
+							
+							{{ Form::close()}}
 						
 						
-						<a href="?all=1" class="btn blue" style = "margin-right:4px;">
-							{{Lang::get('enduser.viewall');}} <i class="fa fa-filter"></i>
-						</a>
-						<a href="?filter=1" class="btn blue" style = "margin-right:4px;">
-							Advocacy <i class="fa fa-filter"></i>
-						</a><a href="?filter=2" class="btn blue" style = "margin-right:4px;">
-							Consumer <i class="fa fa-filter"></i>
-						</a>
-						<a href="?filter=3" class="btn blue" style = "margin-right:4px;">
-							Autogestito <i class="fa fa-filter"></i>
-						</a>
 					</div>
 				</div>
+				
  
 				
 
@@ -40,23 +62,40 @@
 					<thead>
 						<tr>
 							<th>
-								Data visita
+								{{Lang::get('partners.id');}}
 							</th>
 							<th>
-								 Compilata da
+								Created at
+							</th>
+							@if (Auth::user()->role ==1)
+							<th>
+								Partner
+							</th>
+							@endif
+							<th>
+								Row
 							</th>
 							<th>
-								 Tipo visita 
+								 Currency
 							</th>
 							<th>
-								 Locale
+								 Net amount
 							</th>
 							<th>
-								 Città
-							</th>					
+								 VAT amount
+							</th>
 							<th>
-								 Inserita il 
-							</th>	
+								Euro Net amount 
+							</th>
+							<th>
+								 Euro Vat amount
+							</th>
+							<th>
+								 Total
+							</th>
+							<th>
+								 Verified
+							</th>
 							<th>
 								 
 							</th>	
@@ -68,36 +107,66 @@
 						@foreach($roles_list as $c)
 						<tr class="odd gradeX">
 							<td>
-								{{ Decoder::decodeDate($c->visit_at) }}  
+								{{ $c->id }}
 							</td>
 							<td>
-								{{ $c->surname }}  {{ $c->name }} 
+								{{ Decoder::decodeDate($c->created_at)}}
 							</td>
-						
-							<td>
-								{{ Visit::getTypeLabel($c->typevisit) }}  
-							</td>	
-							<td>
-								  {{ $c->local }}  
-
-							</td>					
-							<td>
-								 {{ $c->city }} 
+							@if (Auth::user()->role ==1)
+							<td align="right">
+								{{ $c->short }}
+							</td>
+							@endif
+							<td align="right">
+								{{ $c->row }}
+							</td>
+							<td align="right">
+								{{ $c->currency }}
+							</td>
+							<td align="right">
+								{{number_format($c->netamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{number_format($c->vatamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{number_format($c->euronetamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{number_format($c->eurovatamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{number_format($c->eurototal, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{Decoder::decodeYN($c->verified);}}
 							</td>
 							<td>
-								{{ Decoder::decodeDateTime($c->created_at) }}  
-							</td>	
-							<td>
-								<a href="/visit/{{ $c->id }} " class="btn blue">Visualizza</a>
-							</td>
+								<a href="/visit/{{ $c->id }} " class="btn blue">View</a>
 							
+								<?php if(Auth::user()->role < 10) 
+								{
+								?>
+								<a href="/visit/{{ $c->id }}/edit " class="btn blue">Edit</a>
+								<?php } ?>
+								
+								<?php if(Auth::user()->role == 1) 
+								{
+								?>
+								<a href="/visit/{{ $c->id }}/edit " class="btn blue">Verify</a>
+								{{ Form::open(array('url' => 'visit/'. $c->id)) }}
+										{{ Form::hidden('_method', 'DELETE') }}
+										{{ Form::submit(Lang::get('generic.delete'),  array('class' =>'btn default  yellow')) }}
+										{{ Form::close() }}
+								<?php } ?>
+							</td>
 							
 							
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
-				<?php echo $roles_list->links(); ?>
+				<?php echo $roles_list->appends(Input::all())->links(); ?>
 			</div>
 
 		</div>

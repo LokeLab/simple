@@ -12,7 +12,7 @@ color: #999999;
 </style>
 <div class="row">
  <div class="footer-inner text-center white">
-  <center>     &copy; PRODEA - ALL RIGHTS RESERVED - 2014</center>
+  <center> {{Config::get('app.site')}} </center>
    </div>
    <div class="footer-tools">
       <span class="go-top">

@@ -5,7 +5,7 @@
 	<!-- BEGIN FORM-->
 	<div class="form-body">
 		<div class="logo"> 
-					Report AV PN
+					{{Config::get('app.site')}} 
 		</div>
 		<div class="content">
 			<h3 class="form-title">Work in progress</h3>

@@ -7,7 +7,7 @@
 	<div class="form-body">
 		
 		<div class="content ">
-			<div  class="col-lg-12">Report AV PN</div>
+			<div  class="col-lg-12">{{Config::get('app.site')}} </div>
 <div class="note note-success">
 	<h4 class="block">{{Lang::get('users.gratzReg');}}</h4>
 	<p>

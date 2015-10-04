@@ -11,8 +11,7 @@
 |
 */
 
-include 'routes_FP.php';
-include 'routes_BM.php';
+
 
 
 Route::get('/', 'HomeController@redirectToHome');
@@ -71,6 +70,11 @@ Route::group(array('before'=>'auth'), function()
 {
 	Route::get('profile', array( 'uses' => 'UsersController@showProfile'));
 	Route::get('profile/edit', array( 'uses' => 'UsersController@editProfile'));
+	Route::put('update_pr_profile', array(
+                            
+                            'uses' => 'UsersController@update_pr_profile'
+                            ));
+
 });
 
 
@@ -96,6 +100,7 @@ Route::group(array('before'=>'auth'), function()
 	Route::delete('users/{id}', array( 'uses' => 'UsersController@destroy'));
 
 	Route::put('users/{id}/activate', array( 'uses' => 'UsersController@activate'));
+	
 
 	Route::put('users/{id}/disactivate', array( 'uses' => 'UsersController@disactivate'));
 });
@@ -124,9 +129,34 @@ Route::group(array('before'=>'auth'), function()
 
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Partner Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('partners', array( 'uses' => 'PartnerController@tablelist'));
+
+	Route::get('partners/add', array( 'uses' =>  'PartnerController@add'));
+
+	Route::get('partners/{id}', array( 'uses' => 'PartnerController@view'));
+
+	Route::get('partners/{id}/edit', array( 'uses' => 'PartnerController@edit'));
+
+	Route::put('partners/{id}', array('as' => 'partner.update','uses' => 'PartnerController@update'));
+
+	Route::post('partners', array('as' => 'partner.add',  'uses' => 'PartnerController@store'));
+
+	Route::delete('partners/{id}', array('uses' => 'PartnerController@destroy'));
+
+});
+
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('visit', array( 'uses' => 'VisitController@tablelist'));
+	Route::get('visitSospese', array( 'uses' => 'VisitController@tablelistSospese'));
 
 	Route::get('visit/add', array( 'uses' =>  'VisitController@add'));
 
@@ -143,10 +173,13 @@ Route::group(array('before'=>'auth'), function()
 	Route::post('visit', array('as' => 'visit.add',  'uses' => 'VisitController@store'));
 	
 	Route::delete('visit/{id}', array('uses' => 'VisitController@destroy'));
+	Route::delete('visitSospese/{id}', array('uses' => 'VisitController@destroySospese'));
 
 	Route::get('visit1/add/{id}', array( 'uses' =>  'VisitController@addstep1'));
 	Route::get('visit2/add/{id}', array( 'uses' =>  'VisitController@addstep2'));
 	Route::get('visit3/add/{id}', array( 'uses' =>  'VisitController@addstep3'));
+
+	Route::post('visit/{id}/edit', array('as' => 'visit.update','uses' => 'VisitController@update'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -158,14 +191,32 @@ Route::group(array('before'=>'auth'), function()
 	Route::get('helpdesk', array('uses' => 'HomeController@helpdesk'));
     Route::post('helpdesk', array('as' => 'helpdesk.send',  'uses' => 'HomeController@send'));
 	Route::get('reporting', array('uses' => 'ReportController@home'));
+	Route::post('reporting', array('uses' => 'ExporterController@getFiltered'));
+	Route::post('reportingMax', array('uses' => 'ExporterController@getFilteredMax'));
 });
 
 
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('/export/weekall/{anno}/{settimana}/', array('uses' => 'ExporterController@getWeekAll'));
+	
 	Route::get('/export/weekRoleall/{anno}/{settimana}/{role}', array('uses' => 'ExporterController@getWeekRoleAll'));
 	Route::get('/export/week/{anno}/{settimana}/{id}', array('uses' => 'ExporterController@getWeek'));
 	Route::get('/export/monthall/{anno}/{settimana}/', array('uses' => 'ExporterController@getMonthAll'));
+	Route::get('/export/monthallmax/{anno}/{settimana}/', array('uses' => 'ExporterController@getMonthAllMax'));
+	Route::get('/export/allmax', array('uses' => 'ExporterController@getAllMax'));
 	
+	Route::get('/export/monthalldetail/{anno}/{mese}/', array('uses' => 'ExporterController@getMonthAll'));
+	Route::get('/export/useralldetail/{user}/', array('uses' => 'ExporterController@getUserAll'));
+
+	
+	Route::post('/async/{id}/disactivate', array( 'uses' => 'ReportController@disactivate'));
 });
+
+
+
+Route::get('associates/add_to_introducer_id' , 'AdminAssociatesController@getIntroducer');
+    Route::get('associates/add_to_rank_list' , 'AdminAssociatesController@getRanklist');
+    Route::get('report/cron' , 'ExporterController@jobSheduler');
+
+

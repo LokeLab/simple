@@ -1,7 +1,7 @@
 <div class="header-inner">
     <!-- BEGIN LOGO -->  
     <a class="navbar-brand" href="index.html">
-      Report AV PN
+      {{Config::get('app.site')}} 
     </a>
     <!-- END LOGO -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER --> 
