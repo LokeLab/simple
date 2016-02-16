@@ -6,6 +6,7 @@
  $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
+ $currency = array('EUR'=> 'EUR');
  ?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
@@ -52,30 +53,56 @@
 				<div class="row">
 					<div class="col-lg-12">
 						
-						{{ Form::label('row', 'Row'  , array('class' => 'control-label ')) }}
-						{{ Form::select('row', $rowbudget, '' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
-						
+						{{ Form::label('budgetrow', 'Row'  , array('class' => 'control-label ')) }}
+						{{ Form::select('budgetrow', $rowbudget, '' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+					</div>	
+				<div class="col-lg-4">
 
 						{{ Form::label('d_document', 'Date on document'  , array('class' => 'control-label ')) }}
 						{{ Form::text('d_document', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date document')   ) }}
-
-					<div class="col-lg-6">
+					
+					</div><div class="col-lg-4">
 						{{ Form::label('d_document_start', 'Related activity start from'  , array('class' => 'control-label ')) }}
 						{{ Form::text('d_document_start', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date from')   ) }}
-					</div><div class="col-lg-6">
+					</div><div class="col-lg-4">
 						{{ Form::label('d_document_stop', 'to'  , array('class' => 'control-label ')) }}
 						{{ Form::text('d_document_stop', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date to')   ) }}
 					</div>
 
-			
+				<div class="col-lg-12">
 						{{ Form::label('description_cost', 'Description of cost (like plane ticket, Costume, actor in performance, administrative activity related to the project) '  , array('class' => 'control-label ')) }}
 						{{ Form::text('description_cost', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Cost description' ) ) }}
+				</div><div class="col-lg-12">
+						{{ Form::label('activity', 'Other info about of activity (like name of performance, city for meeting) '  , array('class' => 'control-label ')) }}
+						{{ Form::text('activity', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
 
-						{{ Form::label('description_activity', 'Other info about of activity (like name of performance, city for meeting) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('description_activity', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+				</div>
+				
 
 
-						
+					<div class="col-lg-4">
+							{{ Form::label('currency', 'currency'  , array('class' => 'control-label ')) }}
+							{{ Form::select('currency', $currency, 'EUR' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-4">
+							{{ Form::label('netamount', 'Net amount'  , array('class' => 'control-label ')) }}
+							{{ Form::text('netamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-4">
+							{{ Form::label('vatamount', 'VAT amount'  , array('class' => 'control-label ')) }}
+							{{ Form::text('vatamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-12">
+						{{ Form::label('comment', 'Internal note (not in reporting) '  , array('class' => 'control-label ')) }}
+						{{ Form::text('comment', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+
+				</div>
 					</div>
 					
 				
@@ -84,7 +111,7 @@
 		</div>
 
 
-	</div>
+	
 	<div class="col-lg-4">
 	
 		<div class="portlet box yellow">
@@ -284,21 +311,21 @@
 					</div>
 						<h4> Cost documentation </h4>
 						<div class="col-md-6">
-											{{ Form::file('img1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
 						</div><div class="col-md-6">
-											{{ Form::file('img1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											{{ Form::file('doc2', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
 						</div>
 						<h4> Proof of payment </h4>
 						<div class="col-md-6">
-											{{ Form::file('img2', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+											{{ Form::file('doc3', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
 						</div><div class="col-md-6">
-											{{ Form::file('img2', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+											{{ Form::file('doc4', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
 						</div>
 						<h4> Other document related to cost </h4>		
 						<div class="col-md-6">
-											{{ Form::file('img2', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											{{ Form::file('doc5', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
 						</div><div class="col-md-6">
-											{{ Form::file('img2', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
 						</div>
 					<div>		
 					</div>

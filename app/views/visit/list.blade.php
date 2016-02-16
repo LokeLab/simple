@@ -1,6 +1,9 @@
 @extends('template.internal')
 @section('content')
-
+<?php 
+ $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+ 
+ ?>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -27,7 +30,7 @@
 						{{ Form::open(array('url' => '/visit', 'method' => 'GET')) }}
 							
 							@if (Auth::user()->role ==1)
-							<div class="col-lg-3">
+							<div class="col-lg-12">
 
 							{{ Form::select('filter', $arr_parner
  							, Input::get('filter'), array('class' => 'form-control control-inline')) }}
@@ -37,11 +40,11 @@
 							<div class="col-lg-1">
 								{{ Form::text('code',  Input::get('code'), array('class' => 'form-control control-inline', 'placeholder'=>'Id')) }}
 							</div>
-							<div class="col-lg-2">
-								{{ Form::text('local',  Input::get('local'), array('class' => 'form-control control-inline', 'placeholder'=>'Row')) }}
+							<div class="col-lg-5">
+								{{ Form::select('local',  array(''=>'')+$rowbudget, Input::get('local'), array('class' => 'form-control control-inline')) }}
 							</div>
 							<div class="col-lg-2">
-								{{ Form::text('name',  Input::get('name'), array('class' => 'form-control control-inline', 'placeholder'=>'')) }}
+								{{ Form::text('name',  Input::get('name'), array('class' => 'form-control control-inline', 'placeholder'=>'Activity')) }}
 							</div>
 							
 							
@@ -117,8 +120,8 @@
 								{{ $c->short }}
 							</td>
 							@endif
-							<td align="right">
-								{{ $c->row }}
+							<td align="left">
+								{{ $rowbudget[$c->budgetrow] }}
 							</td>
 							<td align="right">
 								{{ $c->currency }}
@@ -148,6 +151,10 @@
 								{
 								?>
 								<a href="/visit/{{ $c->id }}/edit " class="btn blue">Edit</a>
+								{{ Form::open(array('url' => 'visit/'. $c->id)) }}
+										{{ Form::hidden('_method', 'DELETE') }}
+										{{ Form::submit(Lang::get('generic.delete'),  array('class' =>'btn default  yellow')) }}
+										{{ Form::close() }}
 								<?php } ?>
 								
 								<?php if(Auth::user()->role == 1) 

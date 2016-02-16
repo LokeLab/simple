@@ -1,23 +1,25 @@
 @extends('template.internal')
 
 @section('content')
+
+<?php 
+ $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+ $rowpayedby = DB::table('payedby')->lists('description', 'id');
+ $nation = DB::table('province')->lists('description', 'id');
+ $currency = array('EUR'=> 'EUR');
+ ?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
 						min-height:40px;}
 					</style>
-<div class="row">
-	<div class="col-lg-10">
-		<h3>Compila una nuova scheda</h3>
-	</div>
-</div>
-
-{{ Form::open(array('url' => 'visit/'.$v->id.'/edit', 'method' => 'POST')) }}
+{{ Form::open(array('url' => 'visit/'.$v->id.'/edit', 'method' => 'POST', 'files' => true)) }}
+    
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
-			{{ Form::submit('Aggiorna',  array('class' =>'btn btn-success btn-large')) }}
+			{{ Form::submit(Lang::get('generic.save'),  array('class' =>'btn btn-success btn-large')) }}
 			&nbsp;
-			<a href="{{ url('visit') }}" class="btn btn-warning">Annulla</a>
+			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>
 	</div>
 </div>
@@ -39,258 +41,387 @@
 					@endif
 
 	<div class="col-lg-8">
-	{{Form::hidden('id', $v->id)}}
-		<div class="portlet box purple">
+	
+		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-home"></i>Dati locale visitato
+					<i class="fa fa-home"></i>Nature of cost
 				</div>
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
 					<div class="col-lg-12">
-						{{ Form::label('city', 'Città'  , array('class' => 'control-label ')) }}
-						{{ Form::text('city', $v['city'] ,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Città')   ) }}
 						
-						{{ Form::label('address', 'Indirizzo'  , array('class' => 'control-label ')) }}
-						{{ Form::text('address',   $v['address'] ,  array('class'=>'form-control placeholder-no-fix' , 'placeholder' => 'Indirizzo')  ) }}
-						
-						{{ Form::label('local', 'Locale'  , array('class' => 'control-label ')) }}
-						{{ Form::text('local',  $v['local'],   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Locale' ) ) }}
-			
-						{{ Form::label('local_definition', 'Ragione sociale'  , array('class' => 'control-label ')) }}
-						{{ Form::text('local_definition', $v['local_definition'],   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Ragione sociale' ) ) }}
+						{{ Form::label('budgetrow', 'Row'  , array('class' => 'control-label ')) }}
+						{{ Form::select('budgetrow', $rowbudget, $v->budgetrow ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+					</div>	
+				<div class="col-lg-4">
 
-						{{ Form::label('code', 'Codice spedizione'  , array('class' => 'control-label ')) }}
-						{{ Form::text('code',  $v['code'],   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Codice Spedizione')  ) }}
+						{{ Form::label('d_document', 'Date on document'  , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document', $v->d_document ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date document')   ) }}
+					
+					</div><div class="col-lg-4">
+						{{ Form::label('d_document_start', 'Related activity start from'  , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document_start', $v->d_document_start ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date from')   ) }}
+					</div><div class="col-lg-4">
+						{{ Form::label('d_document_stop', 'to'  , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document_stop', $v->d_document_stop ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date to')   ) }}
 					</div>
-					<div class="col-lg-6">
-						{{ Form::label('furniture', 'Fornitore'  , array('class' => 'control-label ')) }}
-						{{ Form::select('furniture', array('DIRETTO'=>'DIRETTO','INDIRETTO'=>'INDIRETTO'), $v['furniture'],  array('class'=>'form-control placeholder-no-fix'  )) }}
-					</div>
-					<div class="col-lg-6">
-						{{ Form::label('code_team_sell_out', 'Classificazione TEAM SELL OUT'  , array('class' => 'control-label ')) }}
-						{{ Form::select('code_team_sell_out', array('A'=>'A','B'=>'B','C'=>'C'), $v['code_team_sell_out'], array('class'=>'form-control placeholder-no-fix'   )) }}
-					</div>
+
+				<div class="col-lg-12">
+						{{ Form::label('description_cost', 'Description of cost (like plane ticket, Costume, actor in performance, administrative activity related to the project) '  , array('class' => 'control-label ')) }}
+						{{ Form::text('description_cost', $v->description_cost,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Cost description' ) ) }}
+				</div><div class="col-lg-12">
+						{{ Form::label('activity', 'Other info about of activity (like name of performance, city for meeting) '  , array('class' => 'control-label ')) }}
+						{{ Form::text('activity', $v->activity,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+
+				</div>
 				
+
+
+					<div class="col-lg-4">
+							{{ Form::label('currency', 'currency'  , array('class' => 'control-label ')) }}
+							{{ Form::select('currency', $currency, $v->currency ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-4">
+							{{ Form::label('netamount', 'Net amount'  , array('class' => 'control-label ')) }}
+							{{ Form::text('netamount',  $v->netamount,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-4">
+							{{ Form::label('vatamount', 'VAT amount'  , array('class' => 'control-label ')) }}
+							{{ Form::text('vatamount',  $v->vatamount ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+
+					</div>
+
+					<div class="col-lg-12">
+						{{ Form::label('comment', 'Internal note (not in reporting) '  , array('class' => 'control-label ')) }}
+						{{ Form::text('comment', $v->comment,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+
+				</div>
+					</div>
+					
 				
 				</div>
 			</div>
 		</div>
 
 
-	</div>
+	
 	<div class="col-lg-4">
 	
 		<div class="portlet box yellow">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-user"></i>Dati compilatore
+					<i class="fa fa-user"></i>Is payed?
 				</div>
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
-				{{ Form::label('name', 'Nome' ) }} 
-				{{ Form::label('name', Auth::user()->name, array('class'=>'form-control readonly	')) }}
-				{{ Form::hidden('name', Auth::user()->name)}}
-				{{ Form::label('surname', 'Cognome') }}
-				{{ Form::label('surname', Auth::user()->surname, array('class'=>'form-control readonly')) }}
-				{{ Form::hidden('surname', Auth::user()->surname)}}
-				{{ Form::label('role_description_txt', 'Ruolo' ) }} {{ Form::hidden('role', Auth::user()->role) }}
-				{{ Form::label('role_description_txt', Role::getLabel(Auth::user()->role), array('class'=>'form-control readonly')) }}
-				{{ Form::hidden('role_description', Role::getLabel(Auth::user()->role) )}}
-				{{ Form::label('plan', 'Piano strategico' ) }}
-				{{ Form::text('plan',  $v['PN'], array('class'=>'form-control readonly')) }}
-				{{ Form::label('user_manager', 'Manager' ) }}
-				{{ Form::text('user_manager',  $v['user_manager'], array('class'=>'form-control readonly')) }}
-				{{ Form::label('user_agente', 'Agente' ) }}
-				{{ Form::text('user_agente',  $v['user_agente'], array('class'=>'form-control readonly')) }}
-				{{ Form::label('user_developer', 'Developer' ) }}
-				{{ Form::text('user_developer',  $v['user_developer'], array('class'=>'form-control readonly')) }}
+				{{ Form::label('payedby', 'Payed by'  , array('class' => 'control-label ')) }}
+				{{ Form::select('payedby', $rowpayedby, $v->payedby ,   array('class'=>'form-control ')   ) }}
 
+				{{ Form::label('d_document_paid', 'Date payment'  , array('class' => 'control-label ')) }}
+				{{ Form::text('d_document_paid', $v->d_document_paid ,   array('class'=>'form-control placeholder-no-fix date-picker')   ) }}
 
 			</div>
 		</div>
 
-	</div>
-	
-<div class="col-lg-8">
-	
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Tipo di attività che si fa nel locale 
+					<i class="fa fa-bullseye"></i>Is a special costs?
 				</div>
 				
 			</div>
+
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
-					<div class="col-lg-12">
-						<h4>Informazioni generali</h4>
-					</div>
-
+					
 					<div class="col-lg-12">
 						<div class="col-lg-4">	
-							Aperitivo autogestito
+							Third party cost 
 						</div>
-						<div class="col-lg-3">	
+						<div class="col-lg-8">	
 										
 							<label class="radio-inline">
-								{{ Form::radio('aperitif_auto', 1, $v->aperitif_auto == 1 ) }} {{Lang::get('decode.Yes')}}
+								{{ Form::radio('tpc', 1, 0) }} {{Lang::get('decode.Yes')}}
 							</label>
 							<label class="radio-inline">
-								{{ Form::radio('aperitif_auto', 0, $v->aperitif_auto == 0 ) }} {{Lang::get('decode.No')}}
+								{{ Form::radio('tpc', 0, 1) }} {{Lang::get('decode.No')}}
 							</label>
 			
 						</div>
-						<div class="col-lg-5">	
-							{{ Form::select('aperitif_auto_fq', $selectFQ, $v->aperitif_auto_fq ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
-						</div>
+						<div class="col-lg-12 active">
+
+						<div class="panel-group accordion" id="accordion1">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+											 Need some helps about that?
+										</a>
+										</h4>
+									</div>
+									<div id="collapse_1" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												How document well a costs?
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+						
 					</div>
 
 					<div class="col-lg-12 active">
 						<div class="col-lg-4">	
-							Advocacy
+							Subcontracting
 						</div>
-						<div class="col-lg-3">	
+						<div class="col-lg-8">	
 										
 							<label class="radio-inline">
-								{{ Form::radio('advocacy', 1, $v->advocacy == 1) }} {{Lang::get('decode.Yes')}}
+								{{ Form::radio('sub', 1, 0) }} {{Lang::get('decode.Yes')}}
 							</label>
 							<label class="radio-inline">
-								{{ Form::radio('advocacy', 0, $v->advocacy == 0) }} {{Lang::get('decode.No')}}
+								{{ Form::radio('sub', 0, 1) }} {{Lang::get('decode.No')}}
 							</label>
 			
 						</div>
-						<div class="col-lg-5">	
-							{{ Form::select('advocacy_fq', $selectFQ, $v->advocacy_fq ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
+						<div class="col-lg-12 active">
+						<div class="panel-group accordion" id="accordion1">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+											 Need some helps about that?
+										</a>
+										</h4>
+									</div>
+									<div id="collapse_1" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												How document well a costs?
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-12">
-						<div class="col-lg-4">	
-							Serata consumer
-						</div>
-						<div class="col-lg-3">	
-										
-							<label class="radio-inline">
-								{{ Form::radio('s_consumer', 1, $v->s_consumer == 1) }} {{Lang::get('decode.Yes')}}
-							</label>
-							<label class="radio-inline">
-								{{ Form::radio('s_consumer', 0, $v->s_consumer == 0) }} {{Lang::get('decode.No')}}
-							</label>
-			
-						</div>
-						<div class="col-lg-5">	
-							{{ Form::select('s_consumer_fq', $selectFQ, $v->s_consumer_fq ,   array('class'=>'form-control placeholder-no-fix ', 'placeholder' => 'Frequenza')   ) }}
-						</div>
-					</div>
+					
 
 					
 				
 				</div>
 			</div>
 		</div>
-
 
 	</div>
-
-
-<div class="col-lg-4">
 	
-		<div class="portlet box green">
+<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-thumb-tack"></i>Tipo visita rilevata
+					<i class="fa fa-bullseye"></i>Additional information for travel and accomodation
 				</div>
-				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
-				<div class="col-lg-12">
 
-						{{ Form::label('visit_at', 'Data visita'  , array('class' => 'control-label ')) }}
-						{{ Form::text('visit_at', Decoder::decodeDate($v->visit_at)  ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Data')   ) }}
-				</div>
-				<div class="col-lg-12">	
-						{{ Form::label('typevisit', 'Tipo visita'  , array('class' => 'control-label ')) }}
-						{{ Form::select('typevisit', Visit::getTypeList() ,$v->typevisit,  array('class'=>'form-control placeholder-no-fix'  )) }}
+				<div class="row">
+					<div class="col-md-12">
 						
+						<div class="col-md-2">
+								Date start travel	
+						</div><div class="col-md-2">
+											{{ Form::text('d_document_start_travel', $v->d_document_start_travel ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+						</div>
+						<div class="col-md-2">
+								Date finish travel	
+						</div><div class="col-md-2">
+											{{ Form::text('d_document_finish_travel', $v->d_document_finish_travel ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+						</div>
+						<div class="col-lg-12"></div>
+						<div class="col-md-2"> Number people involved  </div>
+						<div class="col-md-2">
+									{{ Form::text('n_people', $v->n_people,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'nr.' ) ) }}
+						</div>
+
+						<div class="col-md-2"> Name of people involved  </div>
+						<div class="col-md-2">
+									{{ Form::text('name_people', $v->name_people,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'name of people' ) ) }}
+						</div>
+
+						<div class="col-md-2"> Role of people involved  </div>
+						<div class="col-md-2">
+									{{ Form::text('role_people', $v->role_people,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'role of people' ) ) }}
+						</div>
+
+						<div class="col-md-2"> Start from ( nation / city) (for accomodation put here where you live/start travel)   </div>
+						<div class="col-md-2">
+									{{ Form::select('from_nation', $nation,$v->from_nation,   array('class'=>'form-control placeholder-no-fix' ) ) }}
+						</div>
+						<div class="col-md-2">
+									{{ Form::text('from_city', $v->from_city,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'City' ) ) }}
+						</div>
+
+						<div class="col-md-2"> To (nation / city)  (for accomodation put here where you stay)  </div>
+						<div class="col-md-2">
+									{{ Form::select('to_nation', $nation, $v->to_nation,   array('class'=>'form-control placeholder-no-fix' ) ) }}
+						</div>
+						<div class="col-md-2">
+									{{ Form::text('to_city', $v->to_city,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'City' ) ) }}
+						</div>
+
 						
+
 					</div>
 
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="col-lg-5">Prima visita</div><div class="col-lg-7"> <label class="radio-inline">
-									{{ Form::radio('first_visit', 1, $v->first_visit == 1) }} {{Lang::get('decode.Yes')}}
-								</label>
-								<label class="radio-inline">
-									{{ Form::radio('first_visit', 0, $v->first_visit == 0) }} {{Lang::get('decode.No')}}
-								</label>
-							</div>
-						</div>
 					
-				 
-						<div class="col-lg-12 active">
-							<div class="col-lg-5">Potenziale </div><div class="col-lg-7"><label class="radio-inline">
-									{{ Form::radio('pot', '1', $v->pot == 1) }} {{Lang::get('decode.Yes')}}
-								</label>
-								<label class="radio-inline">
-									{{ Form::radio('pot', '0', $v->pot == 0) }} {{Lang::get('decode.No')}}
-								</label>
-							</div>
-						</div>
-
-						<div class="col-lg-12">
-							<div class="col-lg-5">Ripassaggio </div><div class="col-lg-7"><label class="radio-inline">
-									{{ Form::radio('re', '1', $v->re == 1) }} {{Lang::get('decode.Yes')}}
-								</label>
-								<label class="radio-inline">
-									{{ Form::radio('re', '0', $v->re == 0) }} {{Lang::get('decode.No')}}
-								</label>
-							</div>
-						</div>
-					 
-
-					<div class="col-lg-12">
-						<h4>Quality</h4>
-					</div>
-
-					 
-						<div class="col-lg-12">
-							<div class="col-lg-5">Serve Martini Royale </div><div class="col-lg-7"><label class="radio-inline">
-									{{ Form::radio('qsmr', 1, $v->qsmr == 1) }} {{Lang::get('decode.Yes')}}
-								</label>
-								<label class="radio-inline">
-									{{ Form::radio('qsmr', 0, $v->qsmr == 0) }} {{Lang::get('decode.No')}}
-								</label>
-							</div>
-						</div>
-
-						<div class="col-lg-12 active">
-							<div class="col-lg-5">Serve Martini Cocktail </div><div class="col-lg-7"><label class="radio-inline">
-									{{ Form::radio('qscc', 1, $v->qscc == 1) }} {{Lang::get('decode.Yes')}}
-								</label>
-								<label class="radio-inline">
-									{{ Form::radio('qscc', 0, $v->qscc == 0) }} {{Lang::get('decode.No')}}
-								</label>
-							</div>
-						</div>
-					</div>
-					 
-    			</div>
 			</div>
 		</div>
+	
+
+
+
+
 	
 </div>
 
-@include(Visit::getEditIncludeVisit($v->role,$v->typevisit))
+		<div class="portlet box purple">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-bullseye"></i>Document related to cost  
+				</div>
+			</div>
+			<div class="portlet-body" style="padding-top:0px!important ">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row"><div class="col-md-8"><h3>
+							Insert document related to cost  
+						</h3> </div> <div class="col-md-4"><img src="/images/time_sheet.png" height="40"></div>
+					</div>
+						<h4> Cost documentation </h4>
+						<div class="col-md-6">
+											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+						</div><div class="col-md-6">
+											{{ Form::file('doc2', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+						</div>
+						<h4> Proof of payment </h4>
+						<div class="col-md-6">
+											{{ Form::file('doc3', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+						</div><div class="col-md-6">
+											{{ Form::file('doc4', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+						</div>
+						<h4> Other document related to cost </h4>		
+						<div class="col-md-6">
+											{{ Form::file('doc5', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+						</div><div class="col-md-6">
+											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+						</div>
+					<div>		
+					</div>
+					
+				</div>
+				<div class="col-lg-4">
+							<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-reorder"></i>Do you need some help?
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+								<a href="javascript:;" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="panel-group accordion" id="accordion1">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+											 Cost documentation
+										</a>
+										</h4>
+									</div>
+									<div id="collapse_1" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												How document well a costs?
+											</p>
+											
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
+											Proof of payment
+										</a>
+										</h4>
+									</div>
+									<div id="collapse_2" class="panel-collapse collapse">
+										<div class="panel-body" style="height:200px; overflow-y:auto;">
+										<p>
+										   What you need insert for document a cost?
+										</p>
+											
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+											 What else?
+										</a>
+										</h4>
+									</div>
+									<div id="collapse_3" class="panel-collapse collapse">
+										<div class="panel-body">
+											<p>
+												 Some activities need more documents.
+											</p>
+											
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					</div>
+			</div>
+		</div>
+	
+
+
+
+
+	
+</div>
 
 
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
-			{{ Form::submit('Aggiorna',  array('class' =>'btn btn-success btn-large')) }}
+			{{ Form::submit('Save',  array('class' =>'btn btn-success btn-large')) }}
 			&nbsp;
 			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>

@@ -91,7 +91,7 @@ class HomeController extends BaseController {
 		             case 4:
 		             case 5:
 		             	 
-		                return Redirect::to('home_promoter');
+		                return Redirect::to('home_partner');
 		                break;
 		             
 		             case 6:
@@ -121,7 +121,7 @@ class HomeController extends BaseController {
 
 			
 
-			$data['partners_list'] = Visit::where('active', '1')->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list'] = Visit::where('active', '1')->orderBy('id', 'desc')->take(8)->get(); // lastestvisit
 			$data['partners_list'] = Partner::listWithBudget();
 			$data['news_list'] = News::last2();
 			$data['visit_list'] = Visit::last(5);
@@ -137,12 +137,12 @@ class HomeController extends BaseController {
 		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
 
 			
-			$data['partners_list'] = Visit::where('active', '1')->wherePartner(Auth::user()->partner)->orderBy('visit_at', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list'] = Visit::where('active', '1')->wherePartner(Auth::user()->partner)->orderBy('id', 'desc')->take(8)->get(); // lastestvisit
 			$data['partners_list'] = Partner::listWithBudget();
 			$data['news_list'] = News::last2();
 			$data['visit_list'] = Visit::lastPartner(Auth::user()->partner, 5);
 
-			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('visit_at', 'desc')->take(8)->get();; // lastestvisit
+			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();; // lastestvisit
 			
 			$this->layout = View::make('home.promoter', $data);
 		}else{
@@ -173,12 +173,12 @@ public function redirectToHome()
 		                	return Redirect::to('home_admin');
 		                break;
 		             case 2:
-		             	return Redirect::to('home_promoter');
-		                break;
 		             case 3:
-		             	return Redirect::to('home_advertiser');
-		                break;
 		             case 4:
+		             case 5:
+		             	return Redirect::to('home_partner');
+		                break;
+		             case 6:
 		             	return Redirect::to('home_tecnico');
 		                break;
 		            default   :
