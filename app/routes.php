@@ -130,6 +130,24 @@ Route::group(array('before'=>'auth'), function()
 });
 
 
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('budget/{id}', array( 'uses' => 'BudgetController@tablelist'));
+
+	Route::get('budget/add', array( 'uses' =>  'BudgetController@add'));
+
+	Route::get('budget/{id}/edit', array( 'uses' => 'BudgetController@edit'));
+
+	Route::put('budget/{id}', array('as' => 'role.update','uses' => 'BudgetController@update'));
+
+	Route::post('budget', array('as' => 'role.add',  'uses' => 'BudgetController@store'));
+
+	Route::delete('budget/{id}', array('uses' => 'BudgetController@destroy'));
+
+});
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Partner Routes

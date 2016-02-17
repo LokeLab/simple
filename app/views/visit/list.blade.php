@@ -145,7 +145,7 @@
 								{{Decoder::decodeYN($c->verified);}}
 							</td>
 							<td>
-								<a href="/visit/{{ $c->id }} " class="btn blue">View</a>
+								<!--a href="/visit/{{ $c->id }} " class="btn blue">View</a-->
 							
 								<?php if(Auth::user()->role < 10) 
 								{

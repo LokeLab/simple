@@ -307,7 +307,12 @@
 					<div class="col-md-8">
 						<div class="row"><div class="col-md-8"><h3>
 							Insert document related to cost  
-						</h3> </div> <div class="col-md-4"><img src="/images/time_sheet.png" height="40"></div>
+						</h3> </div> <div class="col-md-4"><div class="col-md-4"><a href="/model/T1.xlsx" class="btn blue"><i class="fa fa-icon-time"></i> Timesheet </a> 
+						<a href="/model/T2.doc" class="btn yellow"><i class="fa fa-money"></i> Cash rembuirsement </a>
+						<a href="/model/T3.doc" class="btn blue"><i class="fa fa-truck"></i> Car rembuirsement </a>
+						<a href="/model/T4.doc" class="btn blue"><i class="fa fa-calendar"></i> Daily allowance rembuirsement </a>
+
+						<a href="/model/T5.xlsx" class="btn green"><i class="fa fa-users"></i> Salary slip summary </a>  </div>
 					</div>
 						<h4> Cost documentation </h4>
 						<div class="col-md-6">

@@ -11,7 +11,7 @@ class VisitBase extends Eloquent  {
 	 *
 	 * @var string
 	 */
-	protected $table = 'visit_base_estesa';
+	protected $table = 'v_budget_spent';
 
 	/**
 	 * Sets the timestamp method on the model

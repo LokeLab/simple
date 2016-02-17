@@ -4,14 +4,14 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Partner extends Eloquent  {
+class Budget extends Eloquent  {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'partner';
+	protected $table = 'budget';
 
 	/**
 	 * Sets the timestamp method on the model
@@ -74,14 +74,9 @@ class Partner extends Eloquent  {
 	 *
 	 * @return array
 	 */
-	public static function getAll()
+	public static function getAllbyPartner($id)
 	{
-		return Partner::all();
-	}
-
-	public static function listWithBudget()
-	{
-		return DB::table('partner_view')->get();
+		return VisitBase::where('partner',$id)->orderBy('id', 'asc')->get();
 	}
 
 	/**
@@ -91,7 +86,7 @@ class Partner extends Eloquent  {
 	 */
 	public static function getAllUpdated()
 	{
-		return Partner::whereUpdate(1)->get();
+		return Role::whereUpdate(1)->get();
 	}
 
 	/**
@@ -101,7 +96,7 @@ class Partner extends Eloquent  {
 	 */
 	public static function getAllNotUpdated()
 	{
-		return Partner::whereUpdate(0)->get();
+		return Role::whereUpdate(0)->get();
 	}
 
 	/**
@@ -111,7 +106,7 @@ class Partner extends Eloquent  {
 	 */
 	public static function getById($id)
 	{
-		return Partner::whereId($id)->first();
+		return Role::whereId($id)->first();
 	}
 
 	/**
@@ -121,12 +116,7 @@ class Partner extends Eloquent  {
 	 */
 	public static function getLabel($id)
 	{
-		return Partner::find($id)->description;
-	}
-
-	public static function getLabelShort($id)
-	{
-		return Partner::find($id)->short;
+		return Role::find($id)->description;
 	}
 
 	/**
@@ -140,13 +130,13 @@ class Partner extends Eloquent  {
 	}
 
 	/**
-	 * Get if IsAdministrable Partner.
+	 * Get if IsAdministrable role.
 	 *
 	 * @return boolean
 	 */
-	public static function isAdministrable($Partner_id)
+	public static function isAdministrable($role_id)
 	{
-		   	return $Partner_id != 6 ? TRUE : FALSE;
+		   	return $role_id != 6 ? TRUE : FALSE;
 	}
 
 	/**
@@ -159,7 +149,7 @@ class Partner extends Eloquent  {
 		
 		if (Session::has('userid'))
 		{
-			if (Session::has('Partner_admin'))
+			if (Session::has('role_admin'))
 				return true;
 			else 
 				return false;
@@ -178,7 +168,7 @@ class Partner extends Eloquent  {
 		
 		if (Session::has('userid'))
 		{
-			if (Session::has('Partner_advertiser'))
+			if (Session::has('role_advertiser'))
 				return true;
 			else 
 				return false;
@@ -197,7 +187,7 @@ class Partner extends Eloquent  {
 		
 		if (Session::has('userid'))
 		{
-			if (Session::has('Partner_tecnico'))
+			if (Session::has('role_tecnico'))
 				return true;
 			else 
 				return false;
@@ -216,7 +206,7 @@ class Partner extends Eloquent  {
 		
 		if (Session::has('userid'))
 		{
-			if (Session::has('Partner_promoter'))
+			if (Session::has('role_promoter'))
 				return true;
 			else 
 				return false;
@@ -226,59 +216,47 @@ class Partner extends Eloquent  {
 	}*/
 
 	/*
-	 * Get true if it is an admin Partner
+	 * Get true if it is an admin role
 	 *
 	 * @return boolean
 	 */
 	public static function isAdministrator($userId)
 	{
-		$userPartner = User::getById($userId)->Partner;
-		return ($userPartner == 1) ? TRUE : FALSE;
+		$userRole = User::getById($userId)->role;
+		return ($userRole == 1) ? TRUE : FALSE;
 	}
 
 	/**
-	 * Get true if it is an promoter Partner
+	 * Get true if it is an promoter role
 	 *
 	 * @return boolean
 	 */
 	public static function isPromoter($userId)
 	 {
-	 	$userPartner = User::getById($userId)->Partner;
-	 	return ($userPartner == 2) ? TRUE : FALSE;
+	 	$userRole = User::getById($userId)->role;
+	 	return ($userRole == 2) ? TRUE : FALSE;
 	 }
 
 	/**
-	 * Get true if it is an advertiser Partner
+	 * Get true if it is an advertiser role
 	 *
 	 * @return boolean
 	 */
 	public static function isAdvertiser($userId)
 	{
-		$userPartner = User::getById($userId)->Partner;
-		return ($userPartner == 3) ? TRUE : FALSE;
+		$userRole = User::getById($userId)->role;
+		return ($userRole == 3) ? TRUE : FALSE;
 	}
 
 	/**
-	 * Get true if it is an advertiser Partner
+	 * Get true if it is an advertiser role
 	 *
 	 * @return boolean
 	 */
 	public static function isTecnico($userId)
 	{
-		$userPartner = User::getById($userId)->Partner;
-		return ($userPartner == 4) ? TRUE : FALSE;
-	}
-
-public static function getBudget($id)
-	{
-		$userPartner = Partner::whereId($id)->pluck('budget');
-		return $userPartner;
-	}
-
-public static function getSpent($id)
-	{
-		$userPartner = VisitBase::wherePartner($id)->sum('amountspent') ;
-		return $userPartner;
+		$userRole = User::getById($userId)->role;
+		return ($userRole == 4) ? TRUE : FALSE;
 	}
 
 

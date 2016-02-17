@@ -109,7 +109,7 @@
 								 Budget
 							</div>
 						</div>
-						<a class="more" href="/budget">
+						<a class="more" href="/budget/{{Auth::user()->partner}}">
 							 View more <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
@@ -197,7 +197,9 @@
 
 
 				</div>
-				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<a href="{{ url('budget/'.Auth::user()->partner) }}" class="btn btn-warning">Budget detail</a>
+				</div>
 			</div>
 			
 
