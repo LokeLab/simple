@@ -25,6 +25,13 @@ Route::group(array('before'=>'auth'), function()
 	Route::get('home_partner', array('uses' => 'HomeController@home_promoter'));
 	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
 
+
+
+});
+
+
+Route::group(array('before' => array('auth|admin')), function() {
+    Route::controller('translations', 'Barryvdh\TranslationManager\Controller');
 });
 
 
@@ -70,9 +77,9 @@ Route::group(array('before'=>'auth'), function()
 {
 	Route::get('profile', array( 'uses' => 'UsersController@showProfile'));
 	Route::get('profile/edit', array( 'uses' => 'UsersController@editProfile'));
-	Route::put('update_pr_profile', array(
+	Route::put('update_profile', array(
                             
-                            'uses' => 'UsersController@update_pr_profile'
+                            'uses' => 'UsersController@update_profile'
                             ));
 
 });

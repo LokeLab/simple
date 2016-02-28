@@ -8,6 +8,6 @@ return array(
     'ttemplates' => 'Tipologie template',
     'licences' => 'Licenze',
     'campaigns' => 'Campagne',
-    'stop' => ''
+    'hometitlebudget' => 'Partner budget'
 
 );

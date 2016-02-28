@@ -5,9 +5,9 @@
 
 @include('login.profile_breadcrumb')
 <div class="note note-success">
-	<h4 class="block">{{Lang::get('users.gratzProfile');}}</h4>
+	<h4 class="block">Success!</h4>
 	<p>
-		{{Lang::get('users.gratzProfileExt');}}
+		You updated your profile. Please go back to home and continue your work.
 
 	</p>
 </div>

@@ -162,15 +162,15 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_12">
 											 Need some helps about that?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_12" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												Only documents emitted by an not EU country are considered a third country costs. Example: a people payed by an EU company ARE NOT third country cost. A freelancer not EU directly payed is a third country cost. 
 											</p>
 											
 										</div>
@@ -200,15 +200,15 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_11">
 											 Need some helps about that?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_11" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												Every cost emitted by a company is subcontracting. 
 											</p>
 											
 										</div>
@@ -231,7 +231,7 @@
 <div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Additional information for travel and accomodation
+					<i class="fa fa-bullseye"></i>Additional information: fill ONLY for travel and accomodation
 				</div>
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
@@ -358,15 +358,16 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_10">
 											 Cost documentation
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_10" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												How document well a costs?<br/>
+												Insert document inserted in your accountancy. 
 											</p>
 											
 										</div>
@@ -383,7 +384,10 @@
 									<div id="collapse_2" class="panel-collapse collapse">
 										<div class="panel-body" style="height:200px; overflow-y:auto;">
 										<p>
-										   What you need insert for document a cost?
+										   What you need insert for document the you payed a cost? <br/>
+										   Just need insert proof of payment like bank account with evidence of costs. <br<br/>For partner credit card insert detail of expenses and bank account. 
+										   <br/>For cash payment use model inserted on top or similar document. 
+
 										</p>
 											
 										</div>
@@ -392,15 +396,21 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_30">
 											 What else?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_3" class="panel-collapse collapse">
+									<div id="collapse_30" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												 Some activities need more documents.
+												 Some activities need more documents, like salary. Please insert:
+												 <ul><li>For salary and freelancer: contract or letter of appointment(one time), timesheet</li>
+												 <li>For travel: borading pass or train / bus ticket </li>
+												 <li>For print or brochure or good buyed: PDF or pics of goods  </li>
+												 <li>For other costs: all that can prove that costs is related at activities  </li>
+												 <li>For car rembuirsement: use specific model with map and km calculation  </li>
+												 </ul>
 											</p>
 											
 										</div>

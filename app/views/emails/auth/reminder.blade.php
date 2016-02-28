@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h2>Hai chiesto di recuperare la password?</h2>
+		<h2>You need recover your password?</h2>
 
 		<div>
-			Per recuperare la password puoi utilizzare questo link: {{ URL::to('password/reset', array($token)) }}.<br/>
-			Hai a disposizione  {{ Config::get('auth.reminder.expire', 60) }} minuti. Se non hai richiesto alcun cambio password, ignora questa segnalazione. 
+			Please click this link: {{ URL::to('password/reset', array($token)) }}.<br/>
+			You can use this link for  {{ Config::get('auth.reminder.expire', 60) }} minute. If you dont want change your password, ingore this message. 
 		</div>
 	</body>
 </html>

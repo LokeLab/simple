@@ -51,6 +51,12 @@
 		{{ Form::select('role', $roleList, 2, array('class' => 'form-control required')) }}
 		</div>
 	</div>
+	<div class="col-lg-12">
+		<div class="form-group">
+		{{ Form::label('partner',  'Partner', array('class'=>'control-label')) }}
+		{{ Form::select('partner', $partnerList , '' , array('class'=>'form-control')) }} 
+		</div>
+	</div>
 </div> 
 
 <div class="row">
@@ -70,51 +76,12 @@
 	</div>
 </div> 
 
-<div class="row">
-	<div class="col-lg-12">
-		{{ Form::label('access_code', 'Piano strategico' ) }}
-		{{ Form::text('access_code', '', array('class'=>'form-control','placeholder'=>'PN/AV')) }}
-	</div>
-</div> 
-
-
-<div class="row">
-	<div class="col-lg-12">
-{{ Form::label('user_manager', 'Manager' ) }}
-{{ Form::text('user_manager', '', array('class'=>'form-control','placeholder'=>'Manager')) }}
-</div>
-</div> 
-
-<div class="row">
-	<div class="col-lg-12">
-{{ Form::label('agente', 'Agente' ) }}
-{{ Form::text('agente', '', array('class'=>'form-control','placeholder'=>'Agente')) }}
-</div>
-</div> 
-
-<div class="row">
-	<div class="col-lg-12">
-{{ Form::label('developer', 'Developer' ) }}
-{{ Form::text('developer', '', array('class'=>'form-control','placeholder'=>'Developer')) }}
-</div>
-</div> 
-
 
 
 <div class="row">
 	<div class="col-lg-12">
 		<div class="form-group">
-		{{ Form::label('note',  Lang::get('users.note')) }}
-		{{ Form::textarea('note', '', array('class'=>'form-control', 'placeholder'=>Lang::get('users.note'))) }}
-		</div>
-	</div>
-</div> 
-
-
-<div class="row">
-	<div class="col-lg-12">
-		<div class="form-group">
-			{{ Form::submit('Salva',  array('class' =>'btn btn-success btn-large')) }}
+			{{ Form::submit('Save',  array('class' =>'btn btn-success btn-large')) }}
 			&nbsp;
 			<a href="{{ url('users') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>

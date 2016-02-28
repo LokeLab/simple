@@ -49,7 +49,7 @@
 							<td>{{  Decoder::decodePartnerShort($c['partner']) }} </td>
 							<td><?php if($c['active'])
 								{ ?>
-								<span class="btn btn-xs green">{{Lang::get('decode.Yes')}}</span>
+								<span class="btn btn-xs green">{{Lang::get('decode.Yes')}}  - Last access {{  Decoder::decodeDate($c['lastlogin_at']) }} </span>
 								@if (Role::isAdmin())
 									{{ Form::open(array('url' => 'users/'. $c->id. '/disactivate')) }}
 									{{ Form::hidden('_method', 'PUT') }}

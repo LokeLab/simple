@@ -8,6 +8,12 @@ return array(
     'ttemplates' => 'Tipologie template',
     'licences' => 'Licenze',
     'campaigns' => 'Campagne',
-    'stop' => ''
+    'hometitlebudget' => 'Partner budget',
+    'titlecalendar' => 'Calendar',
+    'from' => 'From',
+    'to' => 'To',
+    'elegibility'=>'Elegibility period',
+    'grant'=> 'Grant agreement number',
+    'support' => 'Support email',
 
 );

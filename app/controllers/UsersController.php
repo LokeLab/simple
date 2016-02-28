@@ -21,8 +21,9 @@ class UsersController extends \BaseController {
 	 */
 	public function add()
 	{
-		$roleList = DB::table('roles')->orderBy('id')->lists('description', 'id');
-		$this->layout = View::make('user.add')->with('roleList', $roleList);
+		$data['roleList'] = DB::table('roles')->orderBy('id')->lists('description', 'id');
+		$data['partnerList'] = DB::table('partner')->orderBy('id')->lists('description', 'id');
+		$this->layout = View::make('user.add', $data);
 	}
 
 	 public function view($id)
@@ -66,7 +67,6 @@ class UsersController extends \BaseController {
 				'name' => Input::get('name'),
 				'surname' => Input::get('surname'),
 				'partner' => Input::get('partner'),
-				'phone' => Input::get('phone'),
 				'password' =>   Input::get('password'),
 				'password_confirmation' =>   Input::get('confirm')
 				);
@@ -92,7 +92,7 @@ class UsersController extends \BaseController {
 			
 			$user->email = $userdata['email'];
 			$user->partner = $userdata['partner'];
-			$user->phone = $userdata['phone'];
+
 			
 			
 
@@ -142,21 +142,14 @@ class UsersController extends \BaseController {
 	public function store()
 	{
 		
-		$userdata = array(
+				$userdata = array(
 				'email'  => Input::get('email'),
 				'username' => Input::get('email'),
-				'password' => Input::get('password'),
 				'name' => Input::get('name'),
 				'surname' => Input::get('surname'),
-				'company' => Input::get('company'),
-				'phone' => Input::get('phone'),
-				'note' => Input::get('note'),
-				'address' => Input::get('address'),
-				'city' => Input::get('city'),
-				'cap' => Input::get('cap'),
-				'state' => Input::get('state'),
-				'country' => Input::get('country'),
-				'access_code' => Input::get('access_code')
+				'partner' => Input::get('partner'),
+				'password' =>   Input::get('password'),
+				'password_confirmation' =>   Input::get('confirm')
 				);
 
 
@@ -175,30 +168,35 @@ class UsersController extends \BaseController {
 				$user->name = $userdata['name'];
 				$user->surname = $userdata['surname'];
 				
-				$user->email = $userdata['email'];
-				$user->note = $userdata['note'];
-				$user->access_code = $userdata['access_code'];
-				//address
 				
-				$user->user_manager = Input::get('user_manager');
-				$user->developer = Input::get('developer');
-				$user->agente = Input::get('agente');
+				$user->email = $userdata['email'];
+				$user->partner = $userdata['partner'];
 
 
 				$user->user_created = 1;
 				$user->user_updated = 0;
 				$user->user_deleted = 0;
-				$user->external_login = 1;
-				$user->ext_login_code = "";
-				$user->type_external_login = 1;
-				$user->try_wrong_login = 0;
+				
 				$user->active = 1;
 				$user->deleted = 0;
 				$user->save();
 
 
+				$maildata = array(
+								'email'  =>  $userdata['email'],
+								'name' => $userdata['name']. ' '. $userdata['surname'],
+								'password' =>  $userdata['password']
+								);
 
-				return Redirect::action('UsersController@tablelist')->with('message',Lang::get('users.adduser_success'));
+
+					Mail::send('emails.registration', $maildata, function($message)
+						{
+						    $message->to(Input::get('email'), '')
+						    ->subject('Confirmation registration on ' . Config::get('app.site'));
+						});
+
+
+				return Redirect::to('users')->with('message',Lang::get('users.adduser_success'));
 			}
 
 	}
@@ -235,15 +233,8 @@ class UsersController extends \BaseController {
 		{
 
 			$userrole = Session::get('userrole');
-
-		
-				$data['user_detail'] = User::find($id);
-
-				$this->layout = View::make('login.profile_view', $data);
-
-			
-
-
+			$data['user_detail'] = User::find($id);
+			$this->layout = View::make('login.profile_view', $data);
 			
 		} else
 		{
@@ -263,29 +254,16 @@ class UsersController extends \BaseController {
 	 */
 	public function editProfile()
 	{
-		$id = Session::get('userid');
+		$id = Auth::user()->id;
 
 		if ($id)
 		{
 
 			$userrole = Session::get('userrole');
+			
+			$data['user_detail'] = User::find($id);
 
-			if ($userrole == 3)
-			{
-
-				$data['user_detail'] = DB::table('customers') ->where('user_id', $id) ->first();
-				$this->layout = View::make('login.profile_edit_adv', $data);
-
-				
-			} else
-			{
-				$data['user_detail'] = User::find($id);
-
-				$this->layout = View::make('login.profile_edit', $data);
-
-			}
-
-
+			$this->layout = View::make('login.profile_edit', $data);
 			
 		} else
 		{
@@ -316,156 +294,17 @@ class UsersController extends \BaseController {
 	}
 
 
-	public function update_adv_profile()
-		{
-				$id = Session::get('userid');
+	
 
-				$user = User::find($id);
-				$userdata = array(
-				//personal infos
-				'name' => Input::get('name'),
-				'surname' => Input::get('surname'),
-				'company' => Input::get('company'),
-				'phone' => Input::get('phone'),
-				'note' => Input::get('note'),
-				//address
-				'address' => Input::get('address'),
-				'city' => Input::get('city'),
-				'cap' => Input::get('cap'),
-				'state' => Input::get('state'),
-				'country' => Input::get('country'),
-				'password' =>Input::get('password'),
-				'password_confirmation' =>Input::get('confirm'),
-				);
-
-				$customerdata = array(
-				'name' => Input::get('name'),
-				'surname' => Input::get('surname'),
-				'company' => Input::get('company'),
-				'phone' => Input::get('phone'),
-				'note' => Input::get('note'),
-				'address' => Input::get('address'),
-				'city' => Input::get('city'),
-				'cap' => Input::get('cap'),
-				'state' => Input::get('state'),
-				'country' => Input::get('country'),
-				'company_description' => Input::get('company_description'),
-                'community' => (array)Input::get('community'),
-				//'company_code' => Input::get('company_code'),
-				'fax' => Input::get('fax'),
-				'web' => Input::get('web'),
-				'calltoaction' => Input::get('calltoaction'),
-				
-				
-				'reference' => Input::get('reference'),
-				'phone_reference' => Input::get('phone_reference'),
-				'email_reference' => Input::get('email_reference'),
-				'contract_from' =>  Decoder::convert_date_in(Input::get('contract_from')),
-				'contract_to' =>  Decoder::convert_date_in(Input::get('contract_to'))
-				);
-			 
-			$userForValidation = new User;
-			$customerForValidation = new Customer;
-			if( $userForValidation->validaEditProfile($userdata) == false)
-			{
-				return Redirect::action('UsersController@editProfile' )->withInput()->withErrors($userForValidation->errors());
-			}
-			else
-			{
-				if( $customerForValidation->validaEditProfile($customerdata) == false)
-				{
-					return Redirect::action('UsersController@editProfile' )->withInput()->withErrors($customerForValidation->errors());
-				}
-				else
-				{
-
-					if ( Input::has('password') ) {
-						$user->password = Hash::make(Input::get('password'));
-					}
-					
-				 	//personal infos
-					$user->name = Input::get('name');
-					$user->surname = Input::get('surname');
-					$user->company = Input::get('company');
-					$user->phone = Input::get('phone');
-					$user->note = Input::get('note');
-					$user->language = Input::get('language');
-					Session::put('Language', Input::get('language'));
-					//address
-					$user->address = Input::get('address');
-					$user->city = Input::get('city');
-					$user->cap = Input::get('cap');
-					$user->state = Input::get('state');
-					$user->country = Input::get('country');
-
-					$destinationPath = '';
-				    $filename        = '';
-
-				    if (Input::hasFile('logo')) {
-				    
-				        $file            = Input::file('logo');
-				        $destinationPath = Config::get('app.url_upload', 'upload').'logo/';    
-				        $filename        = str_random(6) . '_' . $file->getClientOriginalName();
-				        $uploadSuccess   = $file->move($destinationPath, $filename);
-				      
-				        $user->logo = $filename;
-				    }
-
-
-
-					$user->save();
-
-					$data['user_detail'] = DB::table('customers') ->where('user_id', $id) 
-						->update(array(
-								'name' => Input::get('name'),
-								'surname' => Input::get('surname'),
-								'company' => Input::get('company'),
-								'phone' => Input::get('phone'),
-								'note' => Input::get('note'),
-								'address' => Input::get('address'),
-								'city' => Input::get('city'),
-								'cap' => Input::get('cap'),
-								'state' => Input::get('state'),
-								'country' => Input::get('country'),
-								'language' => Input::get('language'),
-
-								'company_description' => Input::get('company_description'),
-								//'company_code' => Input::get('company_code'),
-								'fax' => Input::get('fax'),
-								'web' => Input::get('web'),
-								'logo' => $filename,
-								'reference' => Input::get('reference'),
-								'phone_reference' => Input::get('phone_reference'),
-								'email_reference' => Input::get('email_reference'),
-								'contract_from' =>  Decoder::convert_date_in(Input::get('contract_from')),
-								'contract_to' =>  Decoder::convert_date_in(Input::get('contract_to'))
-							));
-
-
-
-					$this->layout = View::make('login.profile_success');
-				}
-			}
-		}
-
-
-		public function update_pr_profile()
+		public function update_profile()
 	{
-			$id = Session::get('userid');
+			$id = Auth::user()->id;
 
 			$userdata = array(
 			//personal infos
-			'name' => Input::get('name'),
-			'surname' => Input::get('surname'),
-			'company' => Input::get('company'),
-			'phone' => Input::get('phone'),
-			'note' => Input::get('note'),
-			//address
-			'address' => Input::get('address'),
-			'city' => Input::get('city'),
-			'cap' => Input::get('cap'),
-			'state' => Input::get('state'),
-			'country' => Input::get('country'),
+			
+			'name' =>Input::get('name'),
+			'surname' =>Input::get('surname'),
 			'password' =>Input::get('password'),
 			'password_confirmation' =>Input::get('confirm'),
 			);
@@ -485,38 +324,15 @@ class UsersController extends \BaseController {
 						$user->password = Hash::make(Input::get('password'));
 					}
 
-					$destinationPath = '';
-					    $filename        = '';
-
-					    if (Input::hasFile('logo')) {
-					    
-					        $file            = Input::file('logo');
-					        $destinationPath = Config::get('app.url_upload', 'upload').'logo/';    
-					        $filename        = str_random(6) . '_' . $file->getClientOriginalName();
-					        $uploadSuccess   = $file->move($destinationPath, $filename);
-					      
-					        $user->logo = $filename;
-					    }
-					    
-					$user->name = $userdata['name'];
-					$user->surname = $userdata['surname'];
-					$user->company = $userdata['company'];
-					$user->phone = $userdata['phone'];
 					
-					$user->note = $userdata['note'];
-					//address
-					$user->address = $userdata['address'];
-					$user->city = $userdata['city'];
-					$user->cap = $userdata['cap'];
-					$user->state = $userdata['state'];
-					$user->country = $userdata['country'];
+					    
+					
+					$user->name = Input::get('name');
+					$user->surname = Input::get('surname');
+					
 					$user->user_updated = Auth::user()->id;
-					Session::put('Language', Input::get('language'));
-					$user->language = Input::get('language');
-
+					
 					$user->save();
-					Session::forget('nameComplete');
-					Session::put('nameComplete', $user['name'] . ' ' . $user['surname']);
 					$this->layout = View::make('login.profile_success');
 				}else{
 					return Redirect::action('UsersController@editProfile' )->withInput();

@@ -9,7 +9,7 @@
 -->
 @include('login.profile_breadcrumb')
 
-{{ Form::open(array('url' => 'update_pr_profile',  'files' => true, 'method' => 'PUT',  'class' => 'form-horizontal form-row-seperated')) }}
+{{ Form::open(array('url' => 'update_profile',  'files' => true, 'method' => 'PUT',  'class' => 'form-horizontal form-row-seperated')) }}
 <div class="row">
 	<div class="col-md-12">
 		<div class="portlet">
@@ -70,26 +70,19 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
-							{{ Form::label('name',  Lang::get('users.name'), array('class'=>'control-label')) }} &nbsp;<img src="/images/required_star.gif" style="margin-bottom:5px;">
+							{{ Form::label('name',  Lang::get('users.name'), array('class'=>'control-label')) }} 
 							{{ Form::text('name',  $user_detail['name'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.name'))) }}
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
-							{{ Form::label('surname',  Lang::get('users.surname'), array('class'=>'control-label')) }} &nbsp;<img src="/images/required_star.gif" style="margin-bottom:5px;">
+							{{ Form::label('surname',  Lang::get('users.surname'), array('class'=>'control-label')) }} 
 							{{ Form::text('surname',  $user_detail['surname'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.surname'))) }}
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="form-group">
-							{{ Form::label('note',  Lang::get('users.note'), array('class'=>'control-label')) }}
-							{{ Form::textarea('note',  $user_detail['note'], array('class'=>'form-control', 'placeholder'=>Lang::get('users.note'))) }}
-							</div>
-						</div>
-					</div> 
+					
 				</div>
 			</div>
 			<!--END EDIT FORM -->

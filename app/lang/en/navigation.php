@@ -5,24 +5,18 @@ return array(
     'users' => 'Users',
     'partners' => 'Partners',
     'roles' => 'Roles',
+    'news' => 'News',
     'languages' => 'Lingue',
-    'ttemplates' => 'Tipologie template',
-    'templates' => 'Template',
-    'licences' => 'Licenze',
-    'campaigns' => 'Campagne',
+    
     'list' => 'List',
     'detail' => 'Detail',
-    'customers' => 'Advertiser',
-    'communities' => 'Community',
-    'subscribed' => 'Sottoscrizioni',
-    'offerts' => 'Offerte',
-    'agenda' => 'Agenda',
+    
+    'agenda' => 'Calendar',
+
     'report' => 'Report',
     'log' => 'Log',
-    'initialcode' =>  'Codici d\'accesso',
-    'offertplan' => 'Pianificazione offerte',
-    'statistics' => 'Statistiche',
+    
 
-    'stop' => ''
+
 
 );

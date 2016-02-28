@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://reportavpn.com/',
+	'url' => 'http://simple.caravanext.eu/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Europe/Rome',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,6 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		'Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider',
+		'Barryvdh\TranslationManager\ManagerServiceProvider',
 
 	),
 
@@ -189,7 +191,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel'
+		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
+		'LaravelLocalization'   => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
 
 	),
 

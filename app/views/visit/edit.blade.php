@@ -59,14 +59,14 @@
 				<div class="col-lg-4">
 
 						{{ Form::label('d_document', 'Date on document'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document', $v->d_document ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date document')   ) }}
+						{{ Form::text('d_document', Decoder::decodeDate($v->d_document) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date document')   ) }}
 					
 					</div><div class="col-lg-4">
 						{{ Form::label('d_document_start', 'Related activity start from'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document_start', $v->d_document_start ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date from')   ) }}
+						{{ Form::text('d_document_start', Decoder::decodeDate($v->d_document_start) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date from')   ) }}
 					</div><div class="col-lg-4">
 						{{ Form::label('d_document_stop', 'to'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document_stop', $v->d_document_stop ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date to')   ) }}
+						{{ Form::text('d_document_stop', Decoder::decodeDate($v->d_document_stop) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date to')   ) }}
 					</div>
 
 				<div class="col-lg-12">
@@ -126,7 +126,7 @@
 				{{ Form::select('payedby', $rowpayedby, $v->payedby ,   array('class'=>'form-control ')   ) }}
 
 				{{ Form::label('d_document_paid', 'Date payment'  , array('class' => 'control-label ')) }}
-				{{ Form::text('d_document_paid', $v->d_document_paid ,   array('class'=>'form-control placeholder-no-fix date-picker')   ) }}
+				{{ Form::text('d_document_paid', Decoder::decodeDate($v->d_document_paid) ,   array('class'=>'form-control placeholder-no-fix date-picker')   ) }}
 
 			</div>
 		</div>
@@ -162,15 +162,15 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_12">
 											 Need some helps about that?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_12" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												Only documents emitted by an not EU country are considered a third country costs. Example: a people payed by an EU company ARE NOT third country cost. A freelancer not EU directly payed is a third country cost.
 											</p>
 											
 										</div>
@@ -200,15 +200,15 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_11">
 											 Need some helps about that?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_11" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												Every cost emitted by a company is subcontracting. 
 											</p>
 											
 										</div>
@@ -242,12 +242,12 @@
 						<div class="col-md-2">
 								Date start travel	
 						</div><div class="col-md-2">
-											{{ Form::text('d_document_start_travel', $v->d_document_start_travel ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+											{{ Form::text('d_document_start_travel', Decoder::decodeDate($v->d_document_start_travel) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
 						</div>
 						<div class="col-md-2">
 								Date finish travel	
 						</div><div class="col-md-2">
-											{{ Form::text('d_document_finish_travel', $v->d_document_finish_travel ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+											{{ Form::text('d_document_finish_travel', Decoder::decodeDate($v->d_document_finish_travel) ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
 						</div>
 						<div class="col-lg-12"></div>
 						<div class="col-md-2"> Number people involved  </div>
@@ -305,15 +305,17 @@
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
 					<div class="col-md-8">
-						<div class="row"><div class="col-md-8"><h3>
+						<div class="row"><div class="col-md-6"><h3>
 							Insert document related to cost  
-						</h3> </div> <div class="col-md-4"><div class="col-md-4"><a href="/model/T1.xlsx" class="btn blue"><i class="fa fa-icon-time"></i> Timesheet </a> 
+						</h3> </div> <div class="col-md-6"><div class="col-md-4"><a href="/model/T1.xlsx" class="btn blue"><i class="fa fa-icon-time"></i> Timesheet </a> 
 						<a href="/model/T2.doc" class="btn yellow"><i class="fa fa-money"></i> Cash rembuirsement </a>
 						<a href="/model/T3.doc" class="btn blue"><i class="fa fa-truck"></i> Car rembuirsement </a>
 						<a href="/model/T4.doc" class="btn blue"><i class="fa fa-calendar"></i> Daily allowance rembuirsement </a>
 
 						<a href="/model/T5.xlsx" class="btn green"><i class="fa fa-users"></i> Salary slip summary </a>  </div>
 					</div>
+					</div>
+					<div class="row">
 						<h4> Cost documentation </h4>
 						<div class="col-md-6">
 											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
@@ -332,7 +334,7 @@
 						</div><div class="col-md-6">
 											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
 						</div>
-					<div>		
+							
 					</div>
 					
 				</div>
@@ -354,19 +356,21 @@
 							</div>
 						</div>
 						<div class="portlet-body">
+
 							<div class="panel-group accordion" id="accordion1">
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_10">
 											 Cost documentation
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_1" class="panel-collapse collapse">
+									<div id="collapse_10" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?
+												How document well a costs?<br/>
+												Insert document inserted in your accountancy. 
 											</p>
 											
 										</div>
@@ -375,15 +379,18 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_20">
 											Proof of payment
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_2" class="panel-collapse collapse">
+									<div id="collapse_20" class="panel-collapse collapse">
 										<div class="panel-body" style="height:200px; overflow-y:auto;">
 										<p>
-										   What you need insert for document a cost?
+										  What you need insert for document the you payed a cost? <br/>
+										   Just need insert proof of payment like bank account with evidence of costs. <br<br/>For partner credit card insert detail of expenses and bank account. 
+										   <br/>For cash payment use model inserted on top or similar document. 
+
 										</p>
 											
 										</div>
@@ -392,15 +399,21 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_30">
 											 What else?
 										</a>
 										</h4>
 									</div>
-									<div id="collapse_3" class="panel-collapse collapse">
+									<div id="collapse_30" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												 Some activities need more documents.
+											 Some activities need more documents, like salary. Please insert:
+												 <ul><li>For salary and freelancer: contract or letter of appointment(one time), timesheet</li>
+												 <li>For travel: borading pass or train / bus ticket </li>
+												 <li>For print or brochure or good buyed: PDF or pics of goods  </li>
+												 <li>For other costs: all that can prove that costs is related at activities  </li>
+												 <li>For car rembuirsement: use specific model with map and km calculation  </li>
+												 </ul>
 											</p>
 											
 										</div>
