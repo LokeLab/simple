@@ -21,7 +21,7 @@
 
 
 <div class="row">
-	<div class="col-md-9 col-sm-9" style="padding:2px!important; margin:0px!important">
+	<div class="col-lg-9 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 col-sm-3" style="padding:2px!important; margin:0px!important">
+	<div class="col-lg-3 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
 	
 	<div class="portlet box yellow">
 			<div class="portlet-title">

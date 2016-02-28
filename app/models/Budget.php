@@ -86,7 +86,7 @@ class Budget extends Eloquent  {
 	 */
 	public static function getAllUpdated()
 	{
-		return Role::whereUpdate(1)->get();
+		return Budget::whereUpdate(1)->get();
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Budget extends Eloquent  {
 	 */
 	public static function getAllNotUpdated()
 	{
-		return Role::whereUpdate(0)->get();
+		return Budget::whereUpdate(0)->get();
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Budget extends Eloquent  {
 	 */
 	public static function getById($id)
 	{
-		return Role::whereId($id)->first();
+		return Budget::whereId($id)->first();
 	}
 
 	/**
@@ -116,7 +116,13 @@ class Budget extends Eloquent  {
 	 */
 	public static function getLabel($id)
 	{
-		return Role::find($id)->description;
+
+		$tmp = Budget::find($id);
+
+		if ($tmp)
+				return $tmp->description;
+		else
+			 	return '';
 	}
 
 	/**

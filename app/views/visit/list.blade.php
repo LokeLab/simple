@@ -88,12 +88,6 @@
 								 VAT amount
 							</th>
 							<th>
-								Euro Net amount 
-							</th>
-							<th>
-								 Euro Vat amount
-							</th>
-							<th>
 								 Total
 							</th>
 							<th>
@@ -133,13 +127,7 @@
 								{{number_format($c->vatamount, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($c->euronetamount, 2, ',', ' ');}}
-							</td>
-							<td align="right">
-								{{number_format($c->eurovatamount, 2, ',', ' ');}}
-							</td>
-							<td align="right">
-								{{number_format($c->eurototal, 2, ',', ' ');}}
+								{{number_format($c->netamount + $c->vatamount , 2, ',', ' ');}}
 							</td>
 							<td align="right">
 								{{Decoder::decodeYN($c->verified);}}

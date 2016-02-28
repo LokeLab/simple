@@ -7,7 +7,7 @@
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
  $currency = array('EUR'=> 'EUR');
- ?>
+?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
 						min-height:40px;}
@@ -23,14 +23,6 @@
 		</div>
 	</div>
 </div>
-<!--<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('id', Lang::get('ttemplates.id')) }}: 
-		{{ Form::text('id', '', array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div>-->
 <div class="row">
 	@if($errors->has())
 					<div class="alert alert-danger">
@@ -54,7 +46,7 @@
 					<div class="col-lg-12">
 						
 						{{ Form::label('budgetrow', 'Row'  , array('class' => 'control-label ')) }}
-						{{ Form::select('budgetrow', $rowbudget, $v->budgetrow ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+						{{ Form::select('budgetrow', $rowbudget, $v->budgetrow ,   array('class'=>'form-control ', 'placeholder' => 'Rows')   ) }}
 					</div>	
 				<div class="col-lg-4">
 

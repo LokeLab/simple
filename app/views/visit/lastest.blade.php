@@ -7,26 +7,22 @@
 							<th>
 								Created at
 							</th>
+							@if (Auth::user()->role == 1 )
 							<th>
 								Partner
 							</th>
+							@endif
 							<th>
 								Row
 							</th>
-							<th>
-								 Currency
+							<th class="center">
+								 <i class="fa fa-money"></i>
 							</th>
 							<th>
 								 Net amount
 							</th>
 							<th>
 								 VAT amount
-							</th>
-							<th>
-								Euro Net amount 
-							</th>
-							<th>
-								 Euro Vat amount
 							</th>
 							<th>
 								 Total
@@ -46,11 +42,13 @@
 							<td>
 								{{ Decoder::decodeDate($c->created_at)}}
 							</td>
-							<td align="right">
-								{{ $c->short }}
-							</td>
-							<td align="right">
-								{{ $c->row }}
+							@if (Auth::user()->role == 1 )
+									<td align="left">
+										{{ $c->short }}
+									</td>
+							@endif
+							<td align="left">
+								{{ Budget::getLabel($c->row) }}
 							</td>
 							<td align="right">
 								{{ $c->currency }}
@@ -62,13 +60,7 @@
 								{{number_format($c->vatamount, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($c->euronetamount, 2, ',', ' ');}}
-							</td>
-							<td align="right">
-								{{number_format($c->eurovatamount, 2, ',', ' ');}}
-							</td>
-							<td align="right">
-								{{number_format($c->eurototal, 2, ',', ' ');}}
+								{{number_format($c->netamount + $c->vatamount, 2, ',', ' ');}} 
 							</td>
 							
 						</tr>
