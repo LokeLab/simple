@@ -6,6 +6,5 @@ return array(
     'see_all' => 'View all',
 
 
-    'stop' => ''
 
 );

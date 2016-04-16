@@ -3,7 +3,33 @@
 @section('content')
 
 <?php 
- $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+ $type_cost = Budget::getTypeCost($v->budgetrow);
+
+
+ switch ($type_cost) {
+ 	case 1:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(1)->lists('description', 'id');
+ 		break;
+ 	case 2:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(2)->lists('description', 'id');
+ 		break;
+ 	case 3:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(3)->lists('description', 'id');
+ 		break;
+ 	case 4:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(4)->lists('description', 'id');
+ 		break;
+ 	case 5:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(5)->lists('description', 'id');
+ 		break;
+ 	case 6:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(6)->lists('description', 'id');
+ 		break;
+ 	default:
+ 		# code...
+ 		break;
+ }
+
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
  $currency = array('EUR'=> 'EUR');
@@ -172,8 +198,8 @@
 							</div>
 						
 					</div>
-
-					<div class="col-lg-12 active">
+@if ($type_cost < 4)
+					<div class="col-lg-12 active" >
 						<div class="col-lg-4">	
 							Subcontracting
 						</div>
@@ -206,9 +232,13 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							
 						</div>
 					</div>
+					</div>
+					@else
+{{Form::hidden('sub',0)}}
+@endif
 
 					
 
@@ -219,7 +249,7 @@
 		</div>
 
 	</div>
-	
+	@if ($type_cost >3)
 <div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
@@ -280,7 +310,19 @@
 					
 			</div>
 		</div>
-	
+		@else
+{{Form::hidden('d_document_start_travel','')}}
+{{Form::hidden('d_document_finish_travel','')}}
+{{Form::hidden('n_people','')}}
+{{Form::hidden('role_people','')}}
+{{Form::hidden('name_people','')}}
+{{Form::hidden('from_nation','')}}
+{{Form::hidden('from_city','')}}
+{{Form::hidden('to_nation','')}}
+{{Form::hidden('to_city','')}}
+
+
+	@endif
 
 
 
@@ -310,21 +352,40 @@
 					<div class="row">
 						<h4> Cost documentation </h4>
 						<div class="col-md-6">
-											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }} 
+											@if ($v->doc1 != '')
+												<a href="/uploadfile/{{$v->doc1}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div><div class="col-md-6">
 											{{ Form::file('doc2', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											@if ($v->doc2 != '')
+												<a href="/uploadfile/{{$v->doc2}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div>
 						<h4> Proof of payment </h4>
 						<div class="col-md-6">
 											{{ Form::file('doc3', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+
+											@if ($v->doc3 != '')
+												<a href="/uploadfile/{{$v->doc3}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div><div class="col-md-6">
 											{{ Form::file('doc4', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+											@if ($v->doc4 != '')
+												<a href="/uploadfile/{{$v->doc4}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div>
 						<h4> Other document related to cost </h4>		
 						<div class="col-md-6">
 											{{ Form::file('doc5', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											@if ($v->doc5 != '')
+												<a href="/uploadfile/{{$v->doc5}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div><div class="col-md-6">
 											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											@if ($v->doc6 != '')
+												<a href="/uploadfile/{{$v->doc6}}" class="btn btn-warning" target="_blank">Download</a>
+											@endif 
 						</div>
 							
 					</div>

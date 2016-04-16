@@ -3,10 +3,34 @@
 @section('content')
 
 <?php 
- $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+$type_cost = Input::get('type');
+ switch ($type_cost) {
+ 	case 1:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(1)->lists('description', 'id');
+ 		break;
+ 	case 2:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(2)->lists('description', 'id');
+ 		break;
+ 	case 3:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(3)->lists('description', 'id');
+ 		break;
+ 	case 4:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(4)->lists('description', 'id');
+ 		break;
+ 	case 5:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(5)->lists('description', 'id');
+ 		break;
+ 	case 6:
+ 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(6)->lists('description', 'id');
+ 		break;
+ 	default:
+ 		# code...
+ 		break;
+ }
+
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
- $currency = array('EUR'=> 'EUR');
+ $currency = Currency::lists('longdescription', 'description');
  ?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
@@ -45,7 +69,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-home"></i>Nature of cost
+					<i class="fa fa-home"></i>{{Lang::get('budget.generalinfo')}}
 				</div>
 				
 			</div>
@@ -53,54 +77,54 @@
 				<div class="row">
 					<div class="col-lg-12">
 						
-						{{ Form::label('budgetrow', 'Row'  , array('class' => 'control-label ')) }}
-						{{ Form::select('budgetrow', $rowbudget, '' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+						{{ Form::label('budgetrow', Lang::get('budget.budgetrow')  , array('class' => 'control-label ')) }}
+						{{ Form::select('budgetrow', $rowbudget, '' ,   array('class'=>'form-control ')   ) }}
 					</div>	
 				<div class="col-lg-4">
 
-						{{ Form::label('d_document', 'Date on document'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date document')   ) }}
+						{{ Form::label('d_document', Lang::get('budget.datedocument')  , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => Lang::get('budget.datedocument'))   ) }}
 					
 					</div><div class="col-lg-4">
-						{{ Form::label('d_document_start', 'Related activity start from'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document_start', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date from')   ) }}
+						{{ Form::label('d_document_start', Lang::get('budget.datefrom')  , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document_start', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => Lang::get('budget.datefrom'))   ) }}
 					</div><div class="col-lg-4">
-						{{ Form::label('d_document_stop', 'to'  , array('class' => 'control-label ')) }}
-						{{ Form::text('d_document_stop', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'Date to')   ) }}
+						{{ Form::label('d_document_stop', Lang::get('budget.to') , array('class' => 'control-label ')) }}
+						{{ Form::text('d_document_stop', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => Lang::get('budget.to'))   ) }}
 					</div>
 
 				<div class="col-lg-12">
-						{{ Form::label('description_cost', 'Description of cost (like plane ticket, Costume, actor in performance, administrative activity related to the project) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('description_cost', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Cost description' ) ) }}
+						{{ Form::label('description_cost', Lang::get('budget.descriptioncost')  , array('class' => 'control-label ')) }}
+						{{ Form::text('description_cost', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.descriptioncost')  ) ) }}
 				</div><div class="col-lg-12">
-						{{ Form::label('activity', 'Other info about of activity (like name of performance, city for meeting) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('activity', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+						{{ Form::label('activity', Lang::get('budget.descriptionactivity')  , array('class' => 'control-label ')) }}
+						{{ Form::text('activity', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.descriptionactivity')  ) ) }}
 
 				</div>
 				
 
 
 					<div class="col-lg-4">
-							{{ Form::label('currency', 'currency'  , array('class' => 'control-label ')) }}
-							{{ Form::select('currency', $currency, 'EUR' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+							{{ Form::label('currency', Lang::get('budget.currency')  , array('class' => 'control-label ')) }}
+							{{ Form::select('currency', $currency, 'EUR' ,   array('class'=>'form-control ', )   ) }}
 
 					</div>
 
 					<div class="col-lg-4">
-							{{ Form::label('netamount', 'Net amount'  , array('class' => 'control-label ')) }}
-							{{ Form::text('netamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+							{{ Form::label('netamount', Lang::get('budget.netamount') , array('class' => 'control-label ')) }}
+							{{ Form::text('netamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => Lang::get('budget.netamount'))   ) }}
 
 					</div>
 
 					<div class="col-lg-4">
-							{{ Form::label('vatamount', 'VAT amount'  , array('class' => 'control-label ')) }}
-							{{ Form::text('vatamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => 'Città')   ) }}
+							{{ Form::label('vatamount', Lang::get('budget.vatamount')  , array('class' => 'control-label ')) }}
+							{{ Form::text('vatamount',  '0' ,   array('class'=>'form-control ', 'placeholder' => Lang::get('budget.vatamount'))   ) }}
 
 					</div>
 
 					<div class="col-lg-12">
-						{{ Form::label('comment', 'Internal note (not in reporting) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('comment', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+						{{ Form::label('comment', Lang::get('budget.internalnote')  , array('class' => 'control-label ')) }}
+						{{ Form::text('comment', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.internalnote')  ) ) }}
 
 				</div>
 					</div>
@@ -117,15 +141,15 @@
 		<div class="portlet box yellow">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-user"></i>Is payed?
+					<i class="fa fa-user"></i>{{Lang::get('budget.ispayed') }}
 				</div>
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
-				{{ Form::label('payedby', 'Payed by'  , array('class' => 'control-label ')) }}
+				{{ Form::label('payedby', Lang::get('budget.payedby')  , array('class' => 'control-label ')) }}
 				{{ Form::select('payedby', $rowpayedby, '4' ,   array('class'=>'form-control ')   ) }}
 
-				{{ Form::label('d_document_paid', 'Date payment'  , array('class' => 'control-label ')) }}
+				{{ Form::label('d_document_paid', Lang::get('budget.paymentdate')   , array('class' => 'control-label ')) }}
 				{{ Form::text('d_document_paid', '' ,   array('class'=>'form-control placeholder-no-fix date-picker')   ) }}
 
 			</div>
@@ -134,7 +158,7 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Is a special costs?
+					<i class="fa fa-bullseye"></i>{{Lang::get('budget.isspecial') }}
 				</div>
 				
 			</div>
@@ -144,7 +168,7 @@
 					
 					<div class="col-lg-12">
 						<div class="col-lg-4">	
-							Third party cost 
+							{{Lang::get('budget.thirdcountry') }}
 						</div>
 						<div class="col-lg-8">	
 										
@@ -163,14 +187,14 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_12">
-											 Need some helps about that?
+											{{Lang::get('budget.needhelps') }}
 										</a>
 										</h4>
 									</div>
 									<div id="collapse_12" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												Only documents emitted by an not EU country are considered a third country costs. Example: a people payed by an EU company ARE NOT third country cost. A freelancer not EU directly payed is a third country cost. 
+												{{Lang::get('budget.needhelps3rd') }}
 											</p>
 											
 										</div>
@@ -180,10 +204,10 @@
 							</div>
 						
 					</div>
-
+@if ($type_cost <4)
 					<div class="col-lg-12 active">
 						<div class="col-lg-4">	
-							Subcontracting
+							{{Lang::get('budget.subcontracting') }}
 						</div>
 						<div class="col-lg-8">	
 										
@@ -201,14 +225,14 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_11">
-											 Need some helps about that?
+											 {{Lang::get('budget.needhelps') }}
 										</a>
 										</h4>
 									</div>
 									<div id="collapse_11" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												Every cost emitted by a company is subcontracting. 
+												{{Lang::get('budget.needhelpssub') }}
 											</p>
 											
 										</div>
@@ -217,8 +241,9 @@
 							</div>
 						</div>
 					</div>
-
-					
+@else
+{{Form::hidden('sub',0)}}
+@endif					
 
 					
 				
@@ -227,11 +252,13 @@
 		</div>
 
 	</div>
+
+	@if ($type_cost >3)
 	
 <div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Additional information: fill ONLY for travel and accomodation
+					<i class="fa fa-bullseye"></i>{{Lang::get('budget.addinformationtravel') }}
 				</div>
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
@@ -240,45 +267,45 @@
 					<div class="col-md-12">
 						
 						<div class="col-md-2">
-								Date start travel	
+								{{Lang::get('budget.datestart') }}	
 						</div><div class="col-md-2">
-											{{ Form::text('d_document_start_travel', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+											{{ Form::text('d_document_start_travel', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => Lang::get('budget.selectdate') )   ) }}
 						</div>
 						<div class="col-md-2">
-								Date finish travel	
+								{{Lang::get('budget.dateend') }}	
 						</div><div class="col-md-2">
-											{{ Form::text('d_document_finish_travel', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => 'select')   ) }}
+											{{ Form::text('d_document_finish_travel', '' ,   array('class'=>'form-control placeholder-no-fix date-picker', 'placeholder' => Lang::get('budget.selectdate'))   ) }}
 						</div>
 						<div class="col-lg-12"></div>
-						<div class="col-md-2"> Number people involved  </div>
+						<div class="col-md-2"> {{Lang::get('budget.numberp') }}	  </div>
 						<div class="col-md-2">
-									{{ Form::text('n_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'nr.' ) ) }}
+									{{ Form::text('n_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.numberp' ) )) }}
 						</div>
 
-						<div class="col-md-2"> Name of people involved  </div>
+						<div class="col-md-2"> {{Lang::get('budget.namep') }}	 </div>
 						<div class="col-md-2">
-									{{ Form::text('name_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'name of people' ) ) }}
+									{{ Form::text('name_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.namep') ) ) }}
 						</div>
 
-						<div class="col-md-2"> Role of people involved  </div>
+						<div class="col-md-2"> {{Lang::get('budget.rolep') }}  </div>
 						<div class="col-md-2">
-									{{ Form::text('role_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'role of people' ) ) }}
+									{{ Form::text('role_people', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.rolep') ) ) }}
 						</div>
 
-						<div class="col-md-2"> Start from ( nation / city) (for accomodation put here where you live/start travel)   </div>
+						<div class="col-md-2"> {{Lang::get('budget.startcountry')}}   </div>
 						<div class="col-md-2">
 									{{ Form::select('from_nation', $nation, '',   array('class'=>'form-control placeholder-no-fix' ) ) }}
 						</div>
 						<div class="col-md-2">
-									{{ Form::text('from_city', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'City' ) ) }}
+									{{ Form::text('from_city', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.city')  )) }}
 						</div>
 
-						<div class="col-md-2"> To (nation / city)  (for accomodation put here where you stay)  </div>
+						<div class="col-md-2"> {{Lang::get('budget.endcountry')}}  </div>
 						<div class="col-md-2">
 									{{ Form::select('to_nation', $nation, '',   array('class'=>'form-control placeholder-no-fix' ) ) }}
 						</div>
 						<div class="col-md-2">
-									{{ Form::text('to_city', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'City' ) ) }}
+									{{ Form::text('to_city', '',   array('class'=>'form-control placeholder-no-fix', 'placeholder' => Lang::get('budget.startcountry')) ) }}
 						</div>
 
 						
@@ -288,8 +315,19 @@
 					
 			</div>
 		</div>
-	
+@else
+{{Form::hidden('d_document_start_travel','')}}
+{{Form::hidden('d_document_finish_travel','')}}
+{{Form::hidden('n_people','')}}
+{{Form::hidden('role_people','')}}
+{{Form::hidden('name_people','')}}
+{{Form::hidden('from_nation','')}}
+{{Form::hidden('from_city','')}}
+{{Form::hidden('to_nation','')}}
+{{Form::hidden('to_city','')}}
 
+
+@endif
 
 
 
@@ -299,38 +337,38 @@
 		<div class="portlet box purple">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-bullseye"></i>Document related to cost  
+					<i class="fa fa-bullseye"></i>{{Lang::get('budget.doc_rel')}}
 				</div>
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row"><div class="col-md-6"><h3>
-							Insert document related to cost  
-						</h3> </div> <div class="col-md-6"><a href="/model/T1.xlsx" class="btn blue"><i class="fa fa-icon-time"></i> Timesheet </a> 
-						<a href="/model/T2.doc" class="btn  yellow"><i class="fa fa-money"></i> Cash rembuirsement </a>
-						<a href="/model/T3.doc" class="btn blue"><i class="fa fa-truck"></i> Car rembuirsement </a>
-						<a href="/model/T4.doc" class="btn  blue"><i class="fa fa-calendar"></i> Daily allowance rembuirsement </a>
+							{{Lang::get('budget.reldoc')}} 
+						</h3> </div> <div class="col-md-6"><a href="/model/T1.xlsx" class="btn blue"><i class="fa fa-icon-time"></i> {{Lang::get('budget.temp_time')}} </a> 
+						<a href="/model/T2.doc" class="btn  yellow"><i class="fa fa-money"></i> {{Lang::get('budget.temp_cash')}} </a>
+						<a href="/model/T3.doc" class="btn blue"><i class="fa fa-truck"></i> {{Lang::get('budget.temp_car')}} </a>
+						<a href="/model/T4.doc" class="btn  blue"><i class="fa fa-calendar"></i> {{Lang::get('budget.temp_sub')}} </a>
 
-						<a href="/model/T5.xlsx" class="btn  green"><i class="fa fa-users"></i> Salary slip summary </a>    </div>
+						<a href="/model/T5.xlsx" class="btn  green"><i class="fa fa-users"></i> {{Lang::get('budget.temp_salary')}} </a>    </div>
 					</div>
-						<h4> Cost documentation </h4>
+						<h4> {{Lang::get('budget.cost_doc')}} </h4>
 						<div class="col-md-6">
-											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.cost_doc'))) }}
 						</div><div class="col-md-6">
-											{{ Form::file('doc2', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }}
+											{{ Form::file('doc2', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.cost_doc'))) }}
 						</div>
-						<h4> Proof of payment </h4>
+						<h4> {{Lang::get('budget.cost_proof_payment')}} </h4>
 						<div class="col-md-6">
-											{{ Form::file('doc3', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+											{{ Form::file('doc3', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.cost_proof_payment'))) }}
 						</div><div class="col-md-6">
-											{{ Form::file('doc4', array('class'=>'form-control' , 'placeholder'=>'Proof of payment')) }}
+											{{ Form::file('doc4', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.cost_proof_payment'))) }}
 						</div>
-						<h4> Other document related to cost </h4>		
+						<h4> {{Lang::get('budget.other_cost_doc')}} </h4>		
 						<div class="col-md-6">
-											{{ Form::file('doc5', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											{{ Form::file('doc5', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.other_cost_doc'))) }}
 						</div><div class="col-md-6">
-											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>'Other document related to cost')) }}
+											{{ Form::file('doc6', array('class'=>'form-control' , 'placeholder'=>Lang::get('budget.other_cost_doc'))) }}
 						</div>
 					<div>		
 					</div>
@@ -340,7 +378,7 @@
 							<div class="portlet box green">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-reorder"></i>Do you need some help?
+								<i class="fa fa-reorder"></i>{{Lang::get('budget.needhelps')}}
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -359,15 +397,14 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_10">
-											 Cost documentation
+											{{Lang::get('budget.cost_doc')}}
 										</a>
 										</h4>
 									</div>
 									<div id="collapse_10" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												How document well a costs?<br/>
-												Insert document inserted in your accountancy. 
+												{{Lang::get('budget.cost_doc_h')}}
 											</p>
 											
 										</div>
@@ -377,16 +414,14 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
-											Proof of payment
+											{{Lang::get('budget.cost_proof_payment')}}
 										</a>
 										</h4>
 									</div>
 									<div id="collapse_2" class="panel-collapse collapse">
 										<div class="panel-body" style="height:200px; overflow-y:auto;">
 										<p>
-										   What you need insert for document the you payed a cost? <br/>
-										   Just need insert proof of payment like bank account with evidence of costs. <br<br/>For partner credit card insert detail of expenses and bank account. 
-										   <br/>For cash payment use model inserted on top or similar document. 
+										   {{Lang::get('budget.cost_proof_payment_h')}}
 
 										</p>
 											
@@ -397,20 +432,14 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_30">
-											 What else?
+											 {{Lang::get('budget.other_cost_doc')}}
 										</a>
 										</h4>
 									</div>
 									<div id="collapse_30" class="panel-collapse collapse">
 										<div class="panel-body">
 											<p>
-												 Some activities need more documents, like salary. Please insert:
-												 <ul><li>For salary and freelancer: contract or letter of appointment(one time), timesheet</li>
-												 <li>For travel: borading pass or train / bus ticket </li>
-												 <li>For print or brochure or good buyed: PDF or pics of goods  </li>
-												 <li>For other costs: all that can prove that costs is related at activities  </li>
-												 <li>For car rembuirsement: use specific model with map and km calculation  </li>
-												 </ul>
+												 {{Lang::get('budget.other_cost_doc_h')}}
 											</p>
 											
 										</div>

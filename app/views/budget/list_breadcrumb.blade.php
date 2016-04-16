@@ -10,7 +10,7 @@
 			</li>
 			<li>
 				<i class="fa fa-sitemap"></i>
-				Budget
+				{{Lang::get('navigation.budget');}}
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>

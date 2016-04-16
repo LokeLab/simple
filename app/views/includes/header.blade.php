@@ -33,7 +33,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
     <!-- BEGIN TOP NAVIGATION MENU -->
     <ul class="nav navbar-nav pull-right">
       <!-- BEGIN NOTIFICATION DROPDOWN -->
-      
+      <a href="{{ url('currency') }}" class="btn green">{{Lang::get('budget.rateapplied');}}</a>
       
       <!-- END TODO DROPDOWN -->
       <!-- BEGIN USER LOGIN DROPDOWN -->
@@ -53,7 +53,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
           </li>
           <li>
             <a href="/logout">
-              <i class="fa fa-key"></i> Log Out
+              <i class="fa fa-key"></i> {{ Lang::get('users.logout') }}
             </a>
           </li>
         </ul>

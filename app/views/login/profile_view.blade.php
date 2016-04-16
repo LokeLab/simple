@@ -70,18 +70,48 @@
 						
 					</div>
 					
-
-
-					
-					
 					<div class="row">
 						<div class="col-lg-12">
+							<h2>Number of staff employed by the organisation before the implementation of the project </h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
 							<div class="form-group">
-							{{ Form::label('note',  Lang::get('users.note'), array('class'=>'control-label')) }}
-							{{ Form::label('note',  $user_detail['note'], array('class'=>'form-control')) }}
+							{{ Form::label('staffpermbefore',  Lang::get('users.staffpermbefore'), array('class'=>'control-label')) }} 
+							{{ Form::label('staffpermbefore',  $user_detail['staffpermbefore'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.staffpermbefore'))) }}
 							</div>
 						</div>
-					</div> 
+						<div class="col-lg-6">
+							<div class="form-group">
+							{{ Form::label('stafftempbefore',  Lang::get('users.stafftempbefore'), array('class'=>'control-label')) }} 
+							{{ Form::label('stafftempbefore',  $user_detail['staffpermbefore'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.stafftempbefore'))) }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<h2>Number of staff recruited by the organisation as a result of the implementation of the project </h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+							{{ Form::label('staffpermafter',  Lang::get('users.staffpermafter'), array('class'=>'control-label')) }} 
+							{{ Form::label('staffpermafter',  $user_detail['staffpermafter'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.name'))) }}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+							{{ Form::label('stafftempafter',  Lang::get('users.stafftempafter'), array('class'=>'control-label')) }} 
+							{{ Form::label('stafftempafter',  $user_detail['staffpermafter'], array('class'=>'form-control required', 'placeholder'=>Lang::get('users.stafftempafter'))) }}
+							</div>
+						</div>
+					</div>
+
+					
+					
+					
 				</div>
 			</div>
 			<!--END EDIT FORM -->

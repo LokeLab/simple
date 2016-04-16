@@ -329,6 +329,10 @@ class UsersController extends \BaseController {
 					
 					$user->name = Input::get('name');
 					$user->surname = Input::get('surname');
+					$user->staffpermbefore = Input::get('staffpermbefore');
+					$user->stafftempbefore = Input::get('stafftempbefore');
+					$user->staffpermafter = Input::get('staffpermafter');
+					$user->stafftempafter = Input::get('stafftempafter');
 					
 					$user->user_updated = Auth::user()->id;
 					

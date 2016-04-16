@@ -124,6 +124,7 @@ return array(
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider',
 		'Barryvdh\TranslationManager\ManagerServiceProvider',
+		'Artisaninweb\SoapWrapper\ServiceProvider'
 
 	),
 
@@ -193,6 +194,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
 		'LaravelLocalization'   => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
+		'SoapWrapper' => 'Artisaninweb\SoapWrapper\Facades\SoapWrapper'
 
 	),
 

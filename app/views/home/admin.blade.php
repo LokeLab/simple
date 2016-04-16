@@ -25,7 +25,7 @@
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>Partner budget
+					<i class="fa fa-money"></i>{{Lang::get('home.hometitlebudget');}}
 				</div>
 				
 			</div>
@@ -39,27 +39,35 @@
 	</div>
 	<div class="col-lg-3 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
 	
+
+		<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="padding:2px!important; margin:0px!important">
+
 	<div class="portlet box yellow">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>Calendar
+					<i class="fa fa-money"></i>{{Lang::get('home.titlecalendar');}}
 				</div>
 				
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
-					<div class="col-md-6"> Elegibility period</div><div class="col-md-6"> From 01/09/2015	To	28/02/2019</div></div>
-					<div class="row bg-yellow"><div class="col-md-6"> First interim report</div><div class="col-md-6"> 01/09/2016	</div></div>
-					<div class="row"><div class="col-md-6"> Second interim report</div><div class="col-md-6"> 01/09/2017	</div></div>
-					<div class="row bg-yellow"><div class="col-md-6"> Final report</div><div class="col-md-6"> 28/04/2019	</div></div>
+					<div class="col-md-12"> {{Lang::get('home.elegibility');}}</div><div class="col-md-6"> {{Lang::get('home.from');}} </div><div class="col-md-6"> 01/09/2015 </div><div class="col-md-6">{{Lang::get('home.to');}}</div><div class="col-md-6">	28/02/2019</div></div>
+					<div class="row bg-yellow"><div class="col-md-12"> {{Lang::get('home.grant');}}</div><div class="col-md-12"> <strong>2015-1504/001-001</strong>	</div></div>
+					<div class="row bg-green"><div class="col-md-6"> {{Lang::get('home.support');}} </div><div class="col-md-6">  	</div>
+
+					<div class="col-md-12"><a href="mailto:support@caravanext.eu" style="color:white"><i class="fa fa-envelope"></i> support@caravanext.eu</a>	</div></div>
 				
 			</div>
 		</div>
+	</div>
+
+		<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="padding:2px!important; margin:0px!important">
+
 	
 	<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>News
+					<i class="fa fa-money"></i>{{Lang::get('navigation.news');}}
 				</div>
 				
 			</div>
@@ -78,7 +86,7 @@
 			</div>
 		</div>
 	
-	
+ </div>	
 
 	</div>
 </div>
@@ -87,7 +95,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>Lastest costs registered
+					<i class="fa fa-money"></i>{{Lang::get('home.lastestcost');}}
 				</div>
 				
 			</div>
@@ -104,6 +112,11 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	
+
+
+
 		</div>
 	</div>
 

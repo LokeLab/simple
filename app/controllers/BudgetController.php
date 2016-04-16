@@ -10,8 +10,17 @@ class BudgetController extends \BaseController {
 	public function tablelist($id)
 	{
 		$data['roles_list'] = Budget::getAllbyPartner($id);
-		
+	
+			
 		$this->layout = View::make('budget.list', $data);
+	}
+
+	public function tablelistCurrency()
+	{
+		$data['DT'] = 'userTable';
+		$data['currency_list'] = Currency::all();
+		
+		$this->layout = View::make('budget.currency', $data);
 	}
 
 	/**

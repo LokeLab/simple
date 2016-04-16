@@ -1,9 +1,9 @@
 @extends('template.internal')
 
 @section('content')
-@include('role.edit_breadcrumb')
+@include('budget.list_breadcrumb')
 
-{{ Form::open(array('url' => 'roles/'. $role_detail->id, 'method' => 'PUT', 'class' =>'form-horizontal form-row-seperated')) }}	
+{{ Form::open(array('url' => 'budget/'. $role_detail->id, 'method' => 'PUT', 'class' =>'form-horizontal form-row-seperated')) }}	
 <div class="row">
 	<div class="col-md-12">
 		<div class="portlet">
@@ -18,18 +18,15 @@
 							<i class="fa fa-pencil"></i> {{$role_detail['description'] }}
 						</li>
 						<li> 
-							<i class="fa fa-users"></i> {{User::getNumberofUsersInRole($role_detail['id'])}}
+							<i class="fa fa-money"></i> {{Budget::getNumberofCostInRow($role_detail['id'])}}
 						</li>
-						<li>
-							<i class="fa fa-power-off"></i> {{ Decoder::decodeYN($role_detail['update']) }}
-								
-						</li>
+						
 					</ul>
 				</div>
 				<div class="actions btn-set">
-					<a href="{{ url('roles') }}" class="btn blue"><i class="fa fa-angle-left"></i>&nbsp;{{Lang::get('generic.back');}}</a>					
+					<a href="{{ url('budget') }}" class="btn blue"><i class="fa fa-angle-left"></i>&nbsp;{{Lang::get('generic.back');}}</a>					
 					<button class="btn green" type="submit"><i class="fa fa-check-circle"></i>&nbsp;{{Lang::get('generic.save');}} </button>
-					<a href="{{ url('roles/'.$role_detail['id'].'/edit') }}" class="btn yellow"><i class="fa fa-reply"></i>&nbsp;{{Lang::get('generic.reset');}}</a>
+					<a href="{{ url('budget/'.$role_detail['id'].'/edit') }}" class="btn yellow"><i class="fa fa-reply"></i>&nbsp;{{Lang::get('generic.reset');}}</a>
 					
 				</div>
 			</div>
@@ -45,17 +42,17 @@
 					  </div>
 					@endif
 					<div class="form-group">
-						<label class="col-md-2 control-label">{{Lang::get('roles.description')}}:
+						<label class="col-md-2 control-label">{{Lang::get('budget.description')}}:
 							<span class="required">
 								 *
 							</span>
 						</label>
 						<div class="col-md-10">
-							{{ Form::text('description', $role_detail['description'], array('class'=>'form-control', 'placeholder'=>'Inserire una descrizione')) }}
+							{{ Form::text('description', $role_detail['description'], array('class'=>'form-control', 'placeholder'=>Lang::get('budget.insertdescription'))) }}
 						</div>
 					</div>
 					<!--<div class="form-group">
-						{{ Form::label('update',  Lang::get('roles.update'), array('class' =>'col-md-2 control-labele')) }}
+						{{ Form::label('update',  Lang::get('budget.update'), array('class' =>'col-md-2 control-labele')) }}
 						<span class="required">
 							 *
 						</span>

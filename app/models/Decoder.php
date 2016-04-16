@@ -165,6 +165,11 @@ class Decoder {
 	}
 
 
+	public static function formatPercentCost($cost,$total) {
+
+		return number_format($cost, 2, ',', ' ').' <div class="percentage border_'.Utility::color(($total>0)?$cost *100/ $total:0).'" > '.number_format(($total>0)?$cost *100/ $total:'0', 1, ',', ' ').' %';
+	}
+
 
 	
 }

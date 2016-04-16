@@ -13,11 +13,11 @@ return array(
 	|
 	*/
 
-	'notification' => 'Hai :id nuove notifiche',
-	'registration' => 'Ti sei registrato il :data ',
-	'last_login' => 'Accesso effettuato il :data ',
-	'now' => 'Ora!',
-	'all' => 'Vedi tutti i messaggi',
+	'notification' => ':id new message',
+	'registration' => 'Registered at :data ',
+	'last_login' => 'ALast access to system at :data ',
+	'now' => 'Now!',
+	'all' => 'View all message',
 	'stop' => ''
 	
 

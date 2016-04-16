@@ -39,6 +39,10 @@
 	</div>
 	<div class="col-lg-3 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
 	
+
+
+		<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="padding:2px!important; margin:0px!important">
+
 	<div class="portlet box yellow">
 			<div class="portlet-title">
 				<div class="caption">
@@ -57,6 +61,9 @@
 				
 			</div>
 		</div>
+	</div>
+
+		<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12" style="padding:2px!important; margin:0px!important">
 	
 	<div class="portlet box blue">
 			<div class="portlet-title">
@@ -80,7 +87,7 @@
 			</div>
 		</div>
 	
-	
+</div>	
 
 	</div>
 </div>
@@ -89,7 +96,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>Lastest costs registered
+					<i class="fa fa-money"></i>{{Lang::get('home.lastestcost');}}
 				</div>
 				
 			</div>

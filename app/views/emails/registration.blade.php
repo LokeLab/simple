@@ -21,19 +21,19 @@
 	</head>
 	<body>
 	
-		<h2>Confirm registration - {{Config::get('app.url')}} </h2>
+		<h2>{{Lang::get('emails.confirm')}} - {{Config::get('app.url')}} </h2>
 
-		<h3>Dear {{$name}} </h3>
-			<p>Welcome to {{Config::get('app.url')}}
-		<p> You have successfully registered to the internal web tool of the {{Config::get('app.header')}}.</p>
-		<p> Your access is: 
-		<p> Username: {{$email}}
-		<p> Password: {{$password}}
+		<h3>{{Lang::get('emails.confirm')}} {{$name}} </h3>
+			<p>{{Lang::get('emails.welcometo')}} {{Config::get('app.url')}}
+		<p> {{Lang::get('emails.succreg')}} {{Config::get('app.header')}}.</p>
+		<p> {{Lang::get('emails.access')}}: 
+		<p> {{Lang::get('users.username')}}: {{$email}}
+		<p> {{Lang::get('users.password')}}: {{$password}}
 			
-		<p> Now you can sign in on system. Consider change your password at first sign in.<br/>
+		<p> {{Lang::get('emails.changepwd')}}<br/>
 			
-		<p> For any need you can contact us through our online support system.</p>
-		<p> Have a good day!</p>
+		<p> {{Lang::get('emails.support')}}</p>
+		<p> {{Lang::get('emails.goodday')}}</p>
 		<p > <em>{{Config::get('app.site')}}</em></p>
 	</body>
 

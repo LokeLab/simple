@@ -2,16 +2,16 @@
 
 return array(
     'id' => 'Id',
-    'description' => 'Descrizione',
-    'update' => 'Aggiornato',
-    'sendticket' => 'Invia un nuovo ticket',
+    'description' => 'Description',
+    'update' => 'Update',
+    'sendticket' => 'Send ticket',
     'ticket' => 'Ticket',
-    'subject' => 'Soggetto',
-    'message' => 'Messagio',
-    'dest' => 'Destinatario',
-    'send' => 'Invia',
-    'sendSuccess' => 'Il messaggio è stato inviato.',
-    'sendError' => 'Il messaggio non è stato inviato. Riprovare.',
+    'subject' => 'Subject',
+    'message' => 'Message',
+    'dest' => 'To',
+    'send' => 'Send',
+    'sendSuccess' => 'Message sent.',
+    'sendError' => 'Message not sent. Please retry.',
     'stop' => ''
 
 );

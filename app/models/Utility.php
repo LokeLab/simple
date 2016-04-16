@@ -14,4 +14,25 @@ class Utility {
 	  return $random; 
 	} 
 
+
+	public static function color($val) { 
+		
+
+		if ($val > 90)
+		{
+			 return 'red';
+		}
+		else 
+			if ($val > 70)
+		{
+			 return 'yellow';
+		}
+		else 
+			{
+				return 'green';
+			}
+
+
+	}
+
 }

@@ -2,14 +2,14 @@
 
 return array(
     'id' => 'Id',
-    'description' => 'Descrizione',
-    'update' => 'Aggiornato',
-    'addrole' => 'Aggiungi un nuovo ruolo',
-    'role' => 'Ruolo',
-    'rolelist' => 'Elenco ruoli',
-    'modifyrole' => 'Modifica ruolo',
-    'roleview' => 'Dettaglio rolo',
-    'usersinrole' => 'Nr. utenti',
+    'description' => 'Description',
+    'update' => 'Update',
+    'addrole' => 'Add new',
+    'role' => 'Role',
+    'rolelist' => 'Roles list',
+    'modifyrole' => 'Update',
+    'roleview' => 'Detail',
+    'usersinrole' => 'Nr. users',
     'stop' => ''
 
 );

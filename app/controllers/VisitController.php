@@ -160,13 +160,16 @@ class VisitController extends \BaseController {
 	 */
 	public function add()
 	{
-		$data['selectFQ'] = array('una volta a settimana' => 'una volta a settimana',
-			'una volta ogni 15 giorni' => 'una volta ogni 15 giorni',
-			'una volta al mese' => 'una volta al mese',
-			'mai' => 'mai',
-			);
-		//$data['a_city'] = Visit::getCity();
-		$this->layout = View::make('visit.add',$data);
+		if (Input::has('type'))
+		{
+			$data['type'] = Input::get('type');
+			$this->layout = View::make('visit.add',$data);
+		} else
+		{
+			$data['type'] = '';
+			$this->layout = View::make('visit.add_selection',$data);
+
+		}
 	}
 
 

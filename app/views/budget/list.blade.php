@@ -8,7 +8,7 @@
 		<div class="portlet box light-blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-sitemap"></i>Budget detail
+					<i class="fa fa-sitemap"></i>{{Lang::get('budget.detail');}}
 				</div>
 			</div>
 			<div class="portlet-body">
@@ -24,19 +24,19 @@
 						<tr>
 							
 							<th>
-								 Description
+								 {{Lang::get('budget.description');}}
 							</th>
 							<th>
-								 Budget  &euro;
+								 {{Lang::get('budget.budget');}}  &euro;
 							</th>
 							<th>
-								 Inserted &euro;
+								 {{Lang::get('budget.inserted');}} &euro;
 							</th>
 							<th>
-								 Spent &euro;
+								 {{Lang::get('budget.spent');}} &euro;
 							</th>
 							<th>
-								 Verified &euro;
+								 {{Lang::get('budget.verified');}} &euro;
 							</th>
 							<th colspan="1">
 								 &nbsp;
@@ -56,21 +56,26 @@
 						<tr class="odd gradeX">
 							
 							<td>
-								 {{ $c['description'] }}
+								<i  class="fa fa-{{ Budget::getIco($c['kind']) }}"></i>&nbsp;&nbsp; {{ $c['description'] }}
+							
 							</td>
 							<td style="width:15%;text-align: right">
 								{{number_format($c['amountbudget'], 2, ',', ' ');}}
 							</td>
 							<td style="width:15%;text-align: right">
-								{{number_format($c['amountinserted'], 2, ',', ' ');}}
+							{{Decoder::formatPercentCost($c->amountinserted,$c->amountbudget)}}
+								
 							</td>
 							<td style="width:15%;text-align: right">
-								 {{number_format($c['amountspent'], 2, ',', ' ');}}
+								{{Decoder::formatPercentCost($c->amountspent,$c->amountbudget)}}
+								  
 							</td >
 							<td style="width:15%;text-align: right">
-								 {{number_format($c['amountverified'], 2, ',', ' ');}}
+							{{Decoder::formatPercentCost($c->amountverified,$c->amountbudget)}}
+								 
 							</td>
 							<td class="center">
+							<a href="{{ url('visit?local='.$c['id']) }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.view');}}</a>
 								 <!--a href="{{ url('budget/'.$c['partner'].'/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a-->
 							</td>
 							
@@ -88,22 +93,25 @@
 						<tfoot class="bg-blue">
 							
 							<td>
-								Total
+								{{Lang::get('budget.total');}}
 							</td>
 							<td style="width:15%;text-align: right">
 								{{number_format($Tamountbudget, 2, ',', ' ');}}
 							</td>
 							<td style="width:15%;text-align: right">
-								{{number_format($Tamountinserted, 2, ',', ' ');}}
+							{{Decoder::formatPercentCost($Tamountinserted,$Tamountbudget)}}
+							
 							</td>
-							<td style="width:15%;text-align: right">
-								 {{number_format($Tamountspent, 2, ',', ' ');}}
+							<td style="width:15%;text-align: right">{{Decoder::formatPercentCost($Tamountspent,$Tamountbudget)}}
+							
 							</td >
-							<td style="width:15%;text-align: right">
-								 {{number_format($Tamountverified, 2, ',', ' ');}}
+							<td style="width:15%;text-align: right">{{Decoder::formatPercentCost($Tamountverified,$Tamountbudget)}}
+								 
 							</td>
 							<td class="center">
-								 
+								 <a href="{{ url('visit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.viewall');}}</a>
+								 <!--a href="{{ url('budget/'.$c['partner'].'/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a-->
+							</td>
 							</td>
 
 						</tfoot>

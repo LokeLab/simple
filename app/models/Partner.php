@@ -84,6 +84,11 @@ class Partner extends Eloquent  {
 		return DB::table('partner_view')->get();
 	}
 
+	public static function getList()
+	{
+		return Partner::lists('description','id');
+	}
+
 	/**
 	 * Returns all the items not deleted and activated
 	 *

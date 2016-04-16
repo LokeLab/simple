@@ -124,7 +124,16 @@ class Budget extends Eloquent  {
 		else
 			 	return '';
 	}
+public static function getTypeCost($id)
+	{
 
+		$tmp = Budget::find($id);
+
+		if ($tmp)
+				return $tmp->kind;
+		else
+			 	return '';
+	}
 	/**
 	 * Returns ...
 	 *
@@ -263,6 +272,36 @@ class Budget extends Eloquent  {
 	{
 		$userRole = User::getById($userId)->role;
 		return ($userRole == 4) ? TRUE : FALSE;
+	}
+
+
+	public static function getIco($type)
+	{
+		switch ($type) {
+			case 1:
+				return 'briefcase';
+				break;
+			case 2:
+				return 'shopping-cart';
+				break;
+			case 3:
+				return 'flagt';
+				break;
+			case 4:
+				return 'hotel';
+				break;
+			case 5:
+				return 'plane';
+				break;
+			case 6:
+				return 'cutlery';
+				break;
+			
+			default:
+				return 'money';
+				break;
+		}
+		 
 	}
 
 

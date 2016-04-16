@@ -1,13 +1,8 @@
 <?php
 
-return array(
-    'home' => 'Pannello di controllo',
-    'promoter' => 'Utenti',
-    'roles' => 'Ruoli',
-    'languages' => 'Lingue',
-    'ttemplates' => 'Tipologie template',
-    'licences' => 'Licenze',
-    'campaigns' => 'Campagne',
-    'hometitlebudget' => 'Partner budget'
-
+return array (
+  'home' => 'Pannello di controllo',
+  'promoter' => 'Utenti',
+  'roles' => 'Ruoli',
+  'languages' => 'Lingue',
 );

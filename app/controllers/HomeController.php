@@ -25,6 +25,11 @@ class HomeController extends BaseController {
 		$this->layout = View::make('login.form_login');
 	}
 
+	public function faq()
+    {
+        $this->layout = View::make('faq.list');
+    }
+
 
 	public function logout()
 	{

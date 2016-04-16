@@ -16,6 +16,12 @@
 
 Route::get('/', 'HomeController@redirectToHome');
 
+Route::get('updateCurrency', 'ImporterController@getCurrency');
+
+Route::group(array('before' => 'auth_admin'), function() {
+    Route::controller('translations', 'Barryvdh\TranslationManager\Controller');
+});
+
 
 Route::group(array('before'=>'auth'), function() 
 {
@@ -24,14 +30,9 @@ Route::group(array('before'=>'auth'), function()
 	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
 	Route::get('home_partner', array('uses' => 'HomeController@home_promoter'));
 	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
+	Route::get('faq', array('uses' => 'HomeController@faq'));
 
 
-
-});
-
-
-Route::group(array('before' => array('auth|admin')), function() {
-    Route::controller('translations', 'Barryvdh\TranslationManager\Controller');
 });
 
 
@@ -137,9 +138,59 @@ Route::group(array('before'=>'auth'), function()
 });
 
 
+/*
+|--------------------------------------------------------------------------
+| Typeactivity Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('typeactivity', array( 'uses' => 'TypeactivityController@tablelist'));
+
+	Route::get('typeactivity/add', array( 'uses' =>  'TypeactivityController@add'));
+
+	Route::get('typeactivity/{id}', array( 'uses' => 'TypeactivityController@view'));
+
+	Route::get('typeactivity/{id}/edit', array( 'uses' => 'TypeactivityController@edit'));
+
+	Route::put('typeactivity/{id}', array('as' => 'role.update','uses' => 'TypeactivityController@update'));
+
+	Route::post('typeactivity', array('as' => 'role.add',  'uses' => 'TypeactivityController@store'));
+
+	Route::delete('typeactivity/{id}', array('uses' => 'TypeactivityController@destroy'));
+
+});
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Activity Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(array('before'=>'auth'), function() 
+{
+	Route::get('activities', array( 'uses' => 'ActivityController@tablelist'));
+
+	Route::get('activities/add', array( 'uses' =>  'ActivityController@add'));
+
+	Route::get('activities/{id}', array( 'uses' => 'ActivityController@view'));
+
+	Route::get('activities/{id}/edit', array( 'uses' => 'ActivityController@edit'));
+
+	Route::put('activities/{id}', array('as' => 'role.update','uses' => 'ActivityController@update'));
+
+	Route::post('activities', array('as' => 'role.add',  'uses' => 'ActivityController@store'));
+
+	Route::delete('activities/{id}', array('uses' => 'ActivityController@destroy'));
+
+});
+
+
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('budget/{id}', array( 'uses' => 'BudgetController@tablelist'));
+	Route::get('currency', array( 'uses' => 'BudgetController@tablelistCurrency'));
 
 	Route::get('budget/add', array( 'uses' =>  'BudgetController@add'));
 

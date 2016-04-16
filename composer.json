@@ -8,7 +8,8 @@
 		"phpoffice/phpexcel": "1.8.0",
 		"maatwebsite/excel": "1.*",
 		"barryvdh/laravel-translation-manager": "0.1.x",
-		"mcamara/laravel-localization": "0.15.x"
+		"mcamara/laravel-localization": "0.15.x",
+		"artisaninweb/laravel-soap": "0.2.*"
 	},
 	"autoload": {
 		"classmap": [

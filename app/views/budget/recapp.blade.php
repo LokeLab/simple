@@ -4,6 +4,7 @@
 							$budget = 0;
 							$spent = 0;
 							$verified = 0;
+							$inserted = 0;
 							
 						?>
 				<table class="table table-striped table-bordered table-hover" id="sample_1">
@@ -17,6 +18,9 @@
 							</th>
 							<th>
 								 {{Lang::get('partners.budget');}} &euro;
+							</th>
+							<th> 
+								 {{Lang::get('budget.inserted');}} &euro;
 							</th>
 							<th>
 								 {{Lang::get('partners.spent');}} &euro;
@@ -37,18 +41,24 @@
 								 {{ $c->description }}
 							</td>
 							<td align="right">
-								{{ number_format($c->budget, 2, ',', ' '); }}
+							{{ number_format($c->budget, 2, ',', ' ');  }}
+								
 							</td>
 							<td align="right">
-								{{ number_format($c->spent, 2, ',', ' ');  }}
+								{{Decoder::formatPercentCost($c->inserted,$c->budget)}}
 							</td>
 							<td align="right">
-								{{ number_format($c->verified, 2, ',', ' ');  }}
+								 {{Decoder::formatPercentCost($c->spent,$c->budget)}}
+							</td>
+							<td align="right">
+								{{Decoder::formatPercentCost($c->verified,$c->budget)}}
 							</td>
 							
 							
 						</tr>
 						<?php
+							$inserted = $inserted + $c->inserted;
+							
 							$budget = $budget + $c->budget;
 							$spent = $spent + $c->spent;
 							$verified = $verified + $c->verified;
@@ -58,22 +68,22 @@
 
 						<tr class="odd gradeX " style="background-color:rgb(168, 168, 168); font-weight:bold">
 							<td colspan=2>
-								Total
+								
+							
+							Total
 							</td>
 							<td align="right">
 								{{number_format($budget, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($spent, 2, ',', ' ');}}
+								 {{Decoder::formatPercentCost($inserted,$budget)}}
+							</td>
+							
+							<td align="right">
+								{{Decoder::formatPercentCost($spent,$budget)}}
 							</td>
 							<td align="right">
-								{{number_format($verified, 2, ',', ' ');}}
-							</td>
-							<td>
-								 
-							</td>
-							<td class="center">
-								<!-- <a href="{{ url('partners/'.$c->id.'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a>-->
+								{{Decoder::formatPercentCost($verified,$budget)}}
 							</td>
 							
 						</tr>
@@ -106,11 +116,11 @@
 								 {{ number_format($budget, 2, ',', ' '); }}
 							</div>
 							<div class="desc">
-								 Budget
+								 {{Lang::get('budget.budget');}}
 							</div>
 						</div>
 						<a class="more" href="/budget/{{Auth::user()->partner}}">
-							 View more <i class="m-icon-swapright m-icon-white"></i>
+						{{Lang::get('generic.viewmore');}} <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -124,11 +134,11 @@
 								  {{ number_format($spent, 2, ',', ' '); }}
 							</div>
 							<div class="desc">
-								 Spent ({{$perc}} %)
+								  {{Lang::get('budget.spent');}} ({{$perc}} %)
 							</div>
 						</div>
-						<a class="more" href="#">
-							 View more <i class="m-icon-swapright m-icon-white"></i>
+						<a class="more" href="/budget/{{Auth::user()->partner}}">
+							 {{Lang::get('generic.viewmore');}} <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -138,16 +148,16 @@
 					<thead>
 						<tr>
 							<th>
-								Code
+								{{Lang::get('budget.code');}}
 							</th>
 							<th>
-								 Description
+								 {{Lang::get('budget.description');}}
 							</th>
 							<th>
-								 Budget &euro;
+								 {{Lang::get('budget.budget');}} &euro;
 							</th>
 							<th>
-								 Spent &euro;
+								 {{Lang::get('budget.spent');}} &euro;
 							</th>
 							
 						</tr>
@@ -165,7 +175,9 @@
 								{{ number_format($c->amount, 2, ',', ' '); }}
 							</td>
 							<td align="right">
-								{{ number_format($c->amountspent, 2, ',', ' '); }}
+
+								{{Decoder::formatPercentCost($c->amountspent,$c->amount)}}
+								</div>
 							</td>
 							
 							
@@ -181,13 +193,15 @@
 
 						<tr class="odd gradeX " style="background-color:rgb(168, 168, 168); font-weight:bold">
 							<td colspan=2>
-								Total
+								{{Lang::get('budget.total');}}
 							</td>
 							<td align="right">
 								{{number_format($budgetM, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($spentM, 2, ',', ' ');}}
+
+							    {{Decoder::formatPercentCost($spentM,$budgetM)}}
+							
 							</td>
 						
 							
@@ -198,7 +212,7 @@
 
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<a href="{{ url('budget/'.Auth::user()->partner) }}" class="btn btn-warning">Budget detail</a>
+					<a href="{{ url('budget/'.Auth::user()->partner) }}" class="btn btn-warning">{{Lang::get('budget.detail');}} &euro;</a>
 				</div>
 			</div>
 			

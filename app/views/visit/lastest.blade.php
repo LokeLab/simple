@@ -5,27 +5,27 @@
 								{{Lang::get('partners.id');}}
 							</th>
 							<th>
-								Created at
+								{{Lang::get('generic.created_at');}}
 							</th>
 							@if (Auth::user()->role == 1 )
 							<th>
-								Partner
+								{{Lang::get('navigation.partner');}}
 							</th>
 							@endif
 							<th>
-								Row
+								{{Lang::get('budget.budgetrow');}}
 							</th>
 							<th class="center">
-								 <i class="fa fa-money"></i>
+								{{Lang::get('budget.currency');}}
 							</th>
 							<th>
-								 Net amount
+								 {{Lang::get('budget.netamount');}}
 							</th>
 							<th>
-								 VAT amount
+								 {{Lang::get('budget.vatamount');}}
 							</th>
 							<th>
-								 Total
+								 {{Lang::get('budget.total');}}
 							</th>
 							<th>
 								 
@@ -48,19 +48,19 @@
 									</td>
 							@endif
 							<td align="left">
-								{{ Budget::getLabel($c->row) }}
+								{{ Budget::getLabel($c->budgetrow) }}
 							</td>
 							<td align="right">
 								{{ $c->currency }}
 							</td>
 							<td align="right">
-								{{number_format($c->netamount, 2, ',', ' ');}}
+								<nobr>{{number_format($c->netamount, 2, ',', ' ');}}</nobr>
 							</td>
 							<td align="right">
-								{{number_format($c->vatamount, 2, ',', ' ');}}
+								<nobr>{{number_format($c->vatamount, 2, ',', ' ');}}</nobr>
 							</td>
 							<td align="right">
-								{{number_format($c->netamount + $c->vatamount, 2, ',', ' ');}} 
+								<nobr>{{number_format($c->netamount + $c->vatamount, 2, ',', ' ');}}</nobr> 
 							</td>
 							
 						</tr>
