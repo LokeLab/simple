@@ -6,7 +6,7 @@
     <!-- END LOGO -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER --> 
     <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-    <img src="assets/img/menu-toggler.png" alt="" />
+    <img src="/assets/img/menu-toggler.png" alt="" />
     </a> 
     <!-- END RESPONSIVE MENU TOGGLER -->
 <div class="navbar navbar-inverse navbar-fixed-top">

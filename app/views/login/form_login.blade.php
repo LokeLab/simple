@@ -17,7 +17,7 @@
 				{{ Form::open(array('url' => 'login_process', 'method' => 'post', 'class' => 'login-form')) }}
 			
 				<div class="col-lg-12 ">
-					<h4 class="form-title">Log in</h4>
+					<h4 class="form-title" style="background-color: #333; padding: 10px"><img src="/images/CNlogo.png"  style="height: 23px;"></h4>
 
 					       <?php if($errors->has()): ?>
 					        <div class="alert alert-danger">
@@ -81,7 +81,7 @@
 				</div>
 				{{ Form::close() }}
 				<div class="clearfix"></div>
-		
+				<div class="row"><img src="/images/eu_flag.jpg" ></div>
 			</div>
 
 	</div>

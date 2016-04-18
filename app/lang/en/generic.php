@@ -2,7 +2,7 @@
 
 return array (
   'save' => 'Save',
-  'cancell' => 'cancel',
+  'cancell' => 'Cancel',
   'disactivate' => 'Deactivate',
   'activate' => 'Activate',
   'view' => 'View',
@@ -31,4 +31,5 @@ return array (
   'Share_with_friend' => 'Share with friends',
   'created_at' => 'Created at',
   'check' => 'Check ',
+  'cancel' => 'Cancel',
 );

@@ -17,7 +17,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
   <div class="header-inner">
     <!-- BEGIN LOGO -->
     <a class="navbar-brand" href="/home">
-      {{Config::get('app.header')}} 
+      <img src="/images/CNlogo.png" style="height: 23px;">
     </a>
     <!-- END LOGO -->
     <!-- BEGIN HORIZANTAL MENU -->
@@ -27,7 +27,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
     <!-- END HORIZANTAL MENU -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER -->
     <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <img src="assets/img/menu-toggler.png" alt="">
+      <img src="/assets/img/menu-toggler.png" alt="">
     </a>
     <!-- END RESPONSIVE MENU TOGGLER -->
     <!-- BEGIN TOP NAVIGATION MENU -->

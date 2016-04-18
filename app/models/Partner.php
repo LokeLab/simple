@@ -126,7 +126,11 @@ class Partner extends Eloquent  {
 	 */
 	public static function getLabel($id)
 	{
-		return Partner::find($id)->description;
+		$tmp = Partner::find($id);
+		if ($tmp)
+			return Partner::find($id)->description;
+		else
+			return '';
 	}
 
 	public static function getLabelShort($id)

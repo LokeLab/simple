@@ -35,6 +35,8 @@ class ActivityController extends \BaseController {
 	 public function edit($id)
 	 {
 	  $data['activities_detail'] = Activity::find($id);
+	  
+	  $data['array_type'] = Typeactivity::lists('description','description');
 	  $this->layout = View::make('activities.edit', $data);
 	 }
 
@@ -47,9 +49,7 @@ class ActivityController extends \BaseController {
 	 public function update($id)
 	 {
 
-	 	$userdata = array(
-	 		'activity' => Input::get('activity')
-				);
+	 	$userdata = Input::all();
 
  		$activities = Activity::find($id);
 
@@ -60,6 +60,14 @@ class ActivityController extends \BaseController {
 		else
 		{		
 			$activities->activity =  $userdata['activity'];
+			$activities->typeactivity =  $userdata['typeactivity'];
+			$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
+			$activities->from_nation = $userdata['from_nation'];
+			$activities->from_city = $userdata['from_city'];
+			$activities->partner = $userdata['partner'];
+			$activities->place = $userdata['place'];
+			$activities->summary = $userdata['summary'];
 		
 			 $activities->save();
 
@@ -85,9 +93,8 @@ class ActivityController extends \BaseController {
 	 */
 	public function store()
 	{
-		$userdata = array(
-	 		'activity' => Input::get('activity')
-				);
+		$userdata = Input::all();
+
 
 
  		$activities = new Activity;
@@ -98,10 +105,35 @@ class ActivityController extends \BaseController {
 		}else
 		{
 			$activities->activity =  $userdata['activity'];
+			$activities->typeactivity =  $userdata['typeactivity'];
+			$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
+			$activities->from_nation = $userdata['from_nation'];
+			$activities->from_city = $userdata['from_city'];
+			$activities->partner = $userdata['partner'];
+			$activities->place = $userdata['place'];
+			$activities->summary = $userdata['summary'];
 		
 			
 			$activities->save();
-			return Redirect::action('ActivityController@tablelist');
+
+			$last_id = DB::getPdo()->lastInsertId();
+
+			$template_detail = DB::table('activities_detail_model')->where('deleted', 0)->get();
+
+						 foreach ($template_detail as $element) {
+						 	DB::table('activities_detail')->insert(
+						 			array(
+						 				'title' => $element->title,
+						 				'typeindicator' => $element->typeindicator,
+						 				'forseen' => 0  ,
+						 				'realized' => 0,
+						 				'activity' => $last_id
+						 				)
+
+						 		);
+						 }
+			return Redirect::action('ActivityController@edit',$last_id);
 		}
 		
 	}
@@ -134,5 +166,36 @@ class ActivityController extends \BaseController {
 		Session::flash('message', 'Successfully deleted!');
 		return Redirect::action('ActivityController@tablelist');
 	}
+
+
+	public function saveInformationSource() {
+		$input = Input::all();
+		unset($input['_token']);
+		unset($input['_method']);
+
+		if ($input['id'] == -1) {
+			$is = new Activitydetail();
+		} else {
+			$is = Activitydetail::getById($input['id']);
+		}
+
+		foreach ($input as $k => $v) {
+			if ($k == 'id') continue;
+
+			$is->$k = $v;
+		}
+
+		$is->save();
+
+		return Response::json(array('data' => $is));
+	}
+
+
+
+	public function getInformationSource($id) {
+		return Response::json(array('data' => Activitydetail::getById($id)));
+	}
+
+
 
 }

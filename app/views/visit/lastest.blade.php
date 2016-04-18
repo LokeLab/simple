@@ -54,13 +54,13 @@
 								{{ $c->currency }}
 							</td>
 							<td align="right">
-								<nobr>{{number_format($c->netamount, 2, ',', ' ');}}</nobr>
+								<nobr>{{Decoder::formatCost($c->netamount, 2, ',', ' ');}}</nobr>
 							</td>
 							<td align="right">
-								<nobr>{{number_format($c->vatamount, 2, ',', ' ');}}</nobr>
+								<nobr>{{Decoder::formatCost($c->vatamount, 2, ',', ' ');}}</nobr>
 							</td>
 							<td align="right">
-								<nobr>{{number_format($c->netamount + $c->vatamount, 2, ',', ' ');}}</nobr> 
+								<nobr>{{Decoder::formatCost($c->netamount + $c->vatamount, 2, ',', ' ');}}</nobr> 
 							</td>
 							
 						</tr>

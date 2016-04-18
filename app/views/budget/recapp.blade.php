@@ -10,22 +10,22 @@
 				<table class="table table-striped table-bordered table-hover" id="sample_1">
 					<thead>
 						<tr>
-							<th>
+							<th width="3%">
 								{{Lang::get('partners.id');}}
 							</th>
-							<th>
+							<th width="25%">
 								 {{Lang::get('partners.description');}}
 							</th>
-							<th>
+							<th width="12%">
 								 {{Lang::get('partners.budget');}} &euro;
 							</th>
-							<th> 
+							<th width="20%"> 
 								 {{Lang::get('budget.inserted');}} &euro;
 							</th>
-							<th>
+							<th width="20%">
 								 {{Lang::get('partners.spent');}} &euro;
 							</th>
-							<th>
+							<th width="20%">
 								 {{Lang::get('partners.verified');}} &euro;
 							</th>
 							
@@ -40,17 +40,17 @@
 							<td>
 								 {{ $c->description }}
 							</td>
-							<td align="right">
-							{{ number_format($c->budget, 2, ',', ' ');  }}
+							<td  class="economic">
+							{{ Decoder::formatCost($c->budget, 2, ',', ' ');  }}
 								
 							</td>
-							<td align="right">
+							<td class="economic">
 								{{Decoder::formatPercentCost($c->inserted,$c->budget)}}
 							</td>
-							<td align="right">
+							<td class="economic">
 								 {{Decoder::formatPercentCost($c->spent,$c->budget)}}
 							</td>
-							<td align="right">
+							<td class="economic">
 								{{Decoder::formatPercentCost($c->verified,$c->budget)}}
 							</td>
 							
@@ -72,17 +72,17 @@
 							
 							Total
 							</td>
-							<td align="right">
-								{{number_format($budget, 2, ',', ' ');}}
+							<td class="economic">
+								{{Decoder::formatCost($budget, 2, ',', ' ');}}
 							</td>
-							<td align="right">
+							<td class="economic">
 								 {{Decoder::formatPercentCost($inserted,$budget)}}
 							</td>
 							
-							<td align="right">
+							<td class="economic">
 								{{Decoder::formatPercentCost($spent,$budget)}}
 							</td>
-							<td align="right">
+							<td class="economic">
 								{{Decoder::formatPercentCost($verified,$budget)}}
 							</td>
 							
@@ -113,7 +113,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ number_format($budget, 2, ',', ' '); }}
+								 {{ Decoder::formatCost($budget, 2, ',', ' '); }}
 							</div>
 							<div class="desc">
 								 {{Lang::get('budget.budget');}}
@@ -131,7 +131,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								  {{ number_format($spent, 2, ',', ' '); }}
+								  {{ Decoder::formatCost($spent, 2, ',', ' '); }}
 							</div>
 							<div class="desc">
 								  {{Lang::get('budget.spent');}} ({{$perc}} %)
@@ -172,7 +172,7 @@
 								 {{ $c->description }}
 							</td>
 							<td align="right">
-								{{ number_format($c->amount, 2, ',', ' '); }}
+								{{ Decoder::formatCost($c->amount, 2, ',', ' '); }}
 							</td>
 							<td align="right">
 
@@ -196,7 +196,7 @@
 								{{Lang::get('budget.total');}}
 							</td>
 							<td align="right">
-								{{number_format($budgetM, 2, ',', ' ');}}
+								{{Decoder::formatCost($budgetM, 2, ',', ' ');}}
 							</td>
 							<td align="right">
 

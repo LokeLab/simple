@@ -19,7 +19,7 @@
 						</a>
 					</div>
 				</div>
-				<table class="table table-striped table-bordered table-hover" id="sample_1">
+				<table class="table table-striped table-bordered table-hover" id="userTable">
 					<thead>
 						<tr>
 							<th>
@@ -27,6 +27,9 @@
 							</th>
 							<th>
 								 {{Lang::get('activities.description');}}
+							</th>
+							<th>
+								 {{Lang::get('navigation.partner');}}
 							</th>
 						
 							<th>
@@ -45,6 +48,10 @@
 							</td>
 							<td>
 								 {{ $c['activity'] }}
+							</td>
+
+							<td>
+								 {{ Partner::getLabel($c['partner']) }}
 							</td>
 						
 							<td>

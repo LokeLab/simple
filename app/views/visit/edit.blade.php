@@ -167,10 +167,10 @@
 						<div class="col-lg-8">	
 										
 							<label class="radio-inline">
-								{{ Form::radio('tpc', 1, 0) }} {{Lang::get('decode.Yes')}}
+								{{ Form::radio('tpc', 1, ( $v->tpc==1)?1:0 ) }} {{Lang::get('decode.Yes')}}
 							</label>
 							<label class="radio-inline">
-								{{ Form::radio('tpc', 0, 1) }} {{Lang::get('decode.No')}}
+								{{ Form::radio('tpc', 0, ( $v->tpc==0)?1:0) }} {{Lang::get('decode.No')}}
 							</label>
 			
 						</div>
@@ -206,10 +206,10 @@
 						<div class="col-lg-8">	
 										
 							<label class="radio-inline">
-								{{ Form::radio('sub', 1, 0) }} {{Lang::get('decode.Yes')}}
+								{{ Form::radio('sub', 1, ( $v->sub==1)?1:0) }} {{Lang::get('decode.Yes')}}
 							</label>
 							<label class="radio-inline">
-								{{ Form::radio('sub', 0, 1) }} {{Lang::get('decode.No')}}
+								{{ Form::radio('sub', 0, ( $v->sub==0)?1:0) }} {{Lang::get('decode.No')}}
 							</label>
 			
 						</div>

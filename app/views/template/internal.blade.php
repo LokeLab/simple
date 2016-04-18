@@ -141,6 +141,80 @@
     } );
 } );
 @endif
+
+
+/** start information source **/
+ <?php
+for ($i=1; $i < 10; $i++) { ?>    
+     $('.editinformationsource{{$i}}').live('click', function () {
+         var id = $(this).attr('data-id');
+     
+         $.ajax({
+             url : '/activities/detail/' + id,
+             type: "GET",
+             success: function(data, textStatus, jqXHR)
+             {
+                 $("#informationSourceForm{{$i}} input[name='comment']").val(data.data.comment);
+                 $("#informationSourceForm{{$i}} input[name='forseen']").val(data.data.forseen);
+                 $("#informationSourceForm{{$i}} input[name='realized']").val(data.data.realized);
+                 $("#informationSourceForm{{$i}} input[name='title']").val(data.data.title);
+                 $("#informationSourceForm{{$i}} input[name='id']").val(data.data.id);
+                 $('#informationSourceModal{{$i}}').modal('show');
+                 
+             },
+             error: function(jqXHR, textStatus, errorThrown)
+             {
+                 console.log(errorThrown);
+             }
+         });
+
+         return false;
+     });
+
+    
+     $('#informationSourceModal{{$i}}').on('hidden.bs.modal', function () {
+         $('#informationSourceForm{{$i}}').trigger("reset");
+         $("#informationSourceForm{{$i}} input[name='id']").val('-1');
+     });
+     $('#saveinformationsource{{$i}}').on('click', function () {
+         var form = $('#informationSourceForm{{$i}}');
+         var formData = $(form).serializeArray();
+         var formURL = $(form).attr("action");
+         var formMethod = $(form).attr("method");
+         $.ajax({
+             url : formURL,
+             type: formMethod,
+             data : formData,
+             success: function(data, textStatus, jqXHR)
+             {
+                 $('#is-' + data.data.id).remove();
+                 $('#informationsources{{$i}}').append('<div id="is-' + data.data.id + '" class="row graybg">' +
+                         '<div class="col-xs-1 col-md-1 col-lg-1">' +
+                         '<button class="btn blue editinformationsource" data-id="' + data.data.id + '">Edit</button>' +'</div>' +'<div class="col-xs-3 col-md-3 col-lg-3">' +
+                         data.data.title +
+                         '</div>' +
+                         '<div class="col-xs-2 col-md-2 col-lg-2">' +
+                         data.data.forseen +
+                         '</div>' +
+                         '<div class="col-xs-2 col-md-2 col-lg-2">' +
+                         data.data.realized +
+                         '</div>' +
+                         '<div class="col-xs-4 col-md-4 col-lg-4">' +
+                         data.data.comment +
+                         '</div></div>')
+                 $('#informationSourceModal{{$i}}').modal('hide');
+             },
+             error: function(jqXHR, textStatus, errorThrown)
+             {
+                 console.log(errorThrown);
+             }
+         });
+     });
+     /** end information source **/
+<?php
+}
+?>
+
 </script>
 <!-- END JAVASCRIPTS -->
   

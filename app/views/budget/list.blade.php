@@ -60,7 +60,7 @@
 							
 							</td>
 							<td style="width:15%;text-align: right">
-								{{number_format($c['amountbudget'], 2, ',', ' ');}}
+								{{Decoder::formatCost($c['amountbudget'], 2, ',', ' ');}}
 							</td>
 							<td style="width:15%;text-align: right">
 							{{Decoder::formatPercentCost($c->amountinserted,$c->amountbudget)}}
@@ -96,7 +96,7 @@
 								{{Lang::get('budget.total');}}
 							</td>
 							<td style="width:15%;text-align: right">
-								{{number_format($Tamountbudget, 2, ',', ' ');}}
+								{{Decoder::formatCost($Tamountbudget, 2, ',', ' ');}}
 							</td>
 							<td style="width:15%;text-align: right">
 							{{Decoder::formatPercentCost($Tamountinserted,$Tamountbudget)}}

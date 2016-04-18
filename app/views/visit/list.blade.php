@@ -135,13 +135,13 @@ $labelshort = Partner::lists('short', 'id');
 								{{ $c->currency }}
 							</td>
 							<td align="right">
-								{{number_format($c->netamount, 2, ',', ' ');}}
+								{{Decoder::formatCost($c->netamount, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($c->vatamount, 2, ',', ' ');}}
+								{{Decoder::formatCost($c->vatamount, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($c->netamount + $c->vatamount , 2, ',', ' ');}}
+								{{Decoder::formatCost($c->netamount + $c->vatamount , 2, ',', ' ');}}
 							</td>
 							<td align="right">
 								{{Decoder::decodeYN($c->verified);}}

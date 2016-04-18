@@ -1,23 +1,23 @@
 /* here you can put your own css to customize and override the theme */
 .percentage {
 
-    width: 50px;
-    float: right;
-    margin-left: 10px;
+       padding-right: 1px;
+       padding-left: 1px;
+       text-align: right;
+
 
 }
 
 .border_red {
 
-	 border: red 1px solid;
+	border: red 1px solid;
     background: rgba(255, 0, 0, 0.19);
 
 }
 
 .border_yellow {
 
-	 border: #FFDD00
-	  1px solid;
+	 border: #FFDD00  1px solid;
     background: rgba(255, 221, 0, 0.19);
 
 }
@@ -33,5 +33,10 @@
 	font-size: 56px;
 	line-height: 56px;
 	color:navy;
+
+}
+.economic {
+	text-align: right;
+	word-wrap: none;
 
 }

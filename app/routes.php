@@ -184,6 +184,10 @@ Route::group(array('before'=>'auth'), function()
 
 	Route::delete('activities/{id}', array('uses' => 'ActivityController@destroy'));
 
+
+	Route::post('activities/detail', 'ActivityController@saveInformationSource');
+	Route::get('activities/detail/{id}', 'ActivityController@getInformationSource');
+
 });
 
 

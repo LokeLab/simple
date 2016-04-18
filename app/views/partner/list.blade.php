@@ -67,13 +67,13 @@
 								 {{ $c->description }}
 							</td>
 							<td align="right">
-								{{ number_format($c->budget, 2, ',', ' '); }}
+								{{ Decoder::formatCost($c->budget, 2, ',', ' '); }}
 							</td>
 							<td align="right">
-								{{ number_format($c->spent, 2, ',', ' ');  }}
+								{{ Decoder::formatCost($c->spent, 2, ',', ' ');  }}
 							</td>
 							<td align="right">
-								{{ number_format($c->verified, 2, ',', ' ');  }}
+								{{ Decoder::formatCost($c->verified, 2, ',', ' ');  }}
 							</td>
 							<td >
 								 {{User::getNumberofUsersInPartner($c->id)}}
@@ -96,13 +96,13 @@
 								Total
 							</td>
 							<td align="right">
-								{{number_format($budget, 2, ',', ' ');}}
+								{{Decoder::formatCost($budget, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($spent, 2, ',', ' ');}}
+								{{Decoder::formatCost($spent, 2, ',', ' ');}}
 							</td>
 							<td align="right">
-								{{number_format($verified, 2, ',', ' ');}}
+								{{Decoder::formatCost($verified, 2, ',', ' ');}}
 							</td>
 							<td>
 								 

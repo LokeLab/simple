@@ -1,6 +1,6 @@
 <?php
 
-class Decoder {
+class Modal {
 
 
 	/**
@@ -8,10 +8,48 @@ class Decoder {
 	 *
 	 * @return string
 	 */
-	public static function decodeRole($role_id)
+	public static function panel($type)
 	{
 		
-		return Role::getLabel($role_id);
+		return '<div id="informationSourceModal'.$type.'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="informationSourceModalLabel'.$type.'">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+										aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="informationSourceModalLabel'.$type.'">{{Lang::get("activities.istitle")}}</h4>
+						</div>
+						<div class="modal-body">
+							{{ Form::open(array("id"=> "informationSourceForm'.$type.'", "url" => "activities/detail'.$type.'", "method" => "POST")) }}
+							{{ Form::hidden("activity", $activities_detail->id) }}
+							{{ Form::hidden("id", -1) }}
+							<div class="form-group">
+								{{ Form::label("title",  Lang::get("activities.title"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("title", Lang::get("activities.title"), array("class" => "form-control required", "disabled"=> true)) }}
+							</div>
+							<div class="form-group">
+								{{ Form::label("forseen",  Lang::get("activities.forseen"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("forseen", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.forseen"))) }}
+							</div>
+							<div class="form-group">
+								{{ Form::label("realized",  Lang::get("activities.realized"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("realized", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.realized"))) }}
+							</div>
+							<div class="form-group">
+								{{ Form::label("comment",  Lang::get("activities.comment"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("comment", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.comment"))) }}
+							</div>
+							{{Form::close()}}
+
+						</div>
+						<div class="modal-footer">
+							<button id="saveinformationsource'.$type.'" type="button" class="btn blue">{{Lang::get("generic.save")}}</button>
+							<button type="button" class="btn yellow"
+									data-dismiss="modal">{{Lang::get("generic.cancel")}}</button>
+						</div>
+					</div>
+				</div>
+			</div>';
 	}
 
 	public static function decodePartnerShort($role_id)

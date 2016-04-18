@@ -46,7 +46,7 @@
 							</td>
 							
 							<td align="right">
-								{{ number_format($c->rate, 4, ',', ' ');  }} 
+								{{ Decoder::formatCost($c->rate, 4, ',', ' ');  }} 
 							</td>
 							
 						</tr>

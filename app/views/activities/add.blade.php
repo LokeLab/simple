@@ -55,7 +55,7 @@
 <div class="col-lg-4">
 		<div class="form-group">
 		<div class="col-lg-12">	
-							{{Lang::get('budget.closed') }}
+							{{Lang::get('activities.closed') }}
 						</div>
 						<div class="col-lg-12">	
 										
