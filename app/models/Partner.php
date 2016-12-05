@@ -291,5 +291,9 @@ public static function getSpent($id)
 	}
 
 
-
+public static function getVerified($id)
+	{
+		$userPartner = VisitBase::wherePartner($id)->sum('amountverified') ;
+		return $userPartner;
+	}
 }

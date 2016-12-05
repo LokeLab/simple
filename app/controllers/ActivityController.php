@@ -13,6 +13,14 @@ class ActivityController extends \BaseController {
 		$this->layout = View::make('activities.list', $data);
 	}
 
+	public function recapp()
+	 {
+	  $data['activities_detail'] = DB::table('v_activities_detail_sum')->get();
+	  
+	  $data['array_type'] = Typeactivity::lists('description','description');
+	  $this->layout = View::make('activities.recapp', $data);
+	 }
+
 	/**
 	 * Display the specified resource.
 	 *

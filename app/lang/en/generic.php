@@ -32,4 +32,6 @@ return array (
   'created_at' => 'Created at',
   'check' => 'Check ',
   'cancel' => 'Cancel',
+  'approve' => 'Approve',
+  'reject' => 'Reject',
 );

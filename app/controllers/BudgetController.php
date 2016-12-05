@@ -142,4 +142,22 @@ class BudgetController extends \BaseController {
 		return Redirect::action('BudgetController@tablelist');
 	}
 
+
+	public function financialSummary($partner)
+	{
+
+		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
+			$partner = Auth::user()->partner;
+
+			$data['partners_list'] = Partner::listWithBudget();
+			
+
+
+			$this->layout = View::make('budget.summary', $data);
+		}else{
+			return Redirect::action('HomeController@logout');
+		}
+
+	}
+
 }

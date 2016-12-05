@@ -76,4 +76,19 @@ For cash payment use model inserted on top or similar document.',
 												 <li>For other costs: all that can prove that costs is related at activities  </li>
 												 <li>For car rembuirsement: use specific model with map and km calculation  </li>
 												 </ul>',
+                         'activation' => 'Send to check',
+                         'tobechecked' => 'Check',
+                         'specialfilter' => 'Special filter',
+                         'withproblem' => 'Costs to recheck',
+                         'checked' => 'Costs with check OK',
+                         'notpayed' => 'Costs not payed',
+                         'payed' => 'Payed',
+                         'status' => 'State',
+                         'rejected' => 'To be reviewed',
+                         'undercheck' => 'Under check',
+                         'checkedok' => 'Check OK',
+                         'costwithrejection' => 'Cost was checked and we find some problem. Please recheck the cost according note',
+                         'updateCurrency' => 'Update exchange rate',
+
+
 );

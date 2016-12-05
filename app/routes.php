@@ -28,10 +28,10 @@ Route::group(array('before'=>'auth'), function()
 	Route::post('home', 'HomeController@redirectToHome');
 	Route::get('home', 'HomeController@redirectToHome');
 	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
+	Route::get('adminfunction', array('uses' => 'HomeController@home_adminfunction'));
 	Route::get('home_partner', array('uses' => 'HomeController@home_promoter'));
 	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
 	Route::get('faq', array('uses' => 'HomeController@faq'));
-
 
 });
 
@@ -171,6 +171,7 @@ Route::group(array('before'=>'auth'), function()
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('activities', array( 'uses' => 'ActivityController@tablelist'));
+	Route::get('activitiesrecapp', array( 'uses' => 'ActivityController@recapp'));
 
 	Route::get('activities/add', array( 'uses' =>  'ActivityController@add'));
 
@@ -194,6 +195,7 @@ Route::group(array('before'=>'auth'), function()
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('budget/{id}', array( 'uses' => 'BudgetController@tablelist'));
+	Route::get('financialsummary/{id}', array( 'uses' => 'BudgetController@financialsummary'));
 	Route::get('currency', array( 'uses' => 'BudgetController@tablelistCurrency'));
 
 	Route::get('budget/add', array( 'uses' =>  'BudgetController@add'));
@@ -205,6 +207,11 @@ Route::group(array('before'=>'auth'), function()
 	Route::post('budget', array('as' => 'role.add',  'uses' => 'BudgetController@store'));
 
 	Route::delete('budget/{id}', array('uses' => 'BudgetController@destroy'));
+	
+	Route::get('activationfunction/{id}', array( 'uses' => 'HomeController@activationfunction'));
+	Route::get('financialsummary/exportbudget/{id}', array( 'uses' => 'ExporterController@getBudgetPartner'));
+	Route::get('financialsummary/exportchapterspent/{id}/{chapter}', array( 'uses' => 'ExporterController@getChapterExpensesPartner'));
+
 
 });
 
@@ -236,28 +243,28 @@ Route::group(array('before'=>'auth'), function()
 Route::group(array('before'=>'auth'), function() 
 {
 	Route::get('visit', array( 'uses' => 'VisitController@tablelist'));
-	Route::get('visitSospese', array( 'uses' => 'VisitController@tablelistSospese'));
+	Route::get('tobechecked', array( 'uses' => 'VisitController@tablelistTobeverified'));
 
 	Route::get('visit/add', array( 'uses' =>  'VisitController@add'));
 
 	Route::get('visit/{id}', array( 'uses' => 'VisitController@view'));
 
 	Route::get('visit/{id}/edit', array( 'uses' => 'VisitController@edit'));
+	Route::get('visit/{id}/check', array( 'uses' => 'VisitController@view'));
+	Route::get('visit/{id}/approve', array( 'uses' => 'VisitController@activate'));
+	Route::post('visit/{id}/reject', array( 'uses' => 'VisitController@disactivate'));
+
 
 	Route::put('visit/{id}', array('as' => 'visit.update','uses' => 'VisitController@update'));
 
-	Route::post('visit/step1', array('as' => 'visit.add',  'uses' => 'VisitController@storestep1'));
-	Route::post('visit/step2', array('as' => 'visit.add',  'uses' => 'VisitController@storestep2'));
-	Route::post('visit/step3', array('as' => 'visit.add',  'uses' => 'VisitController@storestep3'));
+	
 
 	Route::post('visit', array('as' => 'visit.add',  'uses' => 'VisitController@store'));
 	
 	Route::delete('visit/{id}', array('uses' => 'VisitController@destroy'));
 	Route::delete('visitSospese/{id}', array('uses' => 'VisitController@destroySospese'));
 
-	Route::get('visit1/add/{id}', array( 'uses' =>  'VisitController@addstep1'));
-	Route::get('visit2/add/{id}', array( 'uses' =>  'VisitController@addstep2'));
-	Route::get('visit3/add/{id}', array( 'uses' =>  'VisitController@addstep3'));
+
 
 	Route::post('visit/{id}/edit', array('as' => 'visit.update','uses' => 'VisitController@update'));
 });
@@ -271,7 +278,7 @@ Route::group(array('before'=>'auth'), function()
 	Route::get('helpdesk', array('uses' => 'HomeController@helpdesk'));
     Route::post('helpdesk', array('as' => 'helpdesk.send',  'uses' => 'HomeController@send'));
 	Route::get('reporting', array('uses' => 'ReportController@home'));
-	Route::post('reporting', array('uses' => 'ExporterController@getFiltered'));
+	
 	Route::post('reportingMax', array('uses' => 'ExporterController@getFilteredMax'));
 });
 

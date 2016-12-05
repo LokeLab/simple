@@ -137,17 +137,49 @@ class HomeController extends BaseController {
 	}
 	
 
+	public function home_adminfunction()
+	{
+		if(Role::isAdministrator(Auth::user()->id) || Auth::user()->role ==10  )
+		{
+
+			
+
+			$data['partners_list'] = Visit::where('active', '1')->orderBy('id', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list'] = Partner::listWithBudget();
+			$data['news_list'] = News::last2();
+			$data['visit_list'] = Visit::last(5);
+			$this->layout = View::make('home.adminfunction', $data);
+		}else{
+			return Redirect::action('HomeController@logout');
+		}
+	}
+
+	public function activationfunction($partner)
+	{
+		if(Role::isAdministrator(Auth::user()->id) || Auth::user()->partner ==$partner  )
+		{
+
+			Visit::wherePartner($partner)->whereActive(0)->whereRaw('payedby <> 4 ')->update(array('active' =>'1'));
+
+
+			return Redirect::action('HomeController@home_adminfunction');
+			
+		}else{
+			return Redirect::action('HomeController@logout');
+		}
+	}
+
 	public function home_promoter()
 	{
 		if(Auth::user()->role> 1 && Auth::user()->role<6 ){
 
 			
-			$data['partners_list'] = Visit::where('active', '1')->wherePartner(Auth::user()->partner)->orderBy('id', 'desc')->take(8)->get(); // lastestvisit
+			$data['partners_list_costs'] = Visit::where('active', '0')->wherePartner(Auth::user()->partner)->orderBy('id', 'desc')->take(8)->get(); // lastestvisit
 			$data['partners_list'] = Partner::listWithBudget();
 			$data['news_list'] = News::last2();
 			$data['visit_list'] = Visit::lastPartner(Auth::user()->partner, 5);
 
-			$data['campaigns_list'] = $data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();; // lastestvisit
+			$data['campaigns_list'] = Visit::where('active', '1')->where('user_created', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();; // lastestvisit
 			
 			$this->layout = View::make('home.promoter', $data);
 		}else{

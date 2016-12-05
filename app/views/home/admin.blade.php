@@ -21,6 +21,9 @@
 
 
 <div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
+	<a href="{{ url('/adminfunction') }}" class="btn yellow">{{Lang::get('navigation.adminfunction');}}</a>
+</div>
 	<div class="col-lg-9 col-md-12 col-sm-12" style="padding:2px!important; margin:0px!important">
 		<div class="portlet box green">
 			<div class="portlet-title">

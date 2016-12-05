@@ -13,6 +13,8 @@ return array(
     'budget' => 'Budget',
     'spent' => 'Spent',
     'verified' => 'Verified',
+    'tobechecked' => 'Under checking',
+    'activation' => 'Ready to check',
     'stop' => ''
 
 );

@@ -276,61 +276,101 @@ class Visit extends Eloquent  {
     }
 
 
-	public static function getFilter($filter, $code,$local,$name)
+	public static function getFilter($arr_filter)
 
 	{
+
 		$raw = ' 1=1 ';
-
-		if ($filter == 1 || $filter == 2 || $filter == 3)
+		
+		if ($arr_filter['partner'] != '')
 		{
-			$raw = $raw . ' and  partner = '.$filter;
+			$raw = $raw . ' and  partner = '.$arr_filter['partner'];
 		} 
 
-		if (is_numeric( $code))
+		if (is_numeric( $arr_filter['code']))
 		{
-			$raw = $raw . ' and  id = '.$code;
+			$raw = $raw . ' and  id = '.$arr_filter['code'];
 		} 
 
-		if ( $local)
+		if ( $arr_filter['budgetrow'])
 		{
-			$raw = $raw . ' and  budgetrow like \'%'.str_replace('\'', '\\\'', $local) .'%\'';
+			$raw = $raw . ' and  budgetrow like \'%'
+			.str_replace('\'', '\\\'', $arr_filter['budgetrow']) .'%\'';
 		} 
 
-		if ( $name)
+		if ( $arr_filter['activity'])
 		{
-			$raw = $raw . ' and  (activity like \'%'.str_replace('\'', '\\\'', $name) .'%\' ) ';
+			$raw = $raw . ' and  (activity like \'%'.str_replace('\'', '\\\'', $arr_filter['activity'] ).'%\' ) ';
 		} 
 
+		if ( $arr_filter['notpayed']==1)
+		{
+			$raw = $raw . ' and  (payedby=4 ) ';
+		} 
+
+		if ( $arr_filter['withproblem']==1)
+		{
+
+			$raw = $raw . ' and  (rejected=1 and verified=0 and active=0 ) ';
+		} 
+
+		if ( $arr_filter['checked']==1)
+		{
+			$raw = $raw . ' and  (verified=1 ) ';
+		} 
+
+		
+			Session::put('filter', $arr_filter);
 
 		return $raw;
 	}
 
 
-    public static function getFilterSospese($filter, $code,$local,$name)
+    public static function getFilterSospese($arr_filter)
 
     {
-        $raw = ' 1=1 ';
 
-        if ($filter == 1 || $filter == 2 || $filter == 3)
-        {
-            $raw = $raw . ' and  typevisit = '.$filter;
-        } 
+    	$raw = ' 1=1 ';
+		
+		if ($arr_filter['partner'] != '')
+		{
+			$raw = $raw . ' and  partner = '.$arr_filter['partner'];
+		} 
 
-        if (is_numeric( $code))
-        {
-            $raw = $raw . ' and  id = '.$code;
-        } 
+		if (is_numeric( $arr_filter['code']))
+		{
+			$raw = $raw . ' and  id = '.$arr_filter['code'];
+		} 
 
-        if ( $local)
-        {
-            $raw = $raw . ' and  local like \'%'.str_replace('\'', '\\\'', $local) .'%\'';
-        } 
+		if ( $arr_filter['budgetrow'])
+		{
+			$raw = $raw . ' and  budgetrow like \'%'
+			.str_replace('\'', '\\\'', $arr_filter['budgetrow']) .'%\'';
+		} 
 
-        if ( $name)
-        {
-            $raw = $raw . ' and  (name like \'%'.str_replace('\'', '\\\'', $name) .'%\' or surname like \'%'.str_replace('\'', '\\\'', $name) .'%\') ';
-        } 
+		if ( $arr_filter['activity'])
+		{
+			$raw = $raw . ' and  (activity like \'%'.str_replace('\'', '\\\'', $arr_filter['activity'] ).'%\' ) ';
+		} 
 
+		if ( $arr_filter['notpayed']==1)
+		{
+			$raw = $raw . ' and  (payedby=4 ) ';
+		} 
+
+		if ( $arr_filter['withproblem']==1)
+		{
+
+			$raw = $raw . ' and  (rejected=1 and verified=0 and active=0 ) ';
+		} 
+
+		if ( $arr_filter['checked']==1)
+		{
+			$raw = $raw . ' and  (verified=1 ) ';
+		} 
+		
+		Session::put('filterCheck', $arr_filter);
+		
 
         return $raw;
     }
@@ -338,22 +378,8 @@ class Visit extends Eloquent  {
 	
 
 
-    public static function getCity()
-
-    {
-        $raw = VisitCity::orderBy('city')->lists('city', 'city');
-
-        return $raw;
-    }
-
-    public static function getLocaliByCity($city)
-
-    {
-        $raw = VisitLocali::whereCity($city)->orderBy('locale')->lists('locale', 'locale');
-
-        return $raw;
-    }
-
+  
+   
 
 
 }

@@ -75,7 +75,7 @@
 								 
 							</td>
 							<td class="center">
-							<a href="{{ url('visit?local='.$c['id']) }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.view');}}</a>
+							<a href="{{ url('visit?budgetrow='.$c['id']) }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.view');}}</a>
 								 <!--a href="{{ url('budget/'.$c['partner'].'/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a-->
 							</td>
 							

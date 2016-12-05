@@ -16,6 +16,8 @@
 					<div class="btn-group">
 						<a href="{{ url('activities/add') }}" class="btn green">
 							{{Lang::get('activities.addactivities');}} <i class="fa fa-plus"></i>
+						</a> <a href="{{ url('activitiesrecapp') }}" class="btn yellow">
+							{{Lang::get('activities.recappactivities');}} 
 						</a>
 					</div>
 				</div>

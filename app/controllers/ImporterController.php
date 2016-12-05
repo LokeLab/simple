@@ -31,6 +31,8 @@ class ImporterController extends \BaseController {
             # code...
         }
 
+        return Redirect::action('HomeController@home_adminfunction')->withMessage(trans('budget.updateCurrency'));
+
         //print_r($currency[1]);
 
 

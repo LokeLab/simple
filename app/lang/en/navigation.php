@@ -16,9 +16,10 @@ return array (
   'activities' => 'Activities',
   'insertcost' => 'Insert cost',
   'insertedcost' => 'Inserted cost',
-  'tobeverified' => 'Cost to be verified',
+  'tobeverified' => 'Cost to be checked',
   'templates' => 'Templates',
   'actclass' => 'Activity Classification',
   'agenda' => 'Calendar',
   'typeactivity' => 'Activity Classification',
+  'adminfunction' => 'Admin functions',
 );

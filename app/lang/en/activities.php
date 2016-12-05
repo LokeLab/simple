@@ -14,5 +14,6 @@ return array (
   'activitiesview' => 'Activity detail',
   'country' => 'Country',
   'city' => 'City',
+  'recappactivities' => 'summary',
   'infobennext' => 'Information about beneficiaries involved in next step',
 );

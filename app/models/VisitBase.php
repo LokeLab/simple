@@ -33,5 +33,20 @@ class VisitBase extends Eloquent  {
 	
 
 
+ public static function getTotalActivable($partner)
+
+    {
+        $raw = DB::table('v_budget_partner')->wherePartner($partner)->pluck('amountactivable');
+
+        return $raw;
+    }
+
+public static function getTotalUnderCheck($partner)
+
+    {
+        $raw = DB::table('v_budget_partner')->wherePartner($partner)->pluck('amountundercheck');
+
+        return $raw;
+    }
 
 }

@@ -25,7 +25,7 @@
 		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-money"></i>{{Lang::get('home.hometitlebudget');}}
+					<i class="fa fa-money"></i>{{Lang::get('home.hometitlebudget');}} - {{Partner::getLabel(Auth::user()->partner)}}
 				</div>
 				
 			</div>

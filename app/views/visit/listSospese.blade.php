@@ -1,15 +1,32 @@
 @extends('template.internal')
 @section('content')
+<?php 
+if (Auth::user()->role == 1)
+{
+ $rowbudget = DB::table('budget')->lists('description', 'id');
 
+$rowbudgetico = DB::table('budget')->lists('kind', 'id');
+}else{
+ $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+$rowbudgetico = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('kind', 'id');
+}
+$labelshort = Partner::lists('short', 'id');
+ ?>
 
 <div class="row">
 	<div class="col-lg-12">
+		<div class="form-group">
+			
+			
+		</div>
+	</div>
+	<div class="col-lg-12">
 		<!--BEGIN TABLE -->
 
-		<div class="portlet box yellow">
+		<div class="portlet box green">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-list-alt"></i>Visite non complete a sistema
+					<i class="fa fa-list-alt"></i>Costs to be checked
 				</div>
 				
 
@@ -21,31 +38,31 @@
 						
 						<div class="col-lg-2">
 							<a href="?all=1" class="btn blue" style = "margin-right:4px;">
-								{{Lang::get('enduser.viewall');}} <i class="fa fa-filter"></i>
-							</a>
+								{{Lang::get('generic.viewall');}} <i class="fa fa-filter"></i>
+							</a> 
 						</div>
-						{{ Form::open(array('url' => '/visitSospese', 'method' => 'GET')) }}
+						{{ Form::open(array('url' => '/tobechecked', 'method' => 'GET')) }}
 							
-
-							<div class="col-lg-3">
-
-							{{ Form::select('filter', array('0' => 'Tutte' , '1'=>'Advocacy','2'=>'Consumer','3'=>'Autogestito' )
-							, Input::get('filter'), array('class' => 'form-control control-inline')) }}
-
-							</div>
+							@if (Auth::user()->role ==1)
+								<div class="col-lg-12">
+								{{ Form::select('partner', $arr_parner
+	 							, $arrFilter['partner'], array('class' => 'form-control control-inline')) }}
+								</div>
+								@else
+								{{ Form::hidden('partner',  $arrFilter['partner']) }}
+							@endif
 							<div class="col-lg-1">
-							{{ Form::text('code',  Input::get('code'), array('class' => 'form-control control-inline', 'placeholder'=>'Codice')) }}
+								{{ Form::text('code',  $arrFilter['code'], array('class' => 'form-control control-inline', 'placeholder'=>'Id')) }}
+							</div>
+							<div class="col-lg-5">
+								{{ Form::select('budgetrow',  array(''=>'')+$rowbudget, $arrFilter['budgetrow'], array('class' => 'form-control control-inline')) }}
 							</div>
 							<div class="col-lg-2">
-							{{ Form::text('local',  Input::get('local'), array('class' => 'form-control control-inline', 'placeholder'=>'Locale')) }}
-							</div>
-							<div class="col-lg-2">
-							{{ Form::text('name',  Input::get('name'), array('class' => 'form-control control-inline', 'placeholder'=>'Compilata da')) }}
-
+								{{ Form::text('activity',  $arrFilter['activity'], array('class' => 'form-control control-inline', 'placeholder'=>'Activity')) }}
 							</div>
 							
 							
-							<div class="col-lg-2"><button class="btn " type="submit" style="width:80px;"><i class="fa fa-check-filter"></i> Filtra</button></div>
+							<div class="col-lg-2"><button class="btn " type="submit" style="width:80px;"><i class="fa fa-check-filter"></i> {{Lang::get('generic.filter');}}</button></div>
 							
 							
 							
@@ -62,26 +79,34 @@
 					<thead>
 						<tr>
 							<th>
-								ID
+								{{Lang::get('partners.id');}}
 							</th>
 							<th>
-								Data visita
+								{{Lang::get('generic.created_at');}}
+							</th>
+							@if (Auth::user()->role ==1)
+							<th>
+								{{Lang::get('navigation.partner');}}
+							</th>
+							@endif
+							<th>
+								{{Lang::get('budget.budgetrow');}}
 							</th>
 							<th>
-								 Compilata da
+								 {{Lang::get('budget.currency');}}
 							</th>
 							<th>
-								 Tipo visita 
+								 {{Lang::get('budget.netamount');}}
 							</th>
 							<th>
-								 Locale
+								 {{Lang::get('budget.vatamount');}}
 							</th>
 							<th>
-								 Città
-							</th>					
+								 {{Lang::get('budget.total');}}
+							</th>
 							<th>
-								 Inserita il 
-							</th>	
+								 {{Lang::get('budget.verified');}}
+							</th>
 							<th>
 								 
 							</th>	
@@ -93,43 +118,53 @@
 						@foreach($roles_list as $c)
 						<tr class="odd gradeX">
 							<td>
-								{{ $c->id }}  
+								{{ $c->id }}
 							</td>
 							<td>
-								{{ Decoder::decodeDate($c->visit_at) }}  
+								{{ Decoder::decodeDate($c->created_at)}}
+							</td>
+							@if (Auth::user()->role ==1)
+							<td align="right">
+								{{ $labelshort[$c->partner] }}
+							</td>
+							@endif
+							<td align="left">
+								<i  class="fa fa-{{ Budget::getIco($rowbudgetico[$c->budgetrow]) }}"></i>&nbsp;&nbsp;  {{ $rowbudget[$c->budgetrow] }}
+							</td>
+							<td align="right">
+								{{ $c->currency }}
+							</td>
+							<td align="right">
+								{{Decoder::formatCost($c->netamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{Decoder::formatCost($c->vatamount, 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{Decoder::formatCost($c->netamount + $c->vatamount , 2, ',', ' ');}}
+							</td>
+							<td align="right">
+								{{Decoder::decodeYN($c->verified);}}
 							</td>
 							<td>
-								{{ $c->surname }}  {{ $c->name }} 
-							</td>
-						
-							<td>
-								{{ Visit::getTypeLabel($c->typevisit) }}  
-							</td>	
-							<td>
-								  {{ $c->local }}  
+								<!--a href="/visit/{{ $c->id }} " class="btn blue">View</a-->
+							
+								<?php if(Auth::user()->role != 1 && $c->verified == 0 ) 
+								{
+								?>
+								<a href="/visit/{{ $c->id }}/edit " class="btn blue">{{Lang::get('generic.edit');}}</a>
 
-							</td>					
-							<td>
-								 {{ $c->city }} 
-							</td>
-							<td>
-								{{ Decoder::decodeDateTime($c->created_at) }}  
-							</td>	
-							
-							
-							<td>
-								<?php if(Auth::user()->role < 10) 
-								{
-								?>
-								<a href="/visit/{{ $c->id }}/edit " class="btn blue">Recupera</a>
-								<?php } ?>
-								<?php if(Auth::user()->role < 10) 
-								{
-								?>
-								{{ Form::open(array('url' => 'visitSospese/'. $c->id)) }}
-										{{ Form::hidden('_method', 'DELETE') }}
+								{{ Form::open(array('url' => 'visit/'. $c->id)) }}
+										{{ Form::hidden('_method', Lang::get('generic.delete')) }}
 										{{ Form::submit(Lang::get('generic.delete'),  array('class' =>'btn default  yellow')) }}
 										{{ Form::close() }}
+								<?php } ?>
+								
+								<?php if(Auth::user()->role == 1) 
+								{
+								?>
+								<a href="/visit/{{ $c->id }}/check " class="btn blue">{{Lang::get('generic.check');}}</a>
+							
 								<?php } ?>
 							</td>
 							

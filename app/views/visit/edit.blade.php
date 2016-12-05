@@ -3,27 +3,29 @@
 @section('content')
 
 <?php 
- $type_cost = Budget::getTypeCost($v->budgetrow);
+$type_cost = Budget::getTypeCost($v->budgetrow);
+
+$partner = $v->partner;
 
 
  switch ($type_cost) {
  	case 1:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(1)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(1)->lists('description', 'id');
  		break;
  	case 2:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(2)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(2)->lists('description', 'id');
  		break;
  	case 3:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(3)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(3)->lists('description', 'id');
  		break;
  	case 4:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(4)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(4)->lists('description', 'id');
  		break;
  	case 5:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(5)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(5)->lists('description', 'id');
  		break;
  	case 6:
- 		$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->whereKind(6)->lists('description', 'id');
+ 		$rowbudget = DB::table('budget')->wherePartner($partner)->whereKind(6)->lists('description', 'id');
  		break;
  	default:
  		# code...
@@ -32,7 +34,7 @@
 
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
- $currency = array('EUR'=> 'EUR');
+ $currency = Currency::lists('longdescription', 'description');
 ?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
@@ -43,7 +45,10 @@
 <div class="row">
 	<div class="col-lg-3">
 		<div class="form-group">
-			{{ Form::submit(Lang::get('generic.save'),  array('class' =>'btn btn-success btn-large')) }}
+			<a href="{{ url('visit/'.$v->id.'/check') }}" class="btn blue">{{Lang::get('generic.check');}}</a>
+			{{ Form::submit(Lang::get('generic.save'),  array('class' =>'btn btn-success btn-large')) }} 
+
+
 			&nbsp;
 			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.cancell');}}</a>
 		</div>
@@ -69,6 +74,13 @@
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div class="row">
+					@if ($v->rejected) 
+						<div class="col-lg-12 alert alert-danger">
+						
+						{{trans('budget.costwithrejection')}} : <strong>{{$v->rejection}}</strong>
+						
+						</div>
+					@endif
 					<div class="col-lg-12">
 						
 						{{ Form::label('budgetrow', 'Row'  , array('class' => 'control-label ')) }}
@@ -89,10 +101,10 @@
 
 				<div class="col-lg-12">
 						{{ Form::label('description_cost', 'Description of cost (like plane ticket, Costume, actor in performance, administrative activity related to the project) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('description_cost', $v->description_cost,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Cost description' ) ) }}
+						{{ Form::textarea('description_cost', $v->description_cost,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Cost description' ) ) }}
 				</div><div class="col-lg-12">
 						{{ Form::label('activity', 'Other info about of activity (like name of performance, city for meeting) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('activity', $v->activity,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+						{{ Form::textarea('activity', $v->activity,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
 
 				</div>
 				
@@ -118,7 +130,7 @@
 
 					<div class="col-lg-12">
 						{{ Form::label('comment', 'Internal note (not in reporting) '  , array('class' => 'control-label ')) }}
-						{{ Form::text('comment', $v->comment,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
+						{{ Form::textarea('comment', $v->comment,   array('class'=>'form-control placeholder-no-fix', 'placeholder' => 'Description of activity' ) ) }}
 
 				</div>
 					</div>
@@ -350,6 +362,7 @@
 					</div>
 					</div>
 					<div class="row">
+					<div class="col-md-12">
 						<h4> Cost documentation </h4>
 						<div class="col-md-6">
 											{{ Form::file('doc1', array('class'=>'form-control' , 'placeholder'=>'Cost document')) }} 
@@ -389,7 +402,7 @@
 						</div>
 							
 					</div>
-					
+					</div>
 				</div>
 				<div class="col-lg-4">
 							<div class="portlet box green">
