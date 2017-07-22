@@ -39,37 +39,21 @@
 					@endif
 <div class="row">
 
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 		<div class="form-group">
 		{{ Form::label('activity', Lang::get('activities.activity')) }}
 		{{ Form::text('activity', '', array('class'=>'form-control')) }}
 		</div>
 	</div>
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 		<div class="form-group">
 		{{ Form::label('typeactivity', Lang::get('activities.typeactivity')) }}
 		{{ Form::select('typeactivity', $array_type, '', array('class'=>'form-control')) }}
 		</div>
 	</div>
-
-<div class="col-lg-4">
-		<div class="form-group">
-		<div class="col-lg-12">	
-							{{Lang::get('activities.closed') }}
-						</div>
-						<div class="col-lg-12">	
-										
-							<label class="radio-inline">
-								{{ Form::radio('closed', 1, 0) }} {{Lang::get('decode.Yes')}}
-							</label>
-							<label class="radio-inline">
-								{{ Form::radio('closed', 0, 1) }} {{Lang::get('decode.No')}}
-							</label>
-			
-						</div>
-		</div>
-	</div>
 </div>
+{{Form::hidden('closed',0)}}
+
 <div class="row">
 	<div class="col-lg-4">
 			{{ Form::label('from_nation', Lang::get('activities.country')) }}
@@ -85,12 +69,7 @@
 		{{ Form::text('place', '', array('class'=>'form-control')) }}
 		</div>
 	</div>
-	<div class="col-lg-12">
-		<div class="form-group">
-		{{ Form::label('summary', Lang::get('activities.description')) }}
-		{{ Form::textarea('summary', '', array('class'=>'form-control')) }}
-		</div>
-	</div>
+
 </div>
 <div class="row">
     
@@ -103,29 +82,44 @@
 	<div class="col-lg-4">
 		<div class="form-group">
 
-		{{ Form::label('d_document_start', Lang::get('budget.datefrom')  , array('class' => 'control-label ')) }}
+		{{ Form::label('d_document_start', Lang::get('activities.datefrom')  , array('class' => 'control-label ')) }}
 						{{ Form::text('d_document_start', '' ,   array('class'=>'form-control  date-picker', 'placeholder' => Lang::get('budget.datefrom'))   ) }}
 		</div>
 	</div>
 	<div class="col-lg-4">
 		<div class="form-group">
-		{{ Form::label('d_document_stop', Lang::get('budget.to') , array('class' => 'control-label ')) }}
+		{{ Form::label('d_document_stop', Lang::get('activities.to') , array('class' => 'control-label ')) }}
 						{{ Form::text('d_document_stop', '' ,   array('class'=>'form-control  date-picker', 'placeholder' => Lang::get('budget.to'))   ) }}
 		</div>
 	</div>
-	<div class="col-lg-12">
-		<div class="form-group">
-		{{ Form::label('summary', Lang::get('activities.description')) }}
-		{{ Form::textarea('summary', '', array('class'=>'form-control')) }}
+</div>
+	<div class="row">
+
+		<div class="col-lg-4">
+
+		</div>
+		<div class="col-lg-4">
+			<div class="form-group">
+
+				{{ Form::label('d_document_start_event', Lang::get('activities.datefromevent')  , array('class' => 'control-label ')) }}
+				{{ Form::text('d_document_start_event', '' ,   array('class'=>'form-control  date-picker', 'placeholder' => Lang::get('budget.datefrom'))   ) }}
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="form-group">
+				{{ Form::label('d_document_stop_event', Lang::get('activities.toevent') , array('class' => 'control-label ')) }}
+				{{ Form::text('d_document_stop_event', '' ,   array('class'=>'form-control  date-picker', 'placeholder' => Lang::get('budget.to'))   ) }}
+			</div>
 		</div>
 	</div>
+
 	<div class="col-lg-12">
 		
 		<strong>{{ Form::label('summary', Lang::get('activities.infobennext')) }}</strong>
 		
 		
 	</div>
-</div>
+
 
 <div class="row">
 	<div class="col-lg-3">

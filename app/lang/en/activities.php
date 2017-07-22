@@ -16,4 +16,8 @@ return array (
   'city' => 'City',
   'recappactivities' => 'summary',
   'infobennext' => 'Information about beneficiaries involved in next step',
+    'datefrom' => 'Period start date',
+    'to' => 'Period to',
+    'datefromevent' => 'Event start date',
+    'toevent' => 'Event to',
 );

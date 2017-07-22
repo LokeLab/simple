@@ -32,8 +32,6 @@
           <li ><a href="{{ url('/visit/add') }}"><i class="fa fa-plus"></i><span class="title"> {{Lang::get('navigation.insertcost');}}</span></a></li>
          
           <li ><a href="{{ url('/visit') }}"><i class="fa fa-money"></i><span class="title"> {{Lang::get('navigation.insertedcost');}}</span></a></li>
-
-          <li ><a href="{{ url('/financialsummary/'.Auth::user()->partner) }}"><i class="fa fa-money"></i><span class="title"> {{Lang::get('navigation.financialsummary');}}</span></a></li>
            <!--li ><a href="{{ url('/visitSospese') }}"><i class="fa fa-bullseye"></i><span class="title"> Cost to be completed</span></a></li-->
            <li ><a href="https://podio.com/odinteatretdk/caravan-next-udhlt5/apps/info-guidelines/items/6" target="_blank"><i class="fa fa-file-excel-o  "></i><span class="title"> {{Lang::get('navigation.templates');}}</span></a></li>
             <li ><a href="{{ url('/activities') }}"><i class="fa fa-bullseye"></i><span class="title">  {{Lang::get('navigation.activities');}} </span></a></li>

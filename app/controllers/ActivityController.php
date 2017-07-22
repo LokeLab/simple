@@ -69,7 +69,10 @@ class ActivityController extends \BaseController {
 		{		
 			$activities->activity =  $userdata['activity'];
 			$activities->typeactivity =  $userdata['typeactivity'];
-			$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+            $activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
+            $activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
+
+            $activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
 			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
 			$activities->from_nation = $userdata['from_nation'];
 			$activities->from_city = $userdata['from_city'];
@@ -114,13 +117,16 @@ class ActivityController extends \BaseController {
 		{
 			$activities->activity =  $userdata['activity'];
 			$activities->typeactivity =  $userdata['typeactivity'];
-			$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+            $activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
+            $activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
+
+            $activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
 			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
 			$activities->from_nation = $userdata['from_nation'];
 			$activities->from_city = $userdata['from_city'];
 			$activities->partner = $userdata['partner'];
 			$activities->place = $userdata['place'];
-			$activities->summary = $userdata['summary'];
+
 		
 			
 			$activities->save();

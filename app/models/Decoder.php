@@ -170,7 +170,7 @@ class Decoder {
 		return '<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12  "><nobr> '.number_format($cost, 2, ',', ' ').'</nobr> </div> <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 percentage border_'.Utility::color(($total>0)?$cost *100/ $total:0).'" ><nobr> '.number_format(($total>0)?$cost *100/ $total:'0', 1, ',', ' ').' % </nobr></div>';
 	}
 
-public static function formatCost($cost, $decimal=2, $separatorD=',', $separatorM=' ') {
+public static function formatCost($cost, $decimal, $separatorD, $separatorM) {
 
 		return '<nobr> '.number_format($cost, $decimal, $separatorD, $separatorM).'</nobr>';
 	}

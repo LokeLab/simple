@@ -12,6 +12,7 @@
 				</div>
 			</div>
 			<div class="portlet-body">
+				@if (Auth::user()->role == 1)
 				<div class="table-toolbar">
 					<div class="btn-group">
 						<a href="{{ url('activities/add') }}" class="btn green">
@@ -21,6 +22,7 @@
 						</a>
 					</div>
 				</div>
+				@endif
 				<table class="table table-striped table-bordered table-hover" id="userTable">
 					<thead>
 						<tr>
@@ -63,6 +65,7 @@
 								 <a href="{{ url('activities/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a>
 							</td>
 							<td>
+								@if (Auth::user()->role == 1)
 								<?php 
 								if($c['closed'] == 0)
 								{ ?>
@@ -71,6 +74,7 @@
 									{{ Form::submit(Lang::get('generic.delete'),  array('class' =>'btn default btn-xs red-stripe')) }}
 									{{ Form::close() }}
 								<?php } ?>
+									@endif
 							</td>
 						</tr>
 						@endforeach
