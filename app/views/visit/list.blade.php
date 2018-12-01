@@ -4,10 +4,11 @@
 $decoderowbudget = DB::table('budget')->lists('description', 'id');
 if (Auth::user()->role == 1)
 {
-	if (Input::get('filter'))
- 		$rowbudget = DB::table('budget')->wherePartner(Input::get('filter'))->lists('description', 'id');
+	if (Input::get('partner'))
+ 		$rowbudget = DB::table('budget')->wherePartner(Input::get('partner'))->lists('description', 'id');
  	else
- 		$rowbudget = array(''=>'All');
+ 		$rowbudget = array(''=>'All')+DB::table('budget')->lists('description', 'id');
+		
 		$rowbudgetico = DB::table('budget')->lists('kind', 'id');
 }else{
  	$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
@@ -72,7 +73,7 @@ $labelshort = Partner::lists('short', 'id');
 							</div>
 
 							<div class="col-lg-3">
-							{{ Form::select('notpayed', [0=>trans('generic.all'), 1=>trans('generic.yes')],$arrFilter['notpayed'], array('class'=>'form-control ')) }}  {{trans('budget.notpayed')}}
+							{{ Form::select('notpayed', [0=>trans('generic.all'), 1=>trans('budget.notpayed')],$arrFilter['notpayed'], array('class'=>'form-control ')) }}  {{trans('budget.notpayed')}}
 							</div>
 
 							<div class="col-lg-3">
@@ -103,7 +104,7 @@ $labelshort = Partner::lists('short', 'id');
 								{{Lang::get('partners.id');}}
 							</th>
 							<th>
-								{{Lang::get('generic.created_at');}}
+								Date on document
 							</th>
 							@if (Auth::user()->role ==1)
 							<th>
@@ -142,7 +143,7 @@ $labelshort = Partner::lists('short', 'id');
 								{{ $c->id }}
 							</td>
 							<td>
-								{{ Decoder::decodeDate($c->created_at)}}
+								{{ Decoder::decodeDate($c->d_document)}}
 							</td>
 							@if (Auth::user()->role ==1)
 							<td align="right">
@@ -166,7 +167,7 @@ $labelshort = Partner::lists('short', 'id');
 							</td>
 							<td align="right">
 								 <?php
-								 if($c->payed !=4) 
+								 if($c->payedby !=4) 
 								 	echo trans('budget.payed');
 								 else
 								 	echo trans('budget.notpayed');

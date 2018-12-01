@@ -47,7 +47,7 @@
 								@if (Auth::user()->role == 1)
 							{{ Form::text('activity',$activities_detail['activity'], array('class'=>'form-control')) }}
 									@else
-									{{$activities_detail['activity']}}
+									{{$activities_detail['activity']}} {{Form::hidden('activity',$activities_detail['activity'])}}
 								@endif
 							</div>
 						</div>
@@ -247,7 +247,7 @@ for ($i=1; $i < 10; $i++) { ?>
 						</div>
 					</div>
 				</div>
-			</div>;
+			</div>
 
 
 

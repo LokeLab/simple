@@ -9,7 +9,7 @@ class ActivityController extends \BaseController {
 	 */
 	public function tablelist()
 	{
-		$data['activities_list'] = Activity::all();;
+		$data['activities_list'] = Activity::orderBy('id','desc')->get();;
 		$this->layout = View::make('activities.list', $data);
 	}
 
@@ -78,8 +78,8 @@ class ActivityController extends \BaseController {
 			$activities->from_city = $userdata['from_city'];
 			$activities->partner = $userdata['partner'];
 			$activities->place = $userdata['place'];
-			$activities->summary = $userdata['summary'];
-		
+			//$activities->summary = $userdata['summary'];
+		 
 			 $activities->save();
 
 			 return Redirect::action('ActivityController@tablelist');

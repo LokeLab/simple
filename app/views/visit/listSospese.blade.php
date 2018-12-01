@@ -3,12 +3,16 @@
 <?php 
 if (Auth::user()->role == 1)
 {
- $rowbudget = DB::table('budget')->lists('description', 'id');
-
-$rowbudgetico = DB::table('budget')->lists('kind', 'id');
+	
+	if (Input::has('partner'))
+ 		$rowbudget = array(''=>'All')+DB::table('budget')->wherePartner(Input::get('partner'))->lists('description', 'id');
+ 	else
+ 		$rowbudget = array(''=>'All')+DB::table('budget')->lists('description', 'id');
+		
+		$rowbudgetico = DB::table('budget')->lists('kind', 'id');
 }else{
- $rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
-$rowbudgetico = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('kind', 'id');
+ 	$rowbudget = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('description', 'id');
+	$rowbudgetico = DB::table('budget')->wherePartner(Auth::user()->partner)->lists('kind', 'id');
 }
 $labelshort = Partner::lists('short', 'id');
  ?>
@@ -82,7 +86,7 @@ $labelshort = Partner::lists('short', 'id');
 								{{Lang::get('partners.id');}}
 							</th>
 							<th>
-								{{Lang::get('generic.created_at');}}
+								Date on document
 							</th>
 							@if (Auth::user()->role ==1)
 							<th>
@@ -121,7 +125,7 @@ $labelshort = Partner::lists('short', 'id');
 								{{ $c->id }}
 							</td>
 							<td>
-								{{ Decoder::decodeDate($c->created_at)}}
+								{{ Decoder::decodeDate($c->d_document)}}
 							</td>
 							@if (Auth::user()->role ==1)
 							<td align="right">

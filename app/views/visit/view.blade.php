@@ -32,7 +32,7 @@
 
  $rowpayedby = DB::table('payedby')->lists('description', 'id');
  $nation = DB::table('province')->lists('description', 'id');
- $currency = array('EUR'=> 'EUR');
+  $currency = Currency::lists('longdescription', 'description');
 ?>
 <style type="text/css">
 					.active div{ background-color: rgb(226, 211, 211);
