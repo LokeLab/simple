@@ -127,7 +127,7 @@ for ($i=1; $i < 10; $i++) { ?>
 							
 							<div class="col-xs-12 col-md-12 col-lg-12 graybg blackfonttitle">
 								<h4>{{Lang::get('activities_detail.line'.$i)}} </h4>
-								
+								<p><em>{{Lang::get('activities_detail.line_details'.$i)}} </em>
 							</div>
 							<div class="row">
 								<div class="col-xs-1 col-md-1 col-lg-1 blackfonttitle">
