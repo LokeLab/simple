@@ -6,7 +6,7 @@
 	<div class="col-lg-12">
 		<div class="form-group">
 			
-			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.back');}}</a>
+			<a href="{{ url('cost') }}" class="btn btn-warning">{{Lang::get('generic.back');}}</a>
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 ">
@@ -30,7 +30,7 @@
 								  {{Lang::get('currency.description');}}
 							</th>
 							<th>
-								 {{Lang::get('roles.rate');}}
+								 {{Lang::get('currency.rate');}}
 							</th>
 							
 						</tr>

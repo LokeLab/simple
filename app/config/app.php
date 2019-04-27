@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://simple.caravanext.eu/',
+	'url' => 'http://simple.lokelab.dk/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -200,7 +200,9 @@ return array(
 
 
 
-	'site' => 'Financial Reporting || CARAVAN NEXT',
-	'header' => 'CARAVAN NEXT',
+	'site' => 'Financial Reporting || Lokelab',
+	'header' => 'Lokelab',
+	'logo' => '/images/CNlogo.png',
+
 
 );

@@ -17,27 +17,27 @@ class Modal {
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 										aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="informationSourceModalLabel'.$type.'">{{Lang::get("activities.istitle")}}</h4>
+							<h4 class="modal-title" id="informationSourceModalLabel'.$type.'">{{Lang::get("activity.istitle")}}</h4>
 						</div>
 						<div class="modal-body">
 							{{ Form::open(array("id"=> "informationSourceForm'.$type.'", "url" => "activities/detail'.$type.'", "method" => "POST")) }}
 							{{ Form::hidden("activity", $activities_detail->id) }}
 							{{ Form::hidden("id", -1) }}
 							<div class="form-group">
-								{{ Form::label("title",  Lang::get("activities.title"), array("class"=>"control-label")) }}&nbsp;
-								{{ Form::text("title", Lang::get("activities.title"), array("class" => "form-control required", "disabled"=> true)) }}
+								{{ Form::label("title",  Lang::get("activity.title"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("title", Lang::get("activity.title"), array("class" => "form-control required", "disabled"=> true)) }}
 							</div>
 							<div class="form-group">
-								{{ Form::label("forseen",  Lang::get("activities.forseen"), array("class"=>"control-label")) }}&nbsp;
-								{{ Form::text("forseen", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.forseen"))) }}
+								{{ Form::label("forseen",  Lang::get("activity.forseen"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("forseen", "", array("class" => "form-control required", "placeholder"=>Lang::get("activity.forseen"))) }}
 							</div>
 							<div class="form-group">
-								{{ Form::label("realized",  Lang::get("activities.realized"), array("class"=>"control-label")) }}&nbsp;
-								{{ Form::text("realized", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.realized"))) }}
+								{{ Form::label("realized",  Lang::get("activity.realized"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("realized", "", array("class" => "form-control required", "placeholder"=>Lang::get("activity.realized"))) }}
 							</div>
 							<div class="form-group">
-								{{ Form::label("comment",  Lang::get("activities.comment"), array("class"=>"control-label")) }}&nbsp;
-								{{ Form::text("comment", "", array("class" => "form-control required", "placeholder"=>Lang::get("activities.comment"))) }}
+								{{ Form::label("comment",  Lang::get("activity.comment"), array("class"=>"control-label")) }}&nbsp;
+								{{ Form::text("comment", "", array("class" => "form-control required", "placeholder"=>Lang::get("activity.comment"))) }}
 							</div>
 							{{Form::close()}}
 

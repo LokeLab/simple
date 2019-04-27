@@ -45,13 +45,7 @@
 			<div class="portlet-body">
 				<div class="form-body">
 					<div class="row">
-						@if($errors->has())
-						<div class="alert alert-danger">
-						   @foreach ($errors->all() as $error)
-						      <span>{{ $error }}</span><br />
-						  	@endforeach
-						  </div>
-						@endif
+						@include('includes.message')
 					</div>
 					
 					<div class="row">

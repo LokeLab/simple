@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.webfaction.com',
+	'host' => 'smtp.XXXXXXXX.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'simple@caravanext.eu', 'name' => 'Simple website '),
+	'from' => array('address' => 'support@XXXXXXXX.com', 'name' => 'Simple website '),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'simplenoreply',
+	'username' => 'XXXXXXX',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'info2015',
+	'password' => 'XXXXXXX',
 
 	/*
 	|--------------------------------------------------------------------------

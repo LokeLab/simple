@@ -6,7 +6,7 @@
 	<div class="col-lg-12">
 		<div class="form-group">
 			
-			<a href="{{ url('visit') }}" class="btn btn-warning">{{Lang::get('generic.back');}}</a>
+			<a href="{{ url('cost') }}" class="btn btn-warning">{{Lang::get('generic.back');}}</a>
 		</div>
 	</div>
 

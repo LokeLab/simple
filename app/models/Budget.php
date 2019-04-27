@@ -76,7 +76,7 @@ class Budget extends Eloquent  {
 	 */
 	public static function getAllbyPartner($id)
 	{
-		return VisitBase::where('partner',$id)->orderBy('id', 'asc')->get();
+		return CostBase::where('partner',$id)->orderBy('id', 'asc')->get();
 	}
 
 	/**

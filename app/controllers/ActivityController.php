@@ -10,16 +10,16 @@ class ActivityController extends \BaseController {
 	public function tablelist()
 	{
 		$data['activities_list'] = Activity::orderBy('id','desc')->get();;
-		$this->layout = View::make('activities.list', $data);
+		$this->layout = View::make('activity.list', $data);
 	}
 
 	public function recapp()
-	 {
-	  $data['activities_detail'] = DB::table('v_activities_detail_sum')->get();
-	  
-	  $data['array_type'] = Typeactivity::lists('description','description');
-	  $this->layout = View::make('activities.recapp', $data);
-	 }
+	{
+		$data['activities_detail'] = DB::table('v_activities_detail_sum')->get();
+		
+		$data['array_type'] = Typeactivity::lists('description','description');
+		$this->layout = View::make('activity.recapp', $data);
+	}
 
 	/**
 	 * Display the specified resource.
@@ -27,25 +27,25 @@ class ActivityController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	 public function view($id)
-	 {
-	  $data['activities_detail'] = Activity::find($id);
-	  $data['activitiesList'] = Activity::lists('description', 'id');
-	  $this->layout = View::make('activities.view', $data);
-	 }
+	public function view($id)
+	{
+		$data['activities_detail'] = Activity::find($id);
+		$data['activitiesList'] = Activity::lists('description', 'id');
+		$this->layout = View::make('activity.view', $data);
+	}
 
 	 /**
-	  * Show the form for editing the specified activities.
+	  * Show the form for editing the specified activity.
 	  *
 	  * @param  int  $id
 	  * @return Response
 	  */
 	 public function edit($id)
 	 {
-	  $data['activities_detail'] = Activity::find($id);
-	  
-	  $data['array_type'] = Typeactivity::lists('description','description');
-	  $this->layout = View::make('activities.edit', $data);
+	 	$data['activities_detail'] = Activity::find($id);
+	 	
+	 	$data['array_type'] = Typeactivity::lists('description','description');
+	 	$this->layout = View::make('activity.edit', $data);
 	 }
 
 	 /**
@@ -59,31 +59,31 @@ class ActivityController extends \BaseController {
 
 	 	$userdata = Input::all();
 
- 		$activities = Activity::find($id);
+	 	$activities = Activity::find($id);
 
 	 	if( $activities->valida($userdata) == false)
-		{
-			return Redirect::action('ActivityController@edit', $id )->withInput()->withErrors($activities->errors());
-		}
-		else
-		{		
-			$activities->activity =  $userdata['activity'];
-			$activities->typeactivity =  $userdata['typeactivity'];
-            $activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
-            $activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
+	 	{
+	 		return Redirect::action('ActivityController@edit', $id )->withInput()->withErrors($activities->errors());
+	 	}
+	 	else
+	 	{		
+	 		$activities->activity =  $userdata['activity'];
+	 		$activities->typeactivity =  $userdata['typeactivity'];
+	 		$activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
+	 		$activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
 
-            $activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
-			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
-			$activities->from_nation = $userdata['from_nation'];
-			$activities->from_city = $userdata['from_city'];
-			$activities->partner = $userdata['partner'];
-			$activities->place = $userdata['place'];
+	 		$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+	 		$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
+	 		$activities->from_nation = $userdata['from_nation'];
+	 		$activities->from_city = $userdata['from_city'];
+	 		$activities->partner = $userdata['partner'];
+	 		$activities->place = $userdata['place'];
 			//$activities->summary = $userdata['summary'];
-		 
-			 $activities->save();
+	 		
+	 		$activities->save();
 
-			 return Redirect::action('ActivityController@tablelist');
-		}
+	 		return Redirect::action('ActivityController@tablelist');
+	 	}
 	 }
 
 	 /**
@@ -91,11 +91,11 @@ class ActivityController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function add()
-	{
-		$data['array_type'] = Typeactivity::lists('description','description');
-		$this->layout = View::make('activities.add',$data);
-	}
+	 public function add()
+	 {
+	 	$data['array_type'] = Typeactivity::lists('description','description');
+	 	$this->layout = View::make('activity.add',$data);
+	 }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -108,26 +108,26 @@ class ActivityController extends \BaseController {
 
 
 
- 		$activities = new Activity;
+		$activities = new Activity;
 
-	 	if( $activities->valida($userdata) == false)
+		if( $activities->valida($userdata) == false)
 		{
 			return Redirect::action('ActivityController@add')->withInput()->withErrors($activities->errors());
 		}else
 		{
 			$activities->activity =  $userdata['activity'];
 			$activities->typeactivity =  $userdata['typeactivity'];
-            $activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
-            $activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
+			$activities->d_document_start_event = isset($userdata['d_document_start_event'])? Decoder::convert_date_in($userdata['d_document_start_event']) : '';
+			$activities->d_document_stop_event = isset($userdata['d_document_stop_event'])? Decoder::convert_date_in($userdata['d_document_stop_event']) : '';
 
-            $activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
+			$activities->d_document_start = isset($userdata['d_document_start'])? Decoder::convert_date_in($userdata['d_document_start']) : '';
 			$activities->d_document_stop = isset($userdata['d_document_stop'])? Decoder::convert_date_in($userdata['d_document_stop']) : '';
 			$activities->from_nation = $userdata['from_nation'];
 			$activities->from_city = $userdata['from_city'];
 			$activities->partner = $userdata['partner'];
 			$activities->place = $userdata['place'];
 
-		
+			
 			
 			$activities->save();
 
@@ -135,24 +135,24 @@ class ActivityController extends \BaseController {
 
 			$template_detail = DB::table('activities_detail_model')->where('deleted', 0)->get();
 
-						 foreach ($template_detail as $element) {
-						 	DB::table('activities_detail')->insert(
-						 			array(
-						 				'title' => $element->title,
-						 				'typeindicator' => $element->typeindicator,
-						 				'forseen' => 0  ,
-						 				'realized' => 0,
-						 				'activity' => $last_id
-						 				)
+			foreach ($template_detail as $element) {
+				DB::table('activities_detail')->insert(
+					array(
+						'title' => $element->title,
+						'typeindicator' => $element->typeindicator,
+						'forseen' => 0  ,
+						'realized' => 0,
+						'activity' => $last_id
+					)
 
-						 		);
-						 }
+				);
+			}
 			return Redirect::action('ActivityController@edit',$last_id);
 		}
 		
 	}
 
-	 
+	
 
 	/**
 	 * Display the specified resource.
@@ -163,7 +163,7 @@ class ActivityController extends \BaseController {
 	public function show($id)
 	{
 		$data['activities_detail'] = Activity::find($id);
-		$this->layout = View::make('activities.view', $data);
+		$this->layout = View::make('activity.view', $data);
 	}
 
 	/**

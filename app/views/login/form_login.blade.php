@@ -17,20 +17,9 @@
 				{{ Form::open(array('url' => 'login_process', 'method' => 'post', 'class' => 'login-form')) }}
 			
 				<div class="col-lg-12 ">
-					<h4 class="form-title" style="background-color: #333; padding: 10px"><img src="/images/CNlogo.png"  style="height: 23px;"></h4>
+					<h4 class="form-title" style="background-color: #333; padding: 10px"><img src="{{Config::get('app.logo')}}"  style="height: 23px;"></h4>
 
-					       <?php if($errors->has()): ?>
-					        <div class="alert alert-danger">
-					           <?php foreach ($errors->all() as $error): ?>
-					              <span><?php echo $error; ?></span><br />
-					            <?php endforeach; ?>
-					          </div>
-					        <?php endif; ?>
-					        <?php if(Session::has('message')): ?>
-					        <div class="alert alert-success">
-					          <?php echo Session::get('message'); ?>
-					        </div>
-					        <?php endif; ?>
+					       @include('includes.message')
 				</div>
 				<div class="alert alert-danger display-hide text-center">
 					 
@@ -70,11 +59,7 @@
 									{{Lang::get('users.login') }} <i class="m-icon-swapright m-icon-white"></i>
 									</button> 
 								</label>
-								<div class="dashboard-stat">
-									<a href="/password/remind"  >
-										{{Lang::get('users.recover_password') }} 
-									</a>
-								</div>
+								
 							</div>
 						
 					</div>

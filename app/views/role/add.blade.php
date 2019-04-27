@@ -26,13 +26,7 @@
 	</div>
 </div>-->
 <div class="row">
-	@if($errors->has())
-					<div class="alert alert-danger">
-					   @foreach ($errors->all() as $error)
-					      <span>{{ $error }}</span><br />
-					  	@endforeach
-					  </div>
-					@endif
+	@include('includes.message')
 	<div class="col-lg-3">
 		<div class="form-group">
 		{{ Form::label('description', Lang::get('roles.description')) }}

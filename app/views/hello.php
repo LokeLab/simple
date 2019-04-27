@@ -23,7 +23,7 @@
 			margin-top: -100px;
 		}
 
-		a, a:visited {
+		a, a:costed {
 			text-decoration:none;
 		}
 

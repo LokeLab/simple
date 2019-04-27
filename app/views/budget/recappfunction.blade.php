@@ -60,12 +60,12 @@
 							</td>
 							<td>
 							<a href="{{ url('/activationfunction/'.$c->id) }}" class="btn yellow">{{Lang::get('budget.activation');}}</a> <br/>
-							&euro; {{ Decoder::formatCost(VisitBase::getTotalActivable($c->id), 2, ',', ' ');  }}
+							&euro; {{ Decoder::formatCost(CostBase::getTotalActivable($c->id), 2, ',', ' ');  }}
 							
 							</td>
 							<td>
 							<a href="{{ url('/activationfunction/'.$c->id) }}" class="btn yellow">{{Lang::get('budget.tobechecked');}}</a> <br/>
-							&euro; {{ Decoder::formatCost(VisitBase::getTotalUnderCheck($c->id), 2, ',', ' ');  }}
+							&euro; {{ Decoder::formatCost(CostBase::getTotalUnderCheck($c->id), 2, ',', ' ');  }}
 							
 							</td>
 							<td class="economic">
@@ -80,8 +80,8 @@
 							$budget = $budget + $c->budget;
 							$spent = $spent + $c->spent;
 							$verified = $verified + $c->verified;
-							$activable = $activable + VisitBase::getTotalActivable($c->id);
-							$undercheck = $undercheck + VisitBase::getTotalUnderCheck($c->id);
+							$activable = $activable + CostBase::getTotalActivable($c->id);
+							$undercheck = $undercheck + CostBase::getTotalUnderCheck($c->id);
 
 						?>
 						@endforeach

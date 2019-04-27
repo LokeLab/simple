@@ -17,7 +17,7 @@ $list_event = User::getAllEvents(Session::get('userid'));
   <div class="header-inner">
     <!-- BEGIN LOGO -->
     <a class="navbar-brand" href="/home">
-      <img src="/images/CNlogo.png" style="height: 23px;">
+      <img src="{{Config::get('app.logo')}}" style="height: 23px;">
     </a>
     <!-- END LOGO -->
     <!-- BEGIN HORIZANTAL MENU -->

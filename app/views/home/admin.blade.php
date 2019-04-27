@@ -103,11 +103,11 @@
 			</div>
 			<div class="portlet-body" style="padding-top:0px!important ">
 				<div >
-					@include('visit.lastest')
+					@include('cost.lastest')
 				</div>
 				<div class="scroller-footer">
 					<div class="pull-right">
-						<a href="visit">
+						<a href="cost">
 							 {{Lang::get('admin.see_all')}} <i class="m-icon-swapright m-icon-gray"></i>
 						</a>
 						 &nbsp;

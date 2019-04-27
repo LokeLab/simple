@@ -168,7 +168,7 @@ return array(
      *
      * @type string     Yandex translation key
      *
-     * This key is free to obtain and use but is required to enable Yandex translations. Visit: https://tech.yandex.com/translate/
+     * This key is free to obtain and use but is required to enable Yandex translations. Cost: https://tech.yandex.com/translate/
      *
      */
 

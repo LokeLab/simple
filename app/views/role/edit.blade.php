@@ -37,13 +37,7 @@
 			<!--BEGIN EDIT FORM -->
 			<div class="portlet-body">
 				<div class="form-body">
-					@if($errors->has())
-					<div class="alert alert-danger">
-					   @foreach ($errors->all() as $error)
-					      <span>{{ $error }}</span><br />
-					  	@endforeach
-					  </div>
-					@endif
+					@include('includes.message')
 					<div class="form-group">
 						<label class="col-md-2 control-label">{{Lang::get('roles.description')}}:
 							<span class="required">

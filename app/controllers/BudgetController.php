@@ -10,8 +10,8 @@ class BudgetController extends \BaseController {
 	public function tablelist($id)
 	{
 		$data['roles_list'] = Budget::getAllbyPartner($id);
-	
-			
+		
+		
 		$this->layout = View::make('budget.list', $data);
 	}
 
@@ -29,12 +29,12 @@ class BudgetController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	 public function view($id)
-	 {
-	  $data['role_detail'] = Budget::find($id);
-	  $data['roleList'] = Budget::lists('description', 'id');
-	  $this->layout = View::make('budget.view', $data);
-	 }
+	public function view($id)
+	{
+		$data['role_detail'] = Budget::find($id);
+		$data['roleList'] = Budget::lists('description', 'id');
+		$this->layout = View::make('budget.view', $data);
+	}
 
 	 /**
 	  * Show the form for editing the specified budget.
@@ -44,8 +44,8 @@ class BudgetController extends \BaseController {
 	  */
 	 public function edit($id)
 	 {
-	  $data['role_detail'] = Budget::find($id);
-	  $this->layout = View::make('budget.edit', $data);
+	 	$data['role_detail'] = Budget::find($id);
+	 	$this->layout = View::make('budget.edit', $data);
 	 }
 
 	 /**
@@ -59,21 +59,21 @@ class BudgetController extends \BaseController {
 
 	 	$userdata = array(
 	 		'description' => Input::get('description')
-				);
+	 	);
 
- 		$role = role::find($id);
+	 	$role = role::find($id);
 
 	 	if( $role->valida($userdata) == false)
-		{
-			return Redirect::action('BudgetController@edit', $id )->withInput()->withErrors($role->errors());
-		}
-		else
-		{		
-			$role->description = $userdata['description'];
-			 $role->save();
+	 	{
+	 		return Redirect::action('BudgetController@edit', $id )->withInput()->withErrors($role->errors());
+	 	}
+	 	else
+	 	{		
+	 		$role->description = $userdata['description'];
+	 		$role->save();
 
-			 return Redirect::action('BudgetController@tablelist');
-		}
+	 		return Redirect::action('BudgetController@tablelist');
+	 	}
 	 }
 
 	 /**
@@ -81,10 +81,10 @@ class BudgetController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function add()
-	{
-		$this->layout = View::make('budget.add');
-	}
+	 public function add()
+	 {
+	 	$this->layout = View::make('budget.add');
+	 }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -94,12 +94,12 @@ class BudgetController extends \BaseController {
 	public function store()
 	{
 		$userdata = array(
-	 		'description' => Input::get('description')
-				);
+			'description' => Input::get('description')
+		);
 
- 		$role = new Budget;
+		$role = new Budget;
 
-	 	if( $role->valida($userdata) == false)
+		if( $role->valida($userdata) == false)
 		{
 			return Redirect::action('BudgetController@add')->withInput()->withErrors($role->errors());
 		}else
@@ -113,7 +113,7 @@ class BudgetController extends \BaseController {
 		
 	}
 
-	 
+	
 
 	/**
 	 * Display the specified resource.

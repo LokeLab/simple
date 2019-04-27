@@ -12,18 +12,7 @@
 				<h3 class="form-title">{{Lang::get('users.password_recovery') }}</h3>
 				<p>{{Lang::get('users.password_recovery_subtitle')}} </p>
 
-				@if($errors->has())
-				<div class="alert alert-danger">
-				   @foreach ($errors->all() as $error)
-				      <span>{{ $error }}</span><br />
-				  	@endforeach
-				  </div>
-				@endif
-				@if(Session::has('message'))
-				<div class="alert alert-success">
-					{{Session::get('message')}}
-				</div>
-				@endif
+				@include('includes.message')
 				<div class="alert alert-danger display-hide">
 					<button class="close" data-close="alert"></button>
 					<span>

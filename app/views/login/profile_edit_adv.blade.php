@@ -32,13 +32,7 @@
 			
 				
 				<div class="form-group">
-						@if($errors->has())
-						<div class="alert alert-danger">
-						   @foreach ($errors->all() as $error)
-						      <span>{{ $error }}</span><br />
-						  	@endforeach
-						  </div>
-						@endif
+						@include('includes.message')
 					</div>
 
 				<h1>{{Lang::get('users.myprofile');}}</h1>

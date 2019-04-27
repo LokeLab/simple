@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@redirectToHome');
 Route::get('updateCurrency', 'ImporterController@getCurrency');
 
 Route::group(array('before' => 'auth_admin'), function() {
-    Route::controller('translations', 'Barryvdh\TranslationManager\Controller');
+	Route::controller('translations', 'Barryvdh\TranslationManager\Controller');
 });
 
 
@@ -29,8 +29,10 @@ Route::group(array('before'=>'auth'), function()
 	Route::get('home', 'HomeController@redirectToHome');
 	Route::get('home_admin', array('uses' => 'HomeController@home_admin'));
 	Route::get('adminfunction', array('uses' => 'HomeController@home_adminfunction'));
-	Route::get('home_partner', array('uses' => 'HomeController@home_promoter'));
-	Route::get('home_tecnico', array('uses' => 'HomeController@home_tecnico'));
+	Route::get('home_partner', array('uses' => 'HomeController@home_partner'));
+	Route::get('home_pm', array('uses' => 'HomeController@home_pm'));
+	Route::get('home_auditor', array('uses' => 'HomeController@home_auditor'));
+	Route::get('home_auditorext', array('uses' => 'HomeController@home_auditorext'));
 	Route::get('faq', array('uses' => 'HomeController@faq'));
 
 });
@@ -40,30 +42,30 @@ Route::group(array('before'=>'auth'), function()
 Route::get('login', 'HomeController@login');
 Route::post('login', function(){
 	$rules = array(
-        'username' => 'required|email',
-        'password' => 'required'
-    );
+		'username' => 'required|email',
+		'password' => 'required'
+	);
 
-    $value = array(
-        'username' => Input::get('username'),
-        'password' => Input::get('password')
-    );
+	$value = array(
+		'username' => Input::get('username'),
+		'password' => Input::get('password')
+	);
 
-    $userForLogin = new User;
-    if( $userForLogin->validaLogin($value) == false)
-    {
-        return Redirect::to('login')->withInput()->withErrors($userForLogin->errors());
-    }
-    else 
-    {
-    	return Redirect::to('login_process');
-    }
+	$userForLogin = new User;
+	if( $userForLogin->validaLogin($value) == false)
+	{
+		return Redirect::to('login')->withInput()->withErrors($userForLogin->errors());
+	}
+	else 
+	{
+		return Redirect::to('login_process');
+	}
 });
- 
+
 Route::post('login_process', array(
-							
-							'uses' => 'HomeController@login_process'
-							));
+	
+	'uses' => 'HomeController@login_process'
+));
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
@@ -78,10 +80,7 @@ Route::group(array('before'=>'auth'), function()
 {
 	Route::get('profile', array( 'uses' => 'UsersController@showProfile'));
 	Route::get('profile/edit', array( 'uses' => 'UsersController@editProfile'));
-	Route::put('update_profile', array(
-                            
-                            'uses' => 'UsersController@update_profile'
-                            ));
+	Route::put('update_profile', array( 'uses' => 'UsersController@update_profile'));
 
 });
 
@@ -242,68 +241,33 @@ Route::group(array('before'=>'auth'), function()
 
 Route::group(array('before'=>'auth'), function() 
 {
-	Route::get('visit', array( 'uses' => 'VisitController@tablelist'));
-	Route::get('tobechecked', array( 'uses' => 'VisitController@tablelistTobeverified'));
+	Route::get('cost', array( 'uses' => 'CostController@tablelist'));
+	Route::get('tobechecked', array( 'uses' => 'CostController@tablelistTobeverified'));
 
-	Route::get('visit/add', array( 'uses' =>  'VisitController@add'));
+	Route::get('cost/add', array( 'uses' =>  'CostController@add'));
 
-	Route::get('visit/{id}', array( 'uses' => 'VisitController@view'));
+	Route::get('cost/{id}', array( 'uses' => 'CostController@view'));
 
-	Route::get('visit/{id}/edit', array( 'uses' => 'VisitController@edit'));
-	Route::get('visit/{id}/check', array( 'uses' => 'VisitController@view'));
-	Route::get('visit/{id}/approve', array( 'uses' => 'VisitController@activate'));
-	Route::post('visit/{id}/reject', array( 'uses' => 'VisitController@disactivate'));
+	Route::get('cost/{id}/edit', array( 'uses' => 'CostController@edit'));
+	Route::get('cost/{id}/check', array( 'uses' => 'CostController@view'));
+	Route::get('cost/{id}/approve', array( 'uses' => 'CostController@activate'));
+	Route::post('cost/{id}/reject', array( 'uses' => 'CostController@disactivate'));
 
 
-	Route::put('visit/{id}', array('as' => 'visit.update','uses' => 'VisitController@update'));
+	Route::put('cost/{id}', array('as' => 'cost.update','uses' => 'CostController@update'));
 
 	
 
-	Route::post('visit', array('as' => 'visit.add',  'uses' => 'VisitController@store'));
+	Route::post('cost', array('as' => 'cost.add',  'uses' => 'CostController@store'));
 	
-	Route::delete('visit/{id}', array('uses' => 'VisitController@destroy'));
-	Route::delete('visitSospese/{id}', array('uses' => 'VisitController@destroySospese'));
+	Route::delete('cost/{id}', array('uses' => 'CostController@destroy'));
+	Route::delete('costSospese/{id}', array('uses' => 'CostController@destroySospese'));
 
 
 
-	Route::post('visit/{id}/edit', array('as' => 'visit.update','uses' => 'VisitController@update'));
-});
-/*
-|--------------------------------------------------------------------------
-| HelpDesk Routes
-|--------------------------------------------------------------------------
- */
-Route::group(array('before'=>'auth'), function() 
-{
-	Route::get('helpdesk', array('uses' => 'HomeController@helpdesk'));
-    Route::post('helpdesk', array('as' => 'helpdesk.send',  'uses' => 'HomeController@send'));
-	Route::get('reporting', array('uses' => 'ReportController@home'));
-	
-	Route::post('reportingMax', array('uses' => 'ExporterController@getFilteredMax'));
+	Route::post('cost/{id}/edit', array('as' => 'cost.update','uses' => 'CostController@update'));
 });
 
 
-Route::group(array('before'=>'auth'), function() 
-{
-	Route::get('/export/weekall/{anno}/{settimana}/', array('uses' => 'ExporterController@getWeekAll'));
-	
-	Route::get('/export/weekRoleall/{anno}/{settimana}/{role}', array('uses' => 'ExporterController@getWeekRoleAll'));
-	Route::get('/export/week/{anno}/{settimana}/{id}', array('uses' => 'ExporterController@getWeek'));
-	Route::get('/export/monthall/{anno}/{settimana}/', array('uses' => 'ExporterController@getMonthAll'));
-	Route::get('/export/monthallmax/{anno}/{settimana}/', array('uses' => 'ExporterController@getMonthAllMax'));
-	Route::get('/export/allmax', array('uses' => 'ExporterController@getAllMax'));
-	
-	Route::get('/export/monthalldetail/{anno}/{mese}/', array('uses' => 'ExporterController@getMonthAll'));
-	Route::get('/export/useralldetail/{user}/', array('uses' => 'ExporterController@getUserAll'));
-
-	
-	Route::post('/async/{id}/disactivate', array( 'uses' => 'ReportController@disactivate'));
-});
-
-
-
-Route::get('associates/add_to_introducer_id' , 'AdminAssociatesController@getIntroducer');
-    Route::get('associates/add_to_rank_list' , 'AdminAssociatesController@getRanklist');
-    Route::get('report/cron' , 'ExporterController@jobSheduler');
 
 

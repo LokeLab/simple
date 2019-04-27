@@ -34,13 +34,7 @@
 			<!--BEGIN EDIT FORM -->
 			<div class="portlet-body">
 				<div class="form-body">
-					@if($errors->has())
-					<div class="alert alert-danger">
-					   @foreach ($errors->all() as $error)
-					      <span>{{ $error }}</span><br />
-					  	@endforeach
-					  </div>
-					@endif
+					@include('includes.message')
 					<div class="form-group">
 						<label class="col-md-2 control-label">{{Lang::get('budget.description')}}:
 							<span class="required">
@@ -51,15 +45,7 @@
 							{{ Form::text('description', $role_detail['description'], array('class'=>'form-control', 'placeholder'=>Lang::get('budget.insertdescription'))) }}
 						</div>
 					</div>
-					<!--<div class="form-group">
-						{{ Form::label('update',  Lang::get('budget.update'), array('class' =>'col-md-2 control-labele')) }}
-						<span class="required">
-							 *
-						</span>
-						<div class="col-md-10">
-							{{ Form::text('update', $role_detail['update'], array('class'=>'form-control', 'placeholder'=>'Inserire una descrizione')) }}
-						</div>
-					</div>-->
+					
 				</div>
 			</div>
 			<!--END EDIT FORM -->

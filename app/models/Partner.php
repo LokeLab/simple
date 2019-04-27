@@ -286,14 +286,14 @@ public static function getBudget($id)
 
 public static function getSpent($id)
 	{
-		$userPartner = VisitBase::wherePartner($id)->sum('amountspent') ;
+		$userPartner = CostBase::wherePartner($id)->sum('amountspent') ;
 		return $userPartner;
 	}
 
 
 public static function getVerified($id)
 	{
-		$userPartner = VisitBase::wherePartner($id)->sum('amountverified') ;
+		$userPartner = CostBase::wherePartner($id)->sum('amountverified') ;
 		return $userPartner;
 	}
 }

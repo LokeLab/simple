@@ -12,13 +12,7 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<!--<div class="table-toolbar">
-					<div class="btn-group">
-						<a href="{{ url('roles/add') }}" class="btn green">
-							{{Lang::get('roles.addrole');}} <i class="fa fa-plus"></i>
-						</a>
-					</div>
-				</div>-->
+				
 				<table class="table table-striped table-bordered table-hover" id="sample_1">
 					<thead>
 						<tr>
@@ -75,7 +69,7 @@
 								 
 							</td>
 							<td class="center">
-							<a href="{{ url('visit?budgetrow='.$c['id']) }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.view');}}</a>
+							<a href="{{ url('cost?budgetrow='.$c['id']) }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.view');}}</a>
 								 <!--a href="{{ url('budget/'.$c['partner'].'/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a-->
 							</td>
 							
@@ -109,7 +103,7 @@
 								 
 							</td>
 							<td class="center">
-								 <a href="{{ url('visit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.viewall');}}</a>
+								 <a href="{{ url('cost') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.viewall');}}</a>
 								 <!--a href="{{ url('budget/'.$c['partner'].'/'.$c['id'].'/edit') }}" class="btn default btn-xs blue-stripe">{{Lang::get('generic.edit');}}</a-->
 							</td>
 							</td>

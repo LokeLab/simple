@@ -17,22 +17,9 @@
 		</div>
 	</div>
 </div>
-<!--<div class="row">
-	<div class="col-lg-3">
-		<div class="form-group">
-		{{ Form::label('id', Lang::get('ttemplates.id')) }}: 
-		{{ Form::text('id', '', array('class'=>'form-control')) }}
-		</div>
-	</div>
-</div>-->
+
 <div class="row">
-	@if($errors->has())
-					<div class="alert alert-danger">
-					   @foreach ($errors->all() as $error)
-					      <span>{{ $error }}</span><br />
-					  	@endforeach
-					  </div>
-					@endif
+	@include('includes.message')
 	<div class="col-lg-3">
 		<div class="form-group">
 		{{ Form::label('description', Lang::get('typeactivity.description')) }}
