@@ -1,3 +1,26 @@
+## Simple Monitor - LokeLab
+
+Simple Monitor is a web-based application usefull to monitor project financed by Creative Europe.
+This system was developed as partnership internal tool during a 4-year large scale cooperation project, written in Laravel 4.2.
+
+## Installation
+
+Clone repository.
+
+Run composer install.
+
+Change settings in app/database.php and app/mail.php
+
+Restore simple.sql (file in app/database)
+
+## Requirements and Environment
+
+- PHP 5.4+
+- Laravel 4.2+
+
+
+
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
