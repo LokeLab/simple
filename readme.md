@@ -22,6 +22,10 @@ Change settings in app/database.php and app/mail.php
 
 Restore simple.sql (file in app/database)
 
+## Installation
+
+After installation you  have to import your project  information and grant  access to different level of partnership
+
 ## Requirements and Environment
 
 - PHP 5.4+
