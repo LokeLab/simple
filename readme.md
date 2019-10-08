@@ -3,6 +3,15 @@
 Simple Monitor is a web-based application usefull to monitor project financed by Creative Europe.
 This system was developed as partnership internal tool during a 4-year large scale cooperation project, written in Laravel 4.2.
 
+## License
+Released under License: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+
+## Author
+Original Work  SIMPLE by Barbara Manighetti  - LokeLab - Nordisk TeaterLaboratorium -  https://odinteatret.dk/the-ntl-experience/lokelab/
+
 ## Installation
 
 Clone repository.
